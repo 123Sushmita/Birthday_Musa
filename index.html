@@ -2,33 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday My Love❤️</title>
+<title>Happy Birthday My Best Friend ❤️</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
 background:black;
-overflow:hidden;
 color:white;
+overflow:hidden;
 }
 
-/* 🌌 BACKGROUND */
-.bg{
+/* 🌌 STARS */
+.stars, .stars2, .stars3{
 position:fixed;
 width:100%;
 height:100%;
-background:radial-gradient(circle,#200020,#000);
 z-index:-5;
-animation:move 10s infinite alternate;
 }
 
-@keyframes move{
-0%{filter:hue-rotate(0deg);}
-100%{filter:hue-rotate(30deg);}
+.stars{
+box-shadow: 50px 80px white, 120px 200px white, 300px 400px white;
+animation:move1 60s linear infinite;
 }
 
-/* 🎬 PAGE TRANSITION */
+.stars2{
+box-shadow: 80px 100px white, 200px 300px white;
+animation:move2 90s linear infinite;
+}
+
+.stars3{
+box-shadow: 150px 50px white, 400px 200px white;
+animation:move3 120s linear infinite;
+}
+
+@keyframes move1{to{transform:translateY(-1000px)}}
+@keyframes move2{to{transform:translateY(-1200px)}}
+@keyframes move3{to{transform:translateY(-1400px)}}
+
+/* 🫶 HEARTS */
+.heart{
+position:fixed;
+font-size:18px;
+animation:floatUp 5s linear forwards;
+}
+
+@keyframes floatUp{
+to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* 🎬 PAGES */
 .page{
 position:absolute;
 width:100%;
@@ -39,39 +62,31 @@ justify-content:center;
 align-items:center;
 text-align:center;
 opacity:0;
-transform:scale(1.05);
-transition:0.8s ease;
 pointer-events:none;
+transition:0.8s;
 padding:20px;
 }
 
 .active{
 opacity:1;
-transform:scale(1);
 pointer-events:auto;
 }
 
 /* 🔘 BUTTON */
 button{
-padding:12px 20px;
+padding:12px 18px;
 border:none;
 border-radius:25px;
 background:#ff4d6d;
 color:white;
-font-weight:bold;
-margin-top:12px;
+margin:6px;
 cursor:pointer;
 }
 
 /* 💖 TITLE */
 .glow{
-font-size:38px;
+font-size:34px;
 text-shadow:0 0 20px #ff4d6d;
-animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-50%{transform:scale(1.08);}
 }
 
 /* 📸 GALLERY */
@@ -93,51 +108,73 @@ border-radius:10px;
 .game{
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:6px;
+gap:5px;
 }
 
-.game button{
-padding:10px;
-border-radius:8px;
+/* 💌 LETTER */
+.letter{
+background:white;
+color:black;
+padding:20px;
+border-radius:10px;
+width:80%;
+max-width:400px;
+transform:scaleY(0);
+transform-origin:top;
+animation:open 1.5s forwards;
+}
+
+@keyframes open{
+to{transform:scaleY(1);}
 }
 
 /* 🎥 VIDEO */
 video{
 width:300px;
-border-radius:12px;
+border-radius:10px;
 }
 
-/* 🎆 CONFETTI */
-.confetti{
+/* 🎬 NETFLIX INTRO */
+#intro{
 position:fixed;
-width:8px;
-height:8px;
-top:-10px;
-animation:fall 3s linear forwards;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999;
+animation:fadeOut 3s forwards;
+animation-delay:2.5s;
 }
 
-@keyframes fall{
-to{transform:translateY(110vh) rotate(360deg);}
+#intro h1{
+color:#e50914;
+font-size:40px;
 }
 
-/* 🫶 HUG */
-.hug{
-font-size:60px;
-animation:beat 1.2s infinite;
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
 }
-
-@keyframes beat{
-50%{transform:scale(1.2);}
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<!-- 🌌 BACKGROUND -->
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
 
-<!-- 🎵 AUDIO -->
+<!-- 🎬 NETFLIX INTRO -->
+<div id="intro">
+<h1>NETFLIX</h1>
+<p>🎬 A Story of True Friendship</p>
+<button onclick="toggleTaDum()">Toggle Ta-Dum</button>
+</div>
+
+<!-- 🔊 AUDIO -->
 <audio id="a1" src="audio_1.m4a"></audio>
 <audio id="a2" src="audio_2.m4a"></audio>
 <audio id="a3" src="audio_3.m4a"></audio>
@@ -145,22 +182,21 @@ animation:beat 1.2s infinite;
 <audio id="a5" src="audio_5.m4a"></audio>
 <audio id="a6" src="audio_6.m4a"></audio>
 
-<!-- PAGE 1 -->
+<!-- 🎬 PAGES -->
+
 <div class="page active" id="p1">
-<div class="glow">🎉 HAPPY BIRTHDAY Mero Musa ❤️</div>
-<button onclick="go(2)">Start ➜</button>
+<div class="glow">🎉 Happy Birthday My Best Friend ❤️</div>
+<button onclick="go(2)">Start</button>
 </div>
 
-<!-- PAGE 2 -->
 <div class="page" id="p2">
-<h2>💌 A Special Message</h2>
-<p>You are my peace, my chaos, my happiness, my family, my everything ❤️</p>
-<button onclick="go(3)">Next ➜</button>
+<h2>💌 Message</h2>
+<p>You are my safe place ❤️</p>
+<button onclick="go(3)">Next</button>
 </div>
 
-<!-- PAGE 3 GAME -->
 <div class="page" id="p3">
-<h2>🎮 What I Love About You</h2>
+<h2>🎮 Game</h2>
 
 <div class="game">
 <button onclick="show(1)">1</button>
@@ -176,13 +212,11 @@ animation:beat 1.2s infinite;
 </div>
 
 <p id="msg"></p>
-
-<button onclick="go(4)">Next ➜</button>
+<button onclick="go(4)">Next</button>
 </div>
 
-<!-- PAGE 4 PHOTOS -->
 <div class="page" id="p4">
-<h2>📸 Our Memories</h2>
+<h2>📸 Memories</h2>
 
 <div class="gallery">
 <img src="seeee.jpeg">
@@ -191,127 +225,116 @@ animation:beat 1.2s infinite;
 <img src="us.jpeg">
 <img src="Dai.jpg">
 <img src="surab.JPEG">
-<img src="Girls.jpeg">
-<img src="bacchatoli.jpeg">
-<img src="family.JPG">
 </div>
 
-<button onclick="go(5)">Next ➜</button>
+<button onclick="go(5)">Next</button>
 </div>
 
-<!-- PAGE 5 FUN -->
 <div class="page" id="p5">
-<h2>🫶 Our Friendship Moments</h2>
+<h2>💌 Thank You</h2>
 
-<p id="funText">Click to reveal memories 😂</p>
-
-<button onclick="fun(1)">1</button>
-<button onclick="fun(2)">2</button>
-<button onclick="fun(3)">3</button>
-<button onclick="fun(4)">4</button>
-<button onclick="fun(5)">5</button>
-
-<button onclick="go(6)">Next ➜</button>
+<div class="letter">
+<p>Thank you for being my safe person ❤️</p>
+<p>Thank you for adding colors in my life 🌈</p>
+<p>Thank you for always being there 🫶</p>
+<p>Thank you for staying calm with me 🌸</p>
+<p>Thank you for making me your sister-in-law 😂</p>
 </div>
 
-<!-- PAGE 6 VIDEO -->
+<button onclick="go(6)">Next</button>
+</div>
+
 <div class="page" id="p6">
-<h2>🎥 One Last Memory</h2>
+<h2>🎥 Final Memory</h2>
 
 <video controls>
-<source src="Video.MOV" type="video/mp4">
+<source src="Video.MOV">
 </video>
 
-<button onclick="go(7)">Next ➜</button>
+<button onclick="go(7)">Next</button>
 </div>
 
-<!-- PAGE 7 FINAL -->
 <div class="page" id="p7">
-<div class="glow">🎉 HAPPY BIRTHDAY SARITA 🎉</div>
-
-<div class="hug">🫶💖🫶</div>
-
-<p>Forever my best friend ❤️</p>
-
-<button onclick="final()">Finish 🎆</button>
+<div class="glow">🎉 HAPPY BIRTHDAY SARITA ❤️</div>
+<p>Forever my best friend 🫶</p>
+<button onclick="final()">Finish</button>
 </div>
 
 <script>
 
-/* 🔇 HARD AUDIO STOP SYSTEM */
-function stopAllAudio(){
+let taDumOn = true;
+
+/* 🔊 TA-DUM */
+function toggleTaDum(){
+taDumOn = !taDumOn;
+alert("Ta-Dum: " + (taDumOn ? "ON" : "OFF"));
+}
+
+/* 🔇 STOP AUDIO */
+function stopAll(){
 document.querySelectorAll("audio").forEach(a=>{
 a.pause();
 a.currentTime=0;
 });
 }
 
-/* 🎬 PAGE CONTROL */
-let audios=["a1","a2","a3","a4","a5","a6"];
-
+/* 🎬 PAGE CHANGE */
 function go(p){
 
-stopAllAudio();
+stopAll();
 
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* audio sync */
-let i=p-2;
-if(i>=0 && i<audios.length){
-let a=document.getElementById(audios[i]);
-if(a){
-a.play().catch(()=>{});
+/* audio only pages 1-6 */
+if(p<=6){
+document.getElementById("a"+p).play().catch(()=>{});
 }
-}
+
+/* hearts */
+heartRain();
 }
 
 /* 🎮 GAME */
-let msgs=[
-"Your smile is everything 😊",
-"You are kind 💖",
-"You always support me 🫶",
-"You are strong 💪",
-"You are beautiful 🌸",
-"You are my safe place ❤️",
-"You are loyal 💛",
-"You make life better 🌈",
-"You are unforgettable ✨",
-"You are my forever best friend ❤️"
+let msg=[
+"Beautiful soul ❤️",
+"Kind heart 🌸",
+"Always funny 😂",
+"Strong 💪",
+"Loyal 💛",
+"Peace giver 🫶",
+"Best energy 🌈",
+"Supportive ❤️",
+"Unforgettable ✨",
+"My forever friend 💖"
 ];
 
 function show(n){
-document.getElementById("msg").innerText=msgs[n-1];
+document.getElementById("msg").innerText=msg[n-1];
 }
 
-/* 🫶 FUN PAGE */
-let funMsgs=[
-"We laughed till stomach hurt 😂",
-"Your BUMMM moments forever iconic",
-"Late night talks 💖",
-"Random gossip + fun 🌸",
-"You are my safe chaos ❤️"
-];
-
-function fun(n){
-document.getElementById("funText").innerText=funMsgs[n-1];
+/* 🫶 HEARTS */
+function heartRain(){
+for(let i=0;i<5;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+}
 }
 
-/* 🎆 FINAL CONFETTI */
+/* 🎆 FINAL */
 function final(){
-
-for(let i=0;i<150;i++){
+for(let i=0;i<120;i++){
 let c=document.createElement("div");
-c.className="confetti";
+c.className="heart";
+c.innerHTML=["💖","✨","🎉"][Math.floor(Math.random()*3)];
 c.style.left=Math.random()*100+"vw";
-c.style.background=["#ff4d6d","#fff","#ffd700","#ff69b4"][Math.floor(Math.random()*4)];
-c.style.animationDuration=(2+Math.random()*3)+"s";
 document.body.appendChild(c);
-
 setTimeout(()=>c.remove(),5000);
 }
-
-document.body.style.filter="brightness(1.2)";
 }
 
 </script>
