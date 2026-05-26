@@ -72,12 +72,11 @@ font-size:22px;
 max-width:700px;
 }
 
-/* cinematic glow */
+/* glow */
 h1{
 text-shadow:0 0 20px #ff69b4;
 }
 
-/* fade effect */
 .fade{
 animation:fadeIn 1.5s ease;
 }
@@ -112,7 +111,6 @@ to{opacity:1;}
 <h1>💌 A Message From My Heart</h1>
 <p class="fade">
 Happy Birthday Musa ❤️<br><br>
-You are not just my best friend...<br>
 You are my whole emotional world 🫶
 </p>
 <button onclick="go(3)">Next Scene 🎬</button>
@@ -144,11 +142,11 @@ You are my whole emotional world 🫶
 <!-- PAGE 4 -->
 <div class="page" id="p4">
 <h1>🎥 Our Real Moment</h1>
-  
-<video width="300" controls>
-  <source src="Video.MOV" type="video/mp4">
-</video>
 
+<!-- FIXED VIDEO (NO RENAME REQUIRED) -->
+<video width="300" controls>
+  <source src="Video.MOV">
+</video>
 
 <button onclick="go(5)">Unlock Game 🎮</button>
 </div>
@@ -207,8 +205,6 @@ document.getElementById("a5"),
 document.getElementById("a6")
 ];
 
-let current = 0;
-
 function stopAll(){
 audios.forEach(a=>{
 a.pause();
@@ -218,8 +214,9 @@ a.currentTime=0;
 
 function play(i){
 stopAll();
-if(audios[i]) audios[i].play();
-current=i;
+if(audios[i]){
+audios[i].play().catch(()=>{});
+}
 }
 
 function show(page){
@@ -227,6 +224,8 @@ function show(page){
 document.querySelectorAll(".page").forEach(p=>{
 p.classList.remove("active");
 });
+
+document.getElementById("final").classList.remove("active");
 
 document.getElementById("p"+page).classList.add("active");
 
@@ -238,6 +237,7 @@ play(page-2);
 
 function start(){
 show(2);
+setTimeout(()=>play(0),500);
 }
 
 function go(p){
@@ -249,7 +249,7 @@ function reason(n){
 let text=[
 "👁️ Most beautiful eyes ever",
 "💖 Purest soul",
-"😂 I love they way you say BUMMMM",
+"😂 I love the way you say BUMMMM",
 "🌸 Stunning in sari",
 "🫶 Innocent heart",
 "✨ Strong personality",
@@ -263,17 +263,13 @@ document.getElementById("reasonText").innerHTML=text[n-1];
 }
 
 function final(){
-showFinal();
-}
-
-function showFinal(){
-stopAll();
 document.querySelectorAll(".page").forEach(p=>{
 p.classList.remove("active");
 });
+
 document.getElementById("final").classList.add("active");
 
-/* play final audio */
+/* play final audio (audio_6) */
 play(5);
 }
 
