@@ -2,75 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday My Love ❤️</title>
+<title>Happy Birthday My Musa ❤️</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-overflow:hidden;
 background:black;
+overflow:hidden;
 color:white;
 }
 
-/* 🌌 STAR FIELD */
-.stars{
+/* 🌌 CINEMATIC BACKGROUND */
+.bg{
 position:fixed;
 width:100%;
 height:100%;
-overflow:hidden;
-z-index:-5;
-background:radial-gradient(circle,#120018,#000);
+background:radial-gradient(circle,#1a001f,#000);
+animation:bg 10s ease infinite;
+z-index:-3;
 }
 
-.star{
-position:absolute;
-width:2px;
-height:2px;
-background:white;
-border-radius:50%;
-animation:fall linear infinite;
-opacity:0.8;
+@keyframes bg{
+0%{filter:hue-rotate(0deg);}
+50%{filter:hue-rotate(40deg);}
+100%{filter:hue-rotate(0deg);}
 }
 
-@keyframes fall{
-from{transform:translateY(-10vh);}
-to{transform:translateY(110vh);}
-}
-
-/* 🎬 NETFLIX INTRO */
-#intro{
-position:fixed;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:999;
-animation:fadeOut 4s forwards;
-animation-delay:2.5s;
-}
-
-#intro h1{
-color:#e50914;
-font-size:42px;
-letter-spacing:3px;
-text-shadow:0 0 20px #e50914;
-animation:zoom 2s ease;
-}
-
-@keyframes zoom{
-from{transform:scale(0.6);opacity:0;}
-to{transform:scale(1);opacity:1;}
-}
-
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
-}
-
-/* 📱 PAGES */
+/* 🎬 PAGE SYSTEM (CINEMATIC FADE) */
 .page{
 position:absolute;
 width:100%;
@@ -81,19 +40,21 @@ justify-content:center;
 align-items:center;
 text-align:center;
 opacity:0;
+transform:scale(1.05);
 pointer-events:none;
-transition:1s ease;
+transition:0.8s ease;
 padding:20px;
 }
 
 .active{
 opacity:1;
+transform:scale(1);
 pointer-events:auto;
 }
 
 /* 🔘 BUTTON */
 button{
-padding:14px 24px;
+padding:14px 22px;
 border:none;
 border-radius:25px;
 background:#ff4d6d;
@@ -105,52 +66,57 @@ margin-top:15px;
 
 /* 💖 TITLE GLOW */
 .glow{
-font-size:40px;
-text-shadow:0 0 25px #ff4d6d,0 0 40px #ff4d6d;
-animation:pulse 1.8s infinite;
+font-size:38px;
+text-shadow:0 0 20px #ff4d6d,0 0 40px #ff4d6d;
+animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
 50%{transform:scale(1.08);}
 }
 
-/* 💌 TYPE EFFECT */
-.type{
-border-right:2px solid white;
-white-space:nowrap;
-overflow:hidden;
-animation:blink .8s infinite;
-font-size:18px;
+/* 📸 PHOTO GRID */
+.gallery{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:6px;
+padding:10px;
 max-width:90%;
 }
 
-@keyframes blink{
-50%{border-color:transparent;}
-}
-
-/* 🫶 HUG */
-.hug{
-font-size:70px;
-animation:hug 1.5s infinite alternate;
-filter:drop-shadow(0 0 10px pink);
-}
-
-@keyframes hug{
-from{transform:scale(1);}
-to{transform:scale(1.2);}
-}
-
-/* 🎞 CREDITS */
-.credits{
-position:fixed;
-bottom:-100%;
+.gallery img{
 width:100%;
-text-align:center;
-animation:roll 10s linear forwards;
+height:90px;
+object-fit:cover;
+border-radius:10px;
 }
 
-@keyframes roll{
-to{bottom:120%;}
+/* 🎮 GAME BUTTONS */
+.game{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+margin-top:10px;
+}
+
+.game button{
+padding:10px;
+border-radius:10px;
+font-size:14px;
+}
+
+/* 💌 MESSAGE BOX */
+#msg{
+margin-top:15px;
+max-width:90%;
+font-size:16px;
+}
+
+/* 🎥 VIDEO */
+video{
+width:300px;
+border-radius:12px;
+margin-top:10px;
 }
 
 /* 🎆 CONFETTI */
@@ -159,24 +125,21 @@ position:fixed;
 width:8px;
 height:8px;
 top:-10px;
-animation:fallConf 3s linear forwards;
+animation:fall 3s linear forwards;
 }
 
-@keyframes fallConf{
+@keyframes fall{
 to{transform:translateY(110vh) rotate(360deg);}
 }
 
-/* 📳 SHAKE */
-.shake{
-animation:shake 0.4s;
+/* 🫶 FINAL HUG */
+.hug{
+font-size:70px;
+animation:beat 1.2s infinite;
 }
 
-@keyframes shake{
-0%{transform:translate(0);}
-25%{transform:translate(-5px,5px);}
-50%{transform:translate(5px,-5px);}
-75%{transform:translate(-5px);}
-100%{transform:translate(0);}
+@keyframes beat{
+50%{transform:scale(1.2);}
 }
 
 </style>
@@ -184,14 +147,7 @@ animation:shake 0.4s;
 
 <body>
 
-<!-- 🌌 STARS -->
-<div class="stars" id="stars"></div>
-
-<!-- 🎬 INTRO -->
-<div id="intro">
-<h1>NETFLIX PRESENTS</h1>
-<p>🎬 A Love Story</p>
-</div>
+<div class="bg"></div>
 
 <!-- 🎵 AUDIO -->
 <audio id="a1" src="audio_1.m4a"></audio>
@@ -203,127 +159,139 @@ animation:shake 0.4s;
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-<div class="glow">🎉 HAPPY BIRTHDAY MY LOVE ❤️</div>
-<button onclick="unlock(); go(2)">Start Movie 🎬</button>
+<div class="glow">🎉 HAPPY BIRTHDAY MERO MUSA ❤️</div>
+<button onclick="go(2)">Start Movie 🎬</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-<h1 class="type" id="typeText"></h1>
+<h2>💌 A Special Message</h2>
+<p>You are my peace, my comfort, my forever person 🫶</p>
 <button onclick="go(3)">Next ➜</button>
 </div>
 
-<!-- PAGE 3 -->
+<!-- PAGE 3 GAME -->
 <div class="page" id="p3">
-<h1>💖 What I Love About You</h1>
-<p>You are my calm in chaos ❤️</p>
+<h2>🎮 What I Love About You</h2>
+
+<div class="game">
+<button onclick="show(1)">1</button>
+<button onclick="show(2)">2</button>
+<button onclick="show(3)">3</button>
+<button onclick="show(4)">4</button>
+<button onclick="show(5)">5</button>
+<button onclick="show(6)">6</button>
+<button onclick="show(7)">7</button>
+<button onclick="show(8)">8</button>
+<button onclick="show(9)">9</button>
+<button onclick="show(10)">10</button>
+</div>
+
+<p id="msg"></p>
+
 <button onclick="go(4)">Next ➜</button>
 </div>
 
-<!-- PAGE 4 -->
+<!-- PAGE 4 PHOTOS -->
 <div class="page" id="p4">
-<h1>🎮 Your Magic</h1>
-<p>Everything about you feels like home 🫶</p>
+<h2>📸 Our Memories</h2>
+
+<div class="gallery">
+<img src="seeee.jpeg">
+<img src="Bum.JPG">
+<img src="weeeee.JPG">
+<img src="us.jpeg">
+<img src="Dai.jpg">
+<img src="surab.JPEG">
+<img src="Girls.jpeg">
+<img src="bacchatoli.jpeg">
+<img src="family.JPG">
+</div>
+
 <button onclick="go(5)">Next ➜</button>
 </div>
 
-<!-- PAGE 5 -->
+<!-- PAGE 5 VIDEO -->
 <div class="page" id="p5">
-<h1>🫶 The Hug Scene</h1>
-<div class="hug">🧑‍🤝‍🧑💞</div>
+<h2>🎥 Our Moment</h2>
+
+<video controls>
+<source src="Video.MOV" type="video/mp4">
+</video>
+
 <button onclick="go(6)">Next ➜</button>
 </div>
 
-<!-- PAGE 6 -->
+<!-- PAGE 6 FINAL -->
 <div class="page" id="p6">
 <div class="glow">❤️ HAPPY BIRTHDAY SARITA ❤️</div>
-<button onclick="final()">End Movie 🎆</button>
-</div>
+<div class="hug">🫶💞🫶</div>
 
-<!-- PAGE 7 (CREDITS) -->
-<div class="page" id="p7">
-<div class="credits">
-<h2>🎬 Directed by Love</h2>
-<p>Starring: You & Me 💞</p>
-<p>Produced by Memories ✨</p>
-</div>
+<button onclick="final()">Finish 🎆</button>
 </div>
 
 <script>
 
-/* 🌌 STARS */
-for(let i=0;i<100;i++){
-let s=document.createElement("div");
-s.className="star";
-s.style.left=Math.random()*100+"vw";
-s.style.animationDuration=(2+Math.random()*5)+"s";
-document.getElementById("stars").appendChild(s);
-}
-
-/* 🎵 AUDIO */
 let audios=["a1","a2","a3","a4","a5","a6"];
-let unlocked=false;
 
-function unlock(){
-unlocked=true;
+/* 🔊 STOP ALL AUDIO */
+function stopAudio(){
+audios.forEach(id=>{
+let a=document.getElementById(id);
+a.pause();
+a.currentTime=0;
+});
 }
 
-/* 🎬 PAGE CONTROL */
+/* 🎬 PAGE SWITCH */
 function go(p){
 
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* 🎵 AUDIO SYNC */
-if(unlocked && p>=2){
+/* AUDIO SYNC */
+stopAudio();
+if(p>=2 && p<=7){
 let a=document.getElementById(audios[p-2]);
 if(a){
-a.currentTime=0;
 a.play().catch(()=>{});
 }
 }
-
-/* 💌 TYPE TEXT */
-if(p===2){
-typeEffect("You are my peace, my home, my everything ❤️");
-}
 }
 
-/* 💌 TYPE EFFECT */
-function typeEffect(text){
-let i=0;
-let el=document.getElementById("typeText");
-el.innerHTML="";
-let t=setInterval(()=>{
-el.innerHTML+=text[i];
-i++;
-if(i>=text.length) clearInterval(t);
-},50);
+/* 🎮 GAME */
+let msgs=[
+"Your eyes are beautiful 👁️",
+"Your soul is pure 💖",
+"You say BUMMM 😂",
+"You look amazing in saree 🌸",
+"You are innocent 🫶",
+"You are strong 💪",
+"You are my best friend ❤️",
+"You bring color to life 🌈",
+"You are kind 💛",
+"You are everything ✨"
+];
+
+function show(n){
+document.getElementById("msg").innerText = msgs[n-1];
 }
 
-/* 🎆 FINAL SCENE */
+/* 🎆 FINAL */
 function final(){
 
-document.body.classList.add("shake");
-
-/* CONFETTI */
 for(let i=0;i<120;i++){
 let c=document.createElement("div");
 c.className="confetti";
 c.style.left=Math.random()*100+"vw";
-c.style.background=["#ff4d6d","#fff","#ffd700","#ff69b4"][Math.floor(Math.random()*4)];
+c.style.background=["#ff4d6d","#fff","#ffd700"][Math.floor(Math.random()*3)];
 c.style.animationDuration=(2+Math.random()*3)+"s";
 document.body.appendChild(c);
-
 setTimeout(()=>c.remove(),5000);
 }
 
-/* GO CREDITS */
-setTimeout(()=>{
-document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-document.getElementById("p7").classList.add("active");
-},1200);
-
+document.body.style.transition="0.5s";
+document.body.style.filter="brightness(1.2)";
 }
 
 </script>
