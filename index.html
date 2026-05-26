@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday My Musa ❤️</title>
+<title>Happy Birthday My Best Friend ❤️</title>
 
 <style>
 body{
@@ -13,23 +13,41 @@ overflow:hidden;
 color:white;
 }
 
-/* 🌌 CINEMATIC BACKGROUND */
+/* 🌌 BACKGROUND */
 .bg{
 position:fixed;
 width:100%;
 height:100%;
-background:radial-gradient(circle,#1a001f,#000);
-animation:bg 10s ease infinite;
+background:radial-gradient(circle,#1a0020,#000);
 z-index:-3;
 }
 
-@keyframes bg{
-0%{filter:hue-rotate(0deg);}
-50%{filter:hue-rotate(40deg);}
-100%{filter:hue-rotate(0deg);}
+/* 🎬 INTRO */
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999;
+animation:fadeOut 4s forwards;
+animation-delay:2.5s;
 }
 
-/* 🎬 PAGE SYSTEM (CINEMATIC FADE) */
+#intro h1{
+color:#ff4d6d;
+font-size:38px;
+text-shadow:0 0 20px #ff4d6d;
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+/* 📄 PAGE SYSTEM */
 .page{
 position:absolute;
 width:100%;
@@ -40,15 +58,13 @@ justify-content:center;
 align-items:center;
 text-align:center;
 opacity:0;
-transform:scale(1.05);
 pointer-events:none;
-transition:0.8s ease;
+transition:0.8s;
 padding:20px;
 }
 
 .active{
 opacity:1;
-transform:scale(1);
 pointer-events:auto;
 }
 
@@ -60,27 +76,21 @@ border-radius:25px;
 background:#ff4d6d;
 color:white;
 font-weight:bold;
-cursor:pointer;
 margin-top:15px;
+cursor:pointer;
 }
 
-/* 💖 TITLE GLOW */
+/* 💖 TITLE */
 .glow{
 font-size:38px;
-text-shadow:0 0 20px #ff4d6d,0 0 40px #ff4d6d;
-animation:pulse 2s infinite;
+text-shadow:0 0 25px #ff4d6d;
 }
 
-@keyframes pulse{
-50%{transform:scale(1.08);}
-}
-
-/* 📸 PHOTO GRID */
+/* 📸 GALLERY */
 .gallery{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:6px;
-padding:10px;
 max-width:90%;
 }
 
@@ -91,7 +101,7 @@ object-fit:cover;
 border-radius:10px;
 }
 
-/* 🎮 GAME BUTTONS */
+/* 🎮 GAME */
 .game{
 display:grid;
 grid-template-columns:repeat(5,1fr);
@@ -101,15 +111,7 @@ margin-top:10px;
 
 .game button{
 padding:10px;
-border-radius:10px;
-font-size:14px;
-}
-
-/* 💌 MESSAGE BOX */
-#msg{
-margin-top:15px;
-max-width:90%;
-font-size:16px;
+border-radius:8px;
 }
 
 /* 🎥 VIDEO */
@@ -132,9 +134,9 @@ animation:fall 3s linear forwards;
 to{transform:translateY(110vh) rotate(360deg);}
 }
 
-/* 🫶 FINAL HUG */
+/* 🫶 FINAL */
 .hug{
-font-size:70px;
+font-size:60px;
 animation:beat 1.2s infinite;
 }
 
@@ -149,6 +151,12 @@ animation:beat 1.2s infinite;
 
 <div class="bg"></div>
 
+<!-- 🎬 INTRO -->
+<div id="intro">
+<h1>NETFLIX PRESENTS</h1>
+<p>🎬 A Best Friend Birthday Story</p>
+</div>
+
 <!-- 🎵 AUDIO -->
 <audio id="a1" src="audio_1.m4a"></audio>
 <audio id="a2" src="audio_2.m4a"></audio>
@@ -159,14 +167,14 @@ animation:beat 1.2s infinite;
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-<div class="glow">🎉 HAPPY BIRTHDAY MERO MUSA ❤️</div>
-<button onclick="go(2)">Start Movie 🎬</button>
+<div class="glow">🎉 HAPPY BIRTHDAY MY BEST FRIEND ❤️</div>
+<button onclick="go(2)">Next ➜</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
 <h2>💌 A Special Message</h2>
-<p>You are my peace, my comfort, my forever person 🫶</p>
+<p>You are my safe place, my happiness, my family ❤️</p>
 <button onclick="go(3)">Next ➜</button>
 </div>
 
@@ -213,7 +221,7 @@ animation:beat 1.2s infinite;
 
 <!-- PAGE 5 VIDEO -->
 <div class="page" id="p5">
-<h2>🎥 Our Moment</h2>
+<h2>🎥 Our Video Memory</h2>
 
 <video controls>
 <source src="Video.MOV" type="video/mp4">
@@ -232,27 +240,28 @@ animation:beat 1.2s infinite;
 
 <script>
 
+/* 🔊 AUDIO FIX (IMPORTANT) */
 let audios=["a1","a2","a3","a4","a5","a6"];
 
-/* 🔊 STOP ALL AUDIO */
-function stopAudio(){
-audios.forEach(id=>{
-let a=document.getElementById(id);
+function stopAllAudio(){
+document.querySelectorAll("audio").forEach(a=>{
 a.pause();
 a.currentTime=0;
 });
 }
 
-/* 🎬 PAGE SWITCH */
+/* 🎬 PAGE CONTROL */
 function go(p){
+
+stopAllAudio(); // 🔥 ALWAYS STOP FIRST
 
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* AUDIO SYNC */
-stopAudio();
-if(p>=2 && p<=7){
-let a=document.getElementById(audios[p-2]);
+/* play correct audio */
+let index=p-2;
+if(index>=0 && index<audios.length){
+let a=document.getElementById(audios[index]);
 if(a){
 a.play().catch(()=>{});
 }
@@ -261,20 +270,20 @@ a.play().catch(()=>{});
 
 /* 🎮 GAME */
 let msgs=[
-"Your eyes are beautiful 👁️",
-"Your soul is pure 💖",
-"You say BUMMM 😂",
-"You look amazing in saree 🌸",
-"You are innocent 🫶",
+"Your smile is everything 😊",
+"You are kind hearted 💖",
+"You always support me 🫶",
 "You are strong 💪",
-"You are my best friend ❤️",
-"You bring color to life 🌈",
-"You are kind 💛",
-"You are everything ✨"
+"You are beautiful inside out 🌸",
+"You are my safe place ❤️",
+"You are loyal 💛",
+"You make life better 🌈",
+"You are unforgettable ✨",
+"You are my best friend forever ❤️"
 ];
 
 function show(n){
-document.getElementById("msg").innerText = msgs[n-1];
+document.getElementById("msg").innerText=msgs[n-1];
 }
 
 /* 🎆 FINAL */
@@ -290,7 +299,6 @@ document.body.appendChild(c);
 setTimeout(()=>c.remove(),5000);
 }
 
-document.body.style.transition="0.5s";
 document.body.style.filter="brightness(1.2)";
 }
 
