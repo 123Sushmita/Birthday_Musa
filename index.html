@@ -69,7 +69,7 @@ margin-top:15px;
 cursor:pointer;
 }
 
-/* 💬 CHAT BOX */
+/* 💬 CHAT */
 #chatBox{
 width:90%;
 max-width:500px;
@@ -143,7 +143,7 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 
 <div class="bg"></div>
 
-<!-- 🔊 AUDIO (FIXED SYSTEM) -->
+<!-- 🔊 AUDIO -->
 <audio id="a1" src="audio_1.mp3"></audio>
 <audio id="a2" src="audio_2.mp3"></audio>
 <audio id="a3" src="audio_3.mp3"></audio>
@@ -174,7 +174,6 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-
 <h1 class="title">💌 Special Message</h1>
 
 <div class="specialBox" onclick="openSpecial()">
@@ -183,26 +182,19 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 </div>
 
 <button onclick="go(3)">Next</button>
-
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-
 <h1 class="title">🎮 What I Love</h1>
 
-<div>
 <button onclick="love(1)">1</button>
 <button onclick="love(2)">2</button>
 <button onclick="love(3)">3</button>
-<button onclick="love(4)">4</button>
-<button onclick="love(5)">5</button>
-</div>
 
 <p id="loveOut"></p>
 
 <button onclick="go(4)">Next</button>
-
 </div>
 
 <!-- PAGE 4 -->
@@ -214,13 +206,9 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 <img src="us.jpeg">
 <img src="Bum.JPG">
 <img src="weeeee.JPG">
-<img src="family.JPG">
-<img src="happy.jpeg">
-<img src="Girls.jpeg">
 </div>
 
 <button onclick="go(5)">Next</button>
-
 </div>
 
 <!-- PAGE 5 -->
@@ -233,7 +221,6 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 <p id="thankOut"></p>
 
 <button onclick="go(6)">Next</button>
-
 </div>
 
 <!-- PAGE 6 -->
@@ -246,7 +233,6 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 </video>
 
 <button onclick="go(7)">Final</button>
-
 </div>
 
 <!-- PAGE 7 -->
@@ -288,14 +274,13 @@ function go(p){
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* AUDIO RULE */
 if(p >= 2 && p <= 6){
 playAudio(p-1);
 }
 
 }
 
-/* 💬 CHAT FLOW */
+/* 💬 CHAT FLOW (FIXED EXACT STORY) */
 function chatFlow(e){
 
 if(e.key !== "Enter") return;
@@ -305,6 +290,7 @@ if(val === "") return;
 
 let chat = document.getElementById("chatArea");
 
+/* user msg */
 chat.innerHTML += `<div class="msg her">${val}</div>`;
 
 /* STORY */
@@ -317,7 +303,7 @@ chat.innerHTML += `<div class="msg me">Thank you 🫶</div>`;
 }
 
 else if(step === 2){
-chat.innerHTML += `<div class="msg me">I tried something small for your birthday 🎬❤️</div>`;
+chat.innerHTML += `<div class="msg me">I tried this to celebrate your birthday 🎬❤️</div>`;
 }
 
 else if(step === 3){
@@ -326,6 +312,7 @@ document.getElementById("startBtn").style.display="block";
 }
 
 step++;
+
 document.getElementById("r1").value="";
 chat.scrollTop = chat.scrollHeight;
 }
@@ -337,23 +324,21 @@ alert("You are my safe place ❤️");
 
 /* 🎮 LOVE */
 function love(n){
-let arr=["Beautiful","Kind","Funny","Strong","Loyal"];
+let arr=["Beautiful","Kind","Funny"];
 document.getElementById("loveOut").innerText = arr[n-1];
 }
 
-/* 💌 THANKS */
+/* 💌 THANK YOU */
 let t=0;
 let thanks=[
 "Thank you ❤️",
 "Thank you 🌈",
-"Thank you 🫶",
-"Thank you 🌸",
-"Thank you 💖"
+"Thank you 🫶"
 ];
 
 function thank(){
 document.getElementById("thankOut").innerText = thanks[t];
-t = (t+1)%thanks.length;
+t=(t+1)%thanks.length;
 }
 
 </script>
