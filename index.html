@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday My Best Friend ❤️</title>
+<title>Happy Birthday My Love❤️</title>
 
 <style>
 
+/* 🎬 GLOBAL THEME */
 *{
 margin:0;
 padding:0;
@@ -15,7 +16,7 @@ box-sizing:border-box;
 
 body{
 font-family:Arial;
-background:black;
+background:#0b0b0f;
 color:white;
 overflow:hidden;
 }
@@ -25,12 +26,12 @@ overflow:hidden;
 position:fixed;
 width:100%;
 height:100%;
-background:radial-gradient(circle,#1a1a1a,#000);
+background:radial-gradient(circle at top,#1a1a1a,#000);
 z-index:-10;
 }
 
-/* 🎬 PAGE SYSTEM */
-.page{
+/* 🎬 SCENES */
+.scene{
 position:absolute;
 width:100%;
 height:100vh;
@@ -41,47 +42,48 @@ align-items:center;
 text-align:center;
 opacity:0;
 pointer-events:none;
+transform:scale(1.05);
 transition:1s ease;
 padding:20px;
 }
 
-.page.active{
+.scene.active{
 opacity:1;
 pointer-events:auto;
+transform:scale(1);
 }
 
-/* 🎬 TITLE */
-.title{
-font-size:32px;
-margin-bottom:15px;
-text-shadow:0 0 20px #ff4d6d;
+/* 🎭 TITLE */
+h1,h2{
+text-shadow:0 0 25px rgba(255,77,109,0.4);
 }
 
 /* 🔘 BUTTON */
 button{
-padding:12px 20px;
+padding:12px 22px;
 border:none;
-border-radius:25px;
-background:#ff4d6d;
+border-radius:30px;
+background:linear-gradient(145deg,#ff4d6d,#ff758f);
 color:white;
 margin-top:15px;
 cursor:pointer;
 }
 
 /* 💬 CHAT */
-#chatBox{
+.chatBox{
 width:90%;
 max-width:500px;
-height:350px;
-overflow-y:auto;
+height:360px;
 background:rgba(255,255,255,0.05);
-padding:15px;
+backdrop-filter:blur(10px);
 border-radius:20px;
+padding:15px;
+overflow-y:auto;
 }
 
 .msg{
 margin:10px 0;
-padding:10px;
+padding:10px 14px;
 border-radius:15px;
 max-width:75%;
 }
@@ -92,19 +94,19 @@ max-width:75%;
 input{
 width:100%;
 padding:10px;
-border:none;
-border-radius:10px;
 margin-top:10px;
+border-radius:10px;
+border:none;
 background:#222;
 color:white;
 }
 
-/* 💌 SPECIAL BOX */
-.specialBox{
+/* 💌 SPECIAL */
+.specialCard{
 width:300px;
 height:200px;
-background:linear-gradient(145deg,#ff4d6d,#ff758f);
 border-radius:20px;
+background:linear-gradient(145deg,#ff4d6d,#ff758f);
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -112,26 +114,22 @@ align-items:center;
 cursor:pointer;
 }
 
-/* 💥 MAGIC POP */
-.magicPop{
+/* 💥 FLOAT MSG */
+.float{
 position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%) scale(0.2);
-background:rgba(255,77,109,0.95);
-padding:20px;
-border-radius:20px;
-opacity:0;
-transition:0.4s ease;
-z-index:9999;
+padding:12px 16px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+border-radius:15px;
+animation:pop 0.8s ease forwards;
 }
 
-.magicPop.show{
-transform:translate(-50%,-50%) scale(1);
-opacity:1;
+@keyframes pop{
+from{opacity:0;transform:scale(0.3);}
+to{opacity:1;transform:scale(1);}
 }
 
-/* 🎮 LOVE GRID */
+/* 🎮 LOVE CARDS */
 .loveGrid{
 display:grid;
 grid-template-columns:repeat(5,1fr);
@@ -145,33 +143,44 @@ height:55px;
 border-radius:15px;
 }
 
-/* 💖 LOVE TEXT */
+/* 💖 LOVE OUTPUT */
 #loveText{
 margin-top:15px;
 font-size:20px;
-padding:12px;
-background:rgba(255,255,255,0.08);
+padding:12px 16px;
+background:rgba(255,255,255,0.06);
 border-radius:15px;
 }
 
-/* 📸 MEMORY */
-.memoryGrid{
+/* 📸 MEMORY FILM */
+.memGrid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:10px;
+gap:12px;
 width:90%;
-max-width:800px;
+max-width:900px;
 }
 
-.memoryGrid img{
-width:100%;
-height:140px;
-object-fit:cover;
-border-radius:12px;
+.mem{
+border-radius:16px;
+overflow:hidden;
 cursor:pointer;
+transition:0.4s;
 }
 
-/* 🎬 CINEMA */
+.mem img{
+width:100%;
+height:150px;
+object-fit:cover;
+transition:0.4s;
+}
+
+.mem:hover img{
+transform:scale(1.1);
+filter:brightness(0.7);
+}
+
+/* 🎬 CINEMA VIEW */
 #cinema{
 position:fixed;
 top:0;
@@ -188,9 +197,10 @@ z-index:9999;
 
 #cinemaImg{
 width:80%;
-height:300px;
-background-size:cover;
+height:320px;
 border-radius:20px;
+background-size:cover;
+background-position:center;
 }
 
 #cinemaText{
@@ -199,15 +209,23 @@ font-size:20px;
 max-width:80%;
 }
 
-/* 🎉 HEARTS */
-.heart{
+/* 💥 MAGIC POP */
+.magic{
 position:fixed;
-font-size:18px;
-animation:floatUp 4s linear forwards;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0.2);
+background:#ff4d6d;
+padding:18px;
+border-radius:18px;
+opacity:0;
+transition:0.4s;
+z-index:9999;
 }
 
-@keyframes floatUp{
-to{transform:translateY(-120vh);opacity:0;}
+.magic.show{
+transform:translate(-50%,-50%) scale(1);
+opacity:1;
 }
 
 </style>
@@ -217,37 +235,37 @@ to{transform:translateY(-120vh);opacity:0;}
 
 <div class="bg"></div>
 
-<!-- PAGES -->
+<!-- 🎬 SCENES -->
 
-<div class="page active" id="p1">
-<h1 class="title">💬 Chat With Musa</h1>
+<div class="scene active" id="s1">
+<h1>💬 Chat With Musa</h1>
 
-<div id="chatBox">
+<div class="chatBox">
 <div class="msg me">Hi mero musa ❤️</div>
 
 <div class="msg her">
-<input id="r1" placeholder="Type reply..." onkeydown="step1(event)">
+<input id="chat1" placeholder="Type reply..." onkeydown="chatNext(event)">
 </div>
 </div>
 
 <button id="startBtn" style="display:none" onclick="go(2)">Start 🎬</button>
 </div>
 
-<!-- PAGE 2 -->
-<div class="page" id="p2">
-<h2 class="title">💌 Special Message</h2>
+<!-- 💌 -->
+<div class="scene" id="s2">
+<h2>💌 Special Message</h2>
 
-<div class="specialBox" onclick="openSpecial()">
-<h3>Click Me ❤️</h3>
+<div class="specialCard" onclick="special()">
+<h3>HBD GIRL ❤️</h3>
+<p>Tap to open</p>
 </div>
 
 <button onclick="go(3)">Next 🎬</button>
 </div>
 
-<!-- PAGE 3 -->
-<div class="page" id="p3">
-
-<h2 class="title">🎮 What I Love</h2>
+<!-- 🎮 -->
+<div class="scene" id="s3">
+<h2>🎮 What I Love</h2>
 
 <div class="loveGrid">
 <button onclick="love(1)">1</button>
@@ -267,38 +285,35 @@ to{transform:translateY(-120vh);opacity:0;}
 <button onclick="go(4)">Next 🎬</button>
 </div>
 
-<!-- PAGE 4 -->
-<div class="page" id="p4">
+<!-- 📸 -->
+<div class="scene" id="s4">
+<h2>📸 Memories</h2>
 
-<h2 class="title">📸 Memories</h2>
+<div class="memGrid">
 
-<div class="memoryGrid">
-
-<img src="us.jpeg" onclick="mem('We laughed ❤️','us.jpeg')">
-<img src="Bum.JPG" onclick="mem('Safe place 🫶','Bum.JPG')">
-<img src="weeeee.JPG" onclick="mem('Chaos 😂','weeeee.JPG')">
-<img src="family.JPG" onclick="mem('Family ❤️','family.JPG')">
-<img src="happy.jpeg" onclick="mem('Best bond 💖','happy.jpeg')">
+<div class="mem" onclick="mem('We laughed 😂❤️','us.jpeg')"><img src="us.jpeg"></div>
+<div class="mem" onclick="mem('Safe place 🫶','Bum.JPG')"><img src="Bum.JPG"></div>
+<div class="mem" onclick="mem('Chaos 🌈','weeeee.JPG')"><img src="weeeee.JPG"></div>
+<div class="mem" onclick="mem('Family ❤️','family.JPG')"><img src="family.JPG"></div>
+<div class="mem" onclick="mem('Best bond 💖','happy.jpeg')"><img src="happy.jpeg"></div>
 
 </div>
 
 <button onclick="go(5)">Next 🎬</button>
 </div>
 
-<!-- PAGE 5 -->
-<div class="page" id="p5">
+<!-- 💌 THANK YOU -->
+<div class="scene" id="s5">
+<h2>💌 Thank You</h2>
 
-<h2 class="title">💌 Thank You</h2>
-
-<button onclick="thankPop()">Reveal 💥</button>
+<button onclick="thanks()">Reveal 💥</button>
 
 <button onclick="go(6)">Next 🎬</button>
 </div>
 
-<!-- PAGE 6 VIDEO -->
-<div class="page" id="p6">
-
-<h2 class="title">🎥 Video Memory</h2>
+<!-- 🎥 -->
+<div class="scene" id="s6">
+<h2>🎥 Video Memory</h2>
 
 <video controls playsinline>
 <source src="Video.MOV">
@@ -307,95 +322,84 @@ to{transform:translateY(-120vh);opacity:0;}
 <button onclick="go(7)">Next 🎬</button>
 </div>
 
-<!-- FINAL -->
-<div class="page" id="p7">
-<h1 class="title">🎉 HAPPY BIRTHDAY SARITA ❤️</h1>
-<p>Forever best friend 🫶</p>
+<!-- 🎉 FINAL -->
+<div class="scene" id="s7">
+<h1>🎉 HAPPY BIRTHDAY SARITA ❤️</h1>
+<p>Forever my best friend 🫶</p>
 </div>
 
 <!-- CINEMA -->
 <div id="cinema">
 <div id="cinemaImg"></div>
 <div id="cinemaText"></div>
-<button onclick="closeMem()">Close</button>
+<button onclick="closeCinema()">Close</button>
 </div>
 
 <script>
 
-/* NAVIGATION */
-function go(p){
-document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-document.getElementById("p"+p).classList.add("active");
+/* NAV */
+function go(n){
+document.querySelectorAll(".scene").forEach(s=>s.classList.remove("active"));
+document.getElementById("s"+n).classList.add("active");
 }
 
-/* CHAT FIX */
-function step1(e){
+/* CHAT */
+function chatNext(e){
 if(e.key==="Enter"){
-let val=document.getElementById("r1").value;
-if(val.trim()){
 document.getElementById("startBtn").style.display="block";
 }
 }
-}
 
-/* SPECIAL MESSAGE */
-function openSpecial(){
-let msgs=[
-"❤️ Safe place",
-"🫶 My happiness",
-"❤️ My color",
-"💖 My everything"
-];
+/* SPECIAL */
+function special(){
+let msgs=["Safe ❤️","Family 🫶","Happiness 🌈","Everything 💖"];
 
 msgs.forEach((m,i)=>{
 setTimeout(()=>{
 let d=document.createElement("div");
-d.className="magicPop show";
+d.className="magic show";
 d.innerText=m;
 document.body.appendChild(d);
 setTimeout(()=>d.remove(),2000);
-},i*800);
+},i*700);
 });
 }
 
 /* LOVE */
 function love(n){
-let arr=[
-"Beautiful","Kind","Funny","Strong","Loyal",
-"Best","Rare","Caring","Pure","Forever"
-];
+let arr=["Beautiful","Kind","Funny","Strong","Loyal","Best","Rare","Caring","Pure","Forever"];
 document.getElementById("loveText").innerText=arr[n-1];
 }
 
-/* MEMORY */
-function mem(text,img){
+/* MEM */
+function mem(t,img){
 document.getElementById("cinema").style.display="flex";
 document.getElementById("cinemaImg").style.backgroundImage=`url(${img})`;
-document.getElementById("cinemaText").innerText=text;
+document.getElementById("cinemaText").innerText=t;
 }
 
-function closeMem(){
+function closeCinema(){
 document.getElementById("cinema").style.display="none";
 }
 
-/* THANK YOU MAGIC */
-function thankPop(){
-let msgs=[
-"Thank you for trusting me ❤️",
-"Thank you for colors ❤️",
-"Thank you for support 🫶",
-"Thank you for calm 🌸",
-"Thank you sister-in-law 😂💖"
+/* THANKS */
+function thanks(){
+let arr=[
+"Thank you ❤️",
+"Thank you 🌈",
+"Thank you 🫶",
+"Thank you 🌸",
+"Thank you 💖"
 ];
 
-msgs.forEach((m,i)=>{
+arr.forEach((t,i)=>{
 setTimeout(()=>{
 let d=document.createElement("div");
-d.className="magicPop show";
-d.innerText=m;
+d.className="magic show";
+d.innerText=t;
 document.body.appendChild(d);
 setTimeout(()=>d.remove(),2000);
-},i*700);
+},i*600);
 });
 }
 
