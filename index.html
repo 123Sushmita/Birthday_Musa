@@ -6,16 +6,14 @@
 <title>Happy Birthday My Love ❤️</title>
 
 <style>
-
 body{
 margin:0;
 font-family:Arial;
-background: radial-gradient(circle at top, #0a0a0a, #000);
+background:#0b0b0b;
 color:white;
 overflow:hidden;
 }
 
-/* PAGE SYSTEM */
 .page{
 position:absolute;
 width:100%;
@@ -28,58 +26,38 @@ text-align:center;
 padding:20px;
 
 opacity:0;
-transform:scale(1.05);
-transition:1s ease;
 pointer-events:none;
+transition:0.6s ease;
 }
 
 .active{
 opacity:1;
-transform:scale(1);
 pointer-events:auto;
-z-index:10;
 }
 
-/* BUTTON */
 button{
-padding:14px 24px;
+padding:12px 20px;
 border:none;
-border-radius:30px;
-cursor:pointer;
-background:linear-gradient(45deg, #ff4d6d, #ff85a1);
+border-radius:25px;
+background:#ff4d6d;
 color:white;
 font-weight:bold;
 margin-top:15px;
-box-shadow:0 0 15px rgba(255,77,109,0.4);
-transition:0.3s;
+cursor:pointer;
 }
 
-button:hover{
-transform:scale(1.05);
-}
-
-/* PAGE 1 BALLOONS */
 .balloons{
 font-size:40px;
-animation: floatUp 3s infinite ease-in-out;
+animation: float 2s infinite ease-in-out;
 }
 
-@keyframes floatUp{
+@keyframes float{
 0%{transform:translateY(20px); opacity:0;}
 50%{opacity:1;}
-100%{transform:translateY(-40px); opacity:0;}
+100%{transform:translateY(-30px); opacity:0;}
 }
 
-/* MESSAGE BOX */
-.card{
-background:rgba(255,255,255,0.06);
-padding:20px;
-border-radius:15px;
-max-width:600px;
-line-height:1.6;
-}
-
-/* GALLERY */
+/* PHOTOS */
 .gallery{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -92,59 +70,39 @@ max-width:600px;
 width:100%;
 height:140px;
 object-fit:cover;
-border-radius:12px;
-box-shadow:0 0 10px rgba(255,255,255,0.1);
+border-radius:10px;
 }
-
-/* TEXT */
-h1{
-text-shadow:0 0 15px #ff4d6d;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 AUDIO (your files) -->
-<audio id="a1" src="audio_1.m4a"></audio>
-<audio id="a2" src="audio_2.m4a"></audio>
-<audio id="a3" src="audio_3.m4a"></audio>
-<audio id="a4" src="audio_4.m4a"></audio>
-<audio id="a5" src="audio_5.m4a"></audio>
-<audio id="a6" src="audio_6.m4a"></audio>
-
-<!-- 🎉 PAGE 1 -->
+<!-- PAGE 1 -->
 <div class="page active" id="p1">
 
-<div class="balloons">🎈 🎈 🎈 🎈 🎈</div>
+<div class="balloons">🎈🎈🎈🎈🎈</div>
 
 <h1>HAPPY BIRTHDAY MY LOVE ❤️</h1>
-<p>A small cinematic surprise for you ✨</p>
 
-<button onclick="start()">Start Journey 🎬</button>
+<p>Tap below to start 🎬</p>
 
+<button onclick="go(2)">Start</button>
 </div>
 
-<!-- 💌 PAGE 2 -->
+<!-- PAGE 2 -->
 <div class="page" id="p2">
 
-<h1>💌 Special Message</h1>
+<h1>💌 Message</h1>
 
-<div class="card">
-
+<p style="max-width:500px; line-height:1.6;">
 Happy Birthday Sarita ❤️<br><br>
+You are my best friend, my happiness, my peace 🫶
+</p>
 
-You are my peace, my comfort, my happiness 🫶<br>
-I don’t say it often… but you mean a lot to me 💖
-
+<button onclick="go(3)">Next ➜</button>
 </div>
 
-<button onclick="go(3)">Continue ➜</button>
-
-</div>
-
-<!-- 📸 PAGE 3 -->
+<!-- PAGE 3 -->
 <div class="page" id="p3">
 
 <h1>📸 Memories</h1>
@@ -167,138 +125,38 @@ I don’t say it often… but you mean a lot to me 💖
 
 </div>
 
+<!-- IMPORTANT: CLEAR NEXT BUTTON -->
 <button onclick="go(4)">Continue ➜</button>
-
 </div>
 
-<!-- 🎥 PAGE 4 -->
+<!-- PAGE 4 -->
 <div class="page" id="p4">
 
-<h1>🎥 A Moment</h1>
+<h1>🎥 Video Moment</h1>
 
 <video width="300" controls>
 <source src="Video.MOV">
 </video>
 
-<button onclick="go(5)">Continue ➜</button>
-
+<button onclick="go(5)">Next ➜</button>
 </div>
 
-<!-- 🎮 PAGE 5 -->
+<!-- PAGE 5 -->
 <div class="page" id="p5">
 
-<h1>🎮 10 Reasons You Are Special</h1>
+<h1>💖 Final</h1>
 
-<div>
-<button onclick="reason(1)">1</button>
-<button onclick="reason(2)">2</button>
-<button onclick="reason(3)">3</button>
-<button onclick="reason(4)">4</button>
-<button onclick="reason(5)">5</button>
-<button onclick="reason(6)">6</button>
-<button onclick="reason(7)">7</button>
-<button onclick="reason(8)">8</button>
-<button onclick="reason(9)">9</button>
-<button onclick="reason(10)">10</button>
-</div>
-
-<p id="reasonText"></p>
-
-<button onclick="go(6)">Continue ➜</button>
-
-</div>
-
-<!-- 💖 PAGE 6 -->
-<div class="page" id="p6">
-
-<h1>💖 Final Letter</h1>
-
-<div class="card">
-
-Dear Sarita ❤️<br><br>
-
-You are not just my best friend…<br>
-you are a part of my heart 🫶
-
-</div>
-
-<button onclick="final()">Final Scene 🎬</button>
-
-</div>
-
-<!-- 🫂 FINAL -->
-<div class="page" id="final">
-
-<h1>🫂 I LOVE YOU ❤️</h1>
-<h2>Happy Birthday My Musa 🎂</h2>
-
-<p>Forever us 💖</p>
+<p>I LOVE YOU MERO MUSA ❤️</p>
 
 </div>
 
 <script>
 
-let audios=[a1,a2,a3,a4,a5,a6];
-
-function stopAll(){
-audios.forEach(a=>{
-a.pause();
-a.currentTime=0;
-});
-}
-
-function play(i){
-stopAll();
-if(audios[i]) audios[i].play().catch(()=>{});
-}
-
-function show(p){
-
+function go(p){
 document.querySelectorAll(".page").forEach(x=>{
 x.classList.remove("active");
 });
-
-document.getElementById("final").classList.remove("active");
 document.getElementById("p"+p).classList.add("active");
-
-if(p>=2 && p<=6){
-play(p-2);
-}
-}
-
-function start(){
-show(2);
-setTimeout(()=>play(0),500);
-}
-
-function go(p){
-show(p);
-}
-
-function reason(n){
-
-let text=[
-"👁️ Beautiful eyes",
-"💖 Pure heart",
-"😂 Your smile BUMMM",
-"🌸 Graceful",
-"🫶 Kind soul",
-"✨ Strong woman",
-"❤️ My best friend",
-"🦋 My happiness",
-"💛 Caring nature",
-"🌟 Always honest"
-];
-
-document.getElementById("reasonText").innerHTML=text[n-1];
-}
-
-function final(){
-document.querySelectorAll(".page").forEach(p=>{
-p.classList.remove("active");
-});
-document.getElementById("final").classList.add("active");
-play(5);
 }
 
 </script>
