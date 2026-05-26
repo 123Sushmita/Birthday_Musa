@@ -9,27 +9,27 @@ body{
 margin:0;
 font-family:Arial;
 overflow:hidden;
-color:white;
 background:black;
+color:white;
 }
 
-/* STAR BACKGROUND */
+/* 🌌 STAR FIELD */
 .stars{
 position:fixed;
 width:100%;
 height:100%;
-background:transparent;
 overflow:hidden;
-z-index:-3;
+z-index:-5;
+background:radial-gradient(circle,#120018,#000);
 }
 
 .star{
 position:absolute;
-width:3px;
-height:3px;
+width:2px;
+height:2px;
 background:white;
 border-radius:50%;
-animation:fall 6s linear infinite;
+animation:fall linear infinite;
 opacity:0.8;
 }
 
@@ -38,7 +38,7 @@ from{transform:translateY(-10vh);}
 to{transform:translateY(110vh);}
 }
 
-/* NETFLIX INTRO */
+/* 🎬 NETFLIX INTRO */
 #intro{
 position:fixed;
 width:100%;
@@ -55,11 +55,22 @@ animation-delay:2.5s;
 
 #intro h1{
 color:#e50914;
-font-size:40px;
+font-size:42px;
+letter-spacing:3px;
 text-shadow:0 0 20px #e50914;
+animation:zoom 2s ease;
 }
 
-/* PAGE SYSTEM */
+@keyframes zoom{
+from{transform:scale(0.6);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+/* 📱 PAGES */
 .page{
 position:absolute;
 width:100%;
@@ -71,7 +82,7 @@ align-items:center;
 text-align:center;
 opacity:0;
 pointer-events:none;
-transition:0.8s;
+transition:1s ease;
 padding:20px;
 }
 
@@ -80,9 +91,9 @@ opacity:1;
 pointer-events:auto;
 }
 
-/* BUTTON */
+/* 🔘 BUTTON */
 button{
-padding:14px 22px;
+padding:14px 24px;
 border:none;
 border-radius:25px;
 background:#ff4d6d;
@@ -92,40 +103,80 @@ cursor:pointer;
 margin-top:15px;
 }
 
-/* TYPEWRITER */
+/* 💖 TITLE GLOW */
+.glow{
+font-size:40px;
+text-shadow:0 0 25px #ff4d6d,0 0 40px #ff4d6d;
+animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+50%{transform:scale(1.08);}
+}
+
+/* 💌 TYPE EFFECT */
 .type{
 border-right:2px solid white;
 white-space:nowrap;
 overflow:hidden;
-animation:typing 3s steps(40,end), blink .8s infinite;
+animation:blink .8s infinite;
+font-size:18px;
+max-width:90%;
 }
 
 @keyframes blink{
 50%{border-color:transparent;}
 }
 
-/* HUG SILHOUETTE */
+/* 🫶 HUG */
 .hug{
-font-size:60px;
+font-size:70px;
 animation:hug 1.5s infinite alternate;
+filter:drop-shadow(0 0 10px pink);
 }
 
 @keyframes hug{
 from{transform:scale(1);}
-to{transform:scale(1.15);}
+to{transform:scale(1.2);}
 }
 
-/* CREDITS */
+/* 🎞 CREDITS */
 .credits{
 position:fixed;
 bottom:-100%;
 width:100%;
 text-align:center;
-animation:roll 8s linear forwards;
+animation:roll 10s linear forwards;
 }
 
 @keyframes roll{
-to{bottom:100%;}
+to{bottom:120%;}
+}
+
+/* 🎆 CONFETTI */
+.confetti{
+position:fixed;
+width:8px;
+height:8px;
+top:-10px;
+animation:fallConf 3s linear forwards;
+}
+
+@keyframes fallConf{
+to{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* 📳 SHAKE */
+.shake{
+animation:shake 0.4s;
+}
+
+@keyframes shake{
+0%{transform:translate(0);}
+25%{transform:translate(-5px,5px);}
+50%{transform:translate(5px,-5px);}
+75%{transform:translate(-5px);}
+100%{transform:translate(0);}
 }
 
 </style>
@@ -133,16 +184,16 @@ to{bottom:100%;}
 
 <body>
 
-<!-- STAR BACKGROUND -->
+<!-- 🌌 STARS -->
 <div class="stars" id="stars"></div>
 
-<!-- INTRO -->
+<!-- 🎬 INTRO -->
 <div id="intro">
 <h1>NETFLIX PRESENTS</h1>
 <p>🎬 A Love Story</p>
 </div>
 
-<!-- AUDIO -->
+<!-- 🎵 AUDIO -->
 <audio id="a1" src="audio_1.m4a"></audio>
 <audio id="a2" src="audio_2.m4a"></audio>
 <audio id="a3" src="audio_3.m4a"></audio>
@@ -152,52 +203,56 @@ to{bottom:100%;}
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-<h1>🎉 HAPPY BIRTHDAY</h1>
-<button onclick="unlock(); go(2)">Start 🎬</button>
+<div class="glow">🎉 HAPPY BIRTHDAY MY LOVE ❤️</div>
+<button onclick="unlock(); go(2)">Start Movie 🎬</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-<h1 class="type" id="t1"></h1>
+<h1 class="type" id="typeText"></h1>
 <button onclick="go(3)">Next ➜</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
 <h1>💖 What I Love About You</h1>
-<p>Everything about you matters ❤️</p>
+<p>You are my calm in chaos ❤️</p>
 <button onclick="go(4)">Next ➜</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-<h1>🎮 Game Page</h1>
-<p>All your beauty in one soul 🫶</p>
+<h1>🎮 Your Magic</h1>
+<p>Everything about you feels like home 🫶</p>
 <button onclick="go(5)">Next ➜</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-<h1>🫶 Hug Scene</h1>
+<h1>🫶 The Hug Scene</h1>
 <div class="hug">🧑‍🤝‍🧑💞</div>
 <button onclick="go(6)">Next ➜</button>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-<h1>🎬 Movie Credits</h1>
-<div class="credits">
-<h2>Directed by: Love ❤️</h2>
-<p>Starring: You & Me 🫶</p>
-<p>Produced by: Memories ✨</p>
+<div class="glow">❤️ HAPPY BIRTHDAY SARITA ❤️</div>
+<button onclick="final()">End Movie 🎆</button>
 </div>
-<button onclick="final()">End 🎆</button>
+
+<!-- PAGE 7 (CREDITS) -->
+<div class="page" id="p7">
+<div class="credits">
+<h2>🎬 Directed by Love</h2>
+<p>Starring: You & Me 💞</p>
+<p>Produced by Memories ✨</p>
+</div>
 </div>
 
 <script>
 
-/* STARS */
-for(let i=0;i<80;i++){
+/* 🌌 STARS */
+for(let i=0;i<100;i++){
 let s=document.createElement("div");
 s.className="star";
 s.style.left=Math.random()*100+"vw";
@@ -205,7 +260,7 @@ s.style.animationDuration=(2+Math.random()*5)+"s";
 document.getElementById("stars").appendChild(s);
 }
 
-/* AUDIO FIX */
+/* 🎵 AUDIO */
 let audios=["a1","a2","a3","a4","a5","a6"];
 let unlocked=false;
 
@@ -213,13 +268,13 @@ function unlock(){
 unlocked=true;
 }
 
-/* PAGE CONTROL */
+/* 🎬 PAGE CONTROL */
 function go(p){
 
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* AUDIO */
+/* 🎵 AUDIO SYNC */
 if(unlocked && p>=2){
 let a=document.getElementById(audios[p-2]);
 if(a){
@@ -228,28 +283,47 @@ a.play().catch(()=>{});
 }
 }
 
-/* TYPE TEXT */
+/* 💌 TYPE TEXT */
 if(p===2){
-typeText("You are my peace, my home, my everything ❤️");
+typeEffect("You are my peace, my home, my everything ❤️");
 }
 }
 
-/* TYPEWRITER */
-function typeText(text){
+/* 💌 TYPE EFFECT */
+function typeEffect(text){
 let i=0;
-let el=document.getElementById("t1");
+let el=document.getElementById("typeText");
 el.innerHTML="";
-let interval=setInterval(()=>{
+let t=setInterval(()=>{
 el.innerHTML+=text[i];
 i++;
-if(i>=text.length) clearInterval(interval);
-},60);
+if(i>=text.length) clearInterval(t);
+},50);
 }
 
-/* FINAL */
+/* 🎆 FINAL SCENE */
 function final(){
-document.body.style.filter="brightness(1.2)";
-alert("❤️ HAPPY BIRTHDAY MY LOVE ❤️");
+
+document.body.classList.add("shake");
+
+/* CONFETTI */
+for(let i=0;i<120;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"vw";
+c.style.background=["#ff4d6d","#fff","#ffd700","#ff69b4"][Math.floor(Math.random()*4)];
+c.style.animationDuration=(2+Math.random()*3)+"s";
+document.body.appendChild(c);
+
+setTimeout(()=>c.remove(),5000);
+}
+
+/* GO CREDITS */
+setTimeout(()=>{
+document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+document.getElementById("p7").classList.add("active");
+},1200);
+
 }
 
 </script>
