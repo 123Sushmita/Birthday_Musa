@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HAPPY BIRTHDAY MY LOVE ❤️</title>
+<title>Happy Birthday My Love ❤️</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial;
-background: radial-gradient(circle at top, #000, #0a0a0a, #000);
+background: radial-gradient(circle at top, #0a0a0a, #000);
 color:white;
 overflow:hidden;
 }
 
-/* SCENES */
+/* PAGE SYSTEM */
 .page{
 position:absolute;
 width:100%;
@@ -28,37 +28,29 @@ text-align:center;
 padding:20px;
 
 opacity:0;
-transform:scale(1.05) translateY(30px);
+transform:scale(1.05);
 transition:1s ease;
 pointer-events:none;
 }
 
 .active{
 opacity:1;
-transform:scale(1) translateY(0);
-z-index:10;
+transform:scale(1);
 pointer-events:auto;
+z-index:10;
 }
 
-/* GOLD HEADER */
-.banner{
-background:linear-gradient(90deg, black, gold, black);
-padding:20px;
-border-radius:20px;
-box-shadow:0 0 30px gold;
-}
-
-/* BUTTONS */
+/* BUTTON */
 button{
-padding:14px 22px;
+padding:14px 24px;
 border:none;
 border-radius:30px;
 cursor:pointer;
-background:linear-gradient(45deg, gold, #ffcc00);
-color:black;
+background:linear-gradient(45deg, #ff4d6d, #ff85a1);
+color:white;
 font-weight:bold;
 margin-top:15px;
-box-shadow:0 0 15px rgba(255,215,0,0.3);
+box-shadow:0 0 15px rgba(255,77,109,0.4);
 transition:0.3s;
 }
 
@@ -66,13 +58,25 @@ button:hover{
 transform:scale(1.05);
 }
 
-/* PAGE 2 CARD */
+/* PAGE 1 BALLOONS */
+.balloons{
+font-size:40px;
+animation: floatUp 3s infinite ease-in-out;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(20px); opacity:0;}
+50%{opacity:1;}
+100%{transform:translateY(-40px); opacity:0;}
+}
+
+/* MESSAGE BOX */
 .card{
-background:rgba(255,255,255,0.05);
+background:rgba(255,255,255,0.06);
 padding:20px;
 border-radius:15px;
 max-width:600px;
-backdrop-filter:blur(5px);
+line-height:1.6;
 }
 
 /* GALLERY */
@@ -80,26 +84,21 @@ backdrop-filter:blur(5px);
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:10px;
-padding:20px;
+padding:15px;
 max-width:600px;
 }
 
 .gallery img{
 width:100%;
-height:160px;
+height:140px;
 object-fit:cover;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.6);
-transition:0.4s;
-}
-
-.gallery img:hover{
-transform:scale(1.03);
+border-radius:12px;
+box-shadow:0 0 10px rgba(255,255,255,0.1);
 }
 
 /* TEXT */
 h1{
-text-shadow:0 0 15px gold;
+text-shadow:0 0 15px #ff4d6d;
 }
 
 </style>
@@ -107,7 +106,7 @@ text-shadow:0 0 15px gold;
 
 <body>
 
-<!-- AUDIO -->
+<!-- 🎵 AUDIO (your files) -->
 <audio id="a1" src="audio_1.m4a"></audio>
 <audio id="a2" src="audio_2.m4a"></audio>
 <audio id="a3" src="audio_3.m4a"></audio>
@@ -115,39 +114,40 @@ text-shadow:0 0 15px gold;
 <audio id="a5" src="audio_5.m4a"></audio>
 <audio id="a6" src="audio_6.m4a"></audio>
 
-<!-- PAGE 1 -->
+<!-- 🎉 PAGE 1 -->
 <div class="page active" id="p1">
 
-<div class="banner">
-<h1>🎉 HAPPY BIRTHDAY 🎉</h1>
-<h2>MERO MUSA ❤️ SARITA</h2>
+<div class="balloons">🎈 🎈 🎈 🎈 🎈</div>
+
+<h1>HAPPY BIRTHDAY MY LOVE ❤️</h1>
+<p>A small cinematic surprise for you ✨</p>
+
+<button onclick="start()">Start Journey 🎬</button>
+
 </div>
 
-<p>Made with endless love 💖</p>
-
-<button onclick="start()">Begin Journey 🎬</button>
-</div>
-
-<!-- PAGE 2 -->
+<!-- 💌 PAGE 2 -->
 <div class="page" id="p2">
 
-<h1>💌 A MESSAGE FROM MY HEART</h1>
+<h1>💌 Special Message</h1>
 
 <div class="card">
-<p>
-Happy Birthday Musa ❤️<br><br>
-You are my peace, my happiness, my home 🫶<br>
-I am nothing without your presence 💖
-</p>
+
+Happy Birthday Sarita ❤️<br><br>
+
+You are my peace, my comfort, my happiness 🫶<br>
+I don’t say it often… but you mean a lot to me 💖
+
 </div>
 
 <button onclick="go(3)">Continue ➜</button>
+
 </div>
 
-<!-- PAGE 3 (CINEMATIC GALLERY - NO BUTTON) -->
+<!-- 📸 PAGE 3 -->
 <div class="page" id="p3">
 
-<h1>📸 MEMORY LANE</h1>
+<h1>📸 Memories</h1>
 
 <div class="gallery">
 
@@ -167,26 +167,27 @@ I am nothing without your presence 💖
 
 </div>
 
-<div id="scrollTrigger"></div>
+<button onclick="go(4)">Continue ➜</button>
 
 </div>
 
-<!-- PAGE 4 -->
+<!-- 🎥 PAGE 4 -->
 <div class="page" id="p4">
 
-<h1>🎥 OUR MEMORY</h1>
+<h1>🎥 A Moment</h1>
 
 <video width="300" controls>
 <source src="Video.MOV">
 </video>
 
-<button onclick="go(5)">Play Game 🎮</button>
+<button onclick="go(5)">Continue ➜</button>
+
 </div>
 
-<!-- PAGE 5 -->
+<!-- 🎮 PAGE 5 -->
 <div class="page" id="p5">
 
-<h1>🎮 10 REASONS</h1>
+<h1>🎮 10 Reasons You Are Special</h1>
 
 <div>
 <button onclick="reason(1)">1</button>
@@ -203,37 +204,41 @@ I am nothing without your presence 💖
 
 <p id="reasonText"></p>
 
-<button onclick="go(6)">Final Letter 💌</button>
+<button onclick="go(6)">Continue ➜</button>
+
 </div>
 
-<!-- PAGE 6 -->
+<!-- 💖 PAGE 6 -->
 <div class="page" id="p6">
 
-<h1>💖 FINAL LETTER</h1>
+<h1>💖 Final Letter</h1>
 
-<p>
+<div class="card">
+
 Dear Sarita ❤️<br><br>
-You are my forever Musa 🫶
-</p>
 
-<button onclick="final()">Final Scene 🎬</button>
+You are not just my best friend…<br>
+you are a part of my heart 🫶
+
 </div>
 
-<!-- FINAL -->
+<button onclick="final()">Final Scene 🎬</button>
+
+</div>
+
+<!-- 🫂 FINAL -->
 <div class="page" id="final">
 
-<h1>🫂 I LOVE YOU MERO MUSA ❤️</h1>
-<h2>🎂 Happy Birthday Sarita 🎂</h2>
+<h1>🫂 I LOVE YOU ❤️</h1>
+<h2>Happy Birthday My Musa 🎂</h2>
 
-<p>Forever Us 💖</p>
+<p>Forever us 💖</p>
 
 </div>
 
 <script>
 
-let audios=[
-a1,a2,a3,a4,a5,a6
-];
+let audios=[a1,a2,a3,a4,a5,a6];
 
 function stopAll(){
 audios.forEach(a=>{
@@ -273,43 +278,26 @@ show(p);
 function reason(n){
 
 let text=[
-"👁️ Most beautiful eyes ever",
-"💖 Pure soul",
-"😂 BUMMMM makes me smile",
-"🌸 Stunning in saree",
-"🫶 Innocent heart",
-"✨ Strong personality",
+"👁️ Beautiful eyes",
+"💖 Pure heart",
+"😂 Your smile BUMMM",
+"🌸 Graceful",
+"🫶 Kind soul",
+"✨ Strong woman",
 "❤️ My best friend",
-"🦋 You color my life",
-"💛 Kind hearted",
-"🌟 Truth always"
+"🦋 My happiness",
+"💛 Caring nature",
+"🌟 Always honest"
 ];
 
 document.getElementById("reasonText").innerHTML=text[n-1];
 }
 
-/* AUTO MOVE FROM GALLERY */
-document.addEventListener("scroll",function(){
-
-let t=document.getElementById("scrollTrigger");
-if(!t) return;
-
-let r=t.getBoundingClientRect();
-
-if(r.top < window.innerHeight){
-go(4);
-}
-
-});
-
 function final(){
-
 document.querySelectorAll(".page").forEach(p=>{
 p.classList.remove("active");
 });
-
 document.getElementById("final").classList.add("active");
-
 play(5);
 }
 
