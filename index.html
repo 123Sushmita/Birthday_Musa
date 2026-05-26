@@ -10,23 +10,32 @@ margin:0;
 font-family:Arial;
 overflow:hidden;
 color:white;
+background:black;
 }
 
-/* BACKGROUND */
-.bg{
+/* STAR BACKGROUND */
+.stars{
 position:fixed;
 width:100%;
 height:100%;
-background:linear-gradient(-45deg,#0b0015,#1a0025,#2b0033,#000);
-background-size:400% 400%;
-animation:bg 10s ease infinite;
+background:transparent;
+overflow:hidden;
 z-index:-3;
 }
 
-@keyframes bg{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+.star{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+animation:fall 6s linear infinite;
+opacity:0.8;
+}
+
+@keyframes fall{
+from{transform:translateY(-10vh);}
+to{transform:translateY(110vh);}
 }
 
 /* NETFLIX INTRO */
@@ -47,18 +56,7 @@ animation-delay:2.5s;
 #intro h1{
 color:#e50914;
 font-size:40px;
-letter-spacing:4px;
 text-shadow:0 0 20px #e50914;
-animation:zoom 2s ease;
-}
-
-@keyframes zoom{
-from{transform:scale(0.5);opacity:0;}
-to{transform:scale(1);opacity:1;}
-}
-
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
 }
 
 /* PAGE SYSTEM */
@@ -94,74 +92,40 @@ cursor:pointer;
 margin-top:15px;
 }
 
-/* LETTER ANIMATION */
-.letter{
-width:260px;
-height:160px;
-background:#fff;
-color:black;
-border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-position:relative;
-cursor:pointer;
+/* TYPEWRITER */
+.type{
+border-right:2px solid white;
+white-space:nowrap;
+overflow:hidden;
+animation:typing 3s steps(40,end), blink .8s infinite;
 }
 
-.paper{
-position:absolute;
-width:100%;
-height:100%;
-background:white;
-top:100%;
-left:0;
-border-radius:12px;
-transition:1s;
-padding:10px;
-box-sizing:border-box;
+@keyframes blink{
+50%{border-color:transparent;}
 }
 
-.open .paper{
-top:0;
+/* HUG SILHOUETTE */
+.hug{
+font-size:60px;
+animation:hug 1.5s infinite alternate;
 }
 
-/* HEARTBEAT FINAL */
-.heartbeat{
-font-size:40px;
-animation:beat 1s infinite;
+@keyframes hug{
+from{transform:scale(1);}
+to{transform:scale(1.15);}
 }
 
-@keyframes beat{
-0%{transform:scale(1);}
-50%{transform:scale(1.2);}
-100%{transform:scale(1);}
-}
-
-/* CONFETTI */
-.confetti{
+/* CREDITS */
+.credits{
 position:fixed;
-width:8px;
-height:8px;
-top:-10px;
-animation:fall linear forwards;
+bottom:-100%;
+width:100%;
+text-align:center;
+animation:roll 8s linear forwards;
 }
 
-@keyframes fall{
-to{transform:translateY(110vh) rotate(360deg);}
-}
-
-/* SHAKE */
-.shake{
-animation:shake 0.4s;
-}
-
-@keyframes shake{
-0%{transform:translate(0);}
-25%{transform:translate(-5px,5px);}
-50%{transform:translate(5px,-5px);}
-75%{transform:translate(-5px);}
-100%{transform:translate(0);}
+@keyframes roll{
+to{bottom:100%;}
 }
 
 </style>
@@ -169,9 +133,10 @@ animation:shake 0.4s;
 
 <body>
 
-<div class="bg"></div>
+<!-- STAR BACKGROUND -->
+<div class="stars" id="stars"></div>
 
-<!-- NETFLIX INTRO -->
+<!-- INTRO -->
 <div id="intro">
 <h1>NETFLIX PRESENTS</h1>
 <p>🎬 A Love Story</p>
@@ -187,62 +152,60 @@ animation:shake 0.4s;
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-<h1>🎉 HAPPY BIRTHDAY MY LOVE</h1>
-<button onclick="unlock(); go(2)">Start Movie 🎬</button>
+<h1>🎉 HAPPY BIRTHDAY</h1>
+<button onclick="unlock(); go(2)">Start 🎬</button>
 </div>
 
-<!-- PAGE 2 LETTER -->
+<!-- PAGE 2 -->
 <div class="page" id="p2">
-
-<h1>💌 A Letter For You</h1>
-
-<div class="letter" onclick="openLetter(this)">
-Click to Open 💖
-<div class="paper">
-Hey beautiful ❤️<br><br>
-Happy Birthday!<br>
-You are my peace, my home, my everything.<br><br>
-I love you forever 🫶
-</div>
-</div>
-
+<h1 class="type" id="t1"></h1>
 <button onclick="go(3)">Next ➜</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-<h1>💖 Message</h1>
-<p>You are my world ❤️</p>
+<h1>💖 What I Love About You</h1>
+<p>Everything about you matters ❤️</p>
 <button onclick="go(4)">Next ➜</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-<h1>🎮 Why You Matter</h1>
-<p>Everything about you is special 💖</p>
+<h1>🎮 Game Page</h1>
+<p>All your beauty in one soul 🫶</p>
 <button onclick="go(5)">Next ➜</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-<h1>📸 Memories</h1>
+<h1>🫶 Hug Scene</h1>
+<div class="hug">🧑‍🤝‍🧑💞</div>
 <button onclick="go(6)">Next ➜</button>
 </div>
 
-<!-- PAGE 6 FINAL -->
+<!-- PAGE 6 -->
 <div class="page" id="p6">
-
-<div class="heartbeat">❤️ HAPPY BIRTHDAY SARITA ❤️</div>
-
-<h2>Forever Mine 🫶</h2>
-
-<button onclick="final()">Finish 🎆</button>
-
+<h1>🎬 Movie Credits</h1>
+<div class="credits">
+<h2>Directed by: Love ❤️</h2>
+<p>Starring: You & Me 🫶</p>
+<p>Produced by: Memories ✨</p>
+</div>
+<button onclick="final()">End 🎆</button>
 </div>
 
 <script>
 
-/* AUDIO */
+/* STARS */
+for(let i=0;i<80;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=(2+Math.random()*5)+"s";
+document.getElementById("stars").appendChild(s);
+}
+
+/* AUDIO FIX */
 let audios=["a1","a2","a3","a4","a5","a6"];
 let unlocked=false;
 
@@ -256,40 +219,37 @@ function go(p){
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* audio sync */
+/* AUDIO */
 if(unlocked && p>=2){
-let i=p-2;
-let a=document.getElementById(audios[i]);
+let a=document.getElementById(audios[p-2]);
 if(a){
 a.currentTime=0;
 a.play().catch(()=>{});
 }
 }
 
+/* TYPE TEXT */
+if(p===2){
+typeText("You are my peace, my home, my everything ❤️");
+}
 }
 
-/* LETTER OPEN */
-function openLetter(el){
-el.classList.toggle("open");
+/* TYPEWRITER */
+function typeText(text){
+let i=0;
+let el=document.getElementById("t1");
+el.innerHTML="";
+let interval=setInterval(()=>{
+el.innerHTML+=text[i];
+i++;
+if(i>=text.length) clearInterval(interval);
+},60);
 }
 
-/* FINAL SCENE */
+/* FINAL */
 function final(){
-
-document.body.classList.add("shake");
-
-for(let i=0;i<100;i++){
-let c=document.createElement("div");
-c.className="confetti";
-c.style.left=Math.random()*100+"vw";
-c.style.background=["#ff4d6d","#fff","#ffd700"][Math.floor(Math.random()*3)];
-c.style.animationDuration=(2+Math.random()*3)+"s";
-document.body.appendChild(c);
-
-setTimeout(()=>c.remove(),5000);
-}
-
-setTimeout(()=>document.body.classList.remove("shake"),500);
+document.body.style.filter="brightness(1.2)";
+alert("❤️ HAPPY BIRTHDAY MY LOVE ❤️");
 }
 
 </script>
