@@ -23,6 +23,8 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
+padding:20px;
+
 opacity:0;
 pointer-events:none;
 transition:0.6s ease;
@@ -45,10 +47,10 @@ margin-top:15px;
 cursor:pointer;
 }
 
-/* BALLOONS */
+/* PAGE 1 */
 .balloons{
 font-size:40px;
-animation:float 2s infinite;
+animation:float 2s infinite ease-in-out;
 }
 
 @keyframes float{
@@ -57,20 +59,20 @@ animation:float 2s infinite;
 100%{transform:translateY(-30px);opacity:0;}
 }
 
-/* BOX */
+/* PAGE 2 BOX */
 .box{
-width:220px;
+width:240px;
 height:140px;
 background:#ff4d6d;
+border-radius:12px;
 display:flex;
 align-items:center;
 justify-content:center;
-border-radius:12px;
 cursor:pointer;
 font-weight:bold;
 }
 
-/* FLYING PAPER */
+/* PAPER */
 #paper{
 position:fixed;
 top:60%;
@@ -80,9 +82,10 @@ background:white;
 color:black;
 padding:20px;
 border-radius:12px;
-max-width:300px;
+max-width:320px;
 opacity:0;
-transition:1s;
+transition:1s ease;
+z-index:5;
 }
 
 /* PAPER ANIMATION */
@@ -98,21 +101,38 @@ top:10px;
 left:50%;
 transform:translateX(-50%);
 background:rgba(255,255,255,0.1);
-padding:15px;
+padding:12px;
 border-radius:10px;
-max-width:80%;
+max-width:85%;
 display:none;
+font-size:14px;
 }
 
-/* GAME */
-.btn{
-width:45px;
-height:45px;
-margin:5px;
-border-radius:50%;
-border:none;
-background:white;
+/* GAME GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+padding:15px;
+}
+
+.card{
+width:55px;
+height:55px;
+background:#ff4d6d;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+font-weight:bold;
 cursor:pointer;
+transition:0.4s;
+}
+
+.card.flipped{
+background:white;
+color:black;
+transform:scale(1.1);
 }
 
 /* PHOTOS */
@@ -138,31 +158,26 @@ border-radius:10px;
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
 
-<div class="balloons">🎈🎈🎈🎈</div>
+<div class="balloons">🎈🎈🎈🎈🎈</div>
+
 <h1>HAPPY BIRTHDAY MY LOVE ❤️</h1>
 
 <button onclick="go(2)">Start</button>
 </div>
 
-<!-- PAGE 2 LETTER BOX -->
+<!-- PAGE 2 -->
 <div class="page" id="p2">
 
 <h1>💌 Open Your Surprise</h1>
 
 <div class="box" onclick="openBox()">
-🎁 Happy Birthday Girl 💖<br>Click to Open
+🎁 Happy Birthday Girl 💖<br>Click Me
 </div>
 
 </div>
 
-<!-- FLOATING PAPER -->
-<div id="paper">
-Hey beautiful ❤️<br><br>
-
-Happy Birthday! Wishing you a peaceful and prosperous life ahead.<br><br>
-
-You mean the world to me… I love you 💖
-</div>
+<!-- PAPER -->
+<div id="paper"></div>
 
 <!-- TOP MESSAGE -->
 <div id="msg"></div>
@@ -172,20 +187,20 @@ You mean the world to me… I love you 💖
 
 <h1>💖 What I Love Most</h1>
 
-<div>
-<button class="btn" onclick="show(1)">1</button>
-<button class="btn" onclick="show(2)">2</button>
-<button class="btn" onclick="show(3)">3</button>
-<button class="btn" onclick="show(4)">4</button>
-<button class="btn" onclick="show(5)">5</button>
-<button class="btn" onclick="show(6)">6</button>
-<button class="btn" onclick="show(7)">7</button>
-<button class="btn" onclick="show(8)">8</button>
-<button class="btn" onclick="show(9)">9</button>
-<button class="btn" onclick="show(10)">10</button>
-</div>
+<div class="grid">
 
-<p id="text"></p>
+<div class="card" onclick="flip(this,1)">1</div>
+<div class="card" onclick="flip(this,2)">2</div>
+<div class="card" onclick="flip(this,3)">3</div>
+<div class="card" onclick="flip(this,4)">4</div>
+<div class="card" onclick="flip(this,5)">5</div>
+<div class="card" onclick="flip(this,6)">6</div>
+<div class="card" onclick="flip(this,7)">7</div>
+<div class="card" onclick="flip(this,8)">8</div>
+<div class="card" onclick="flip(this,9)">9</div>
+<div class="card" onclick="flip(this,10)">10</div>
+
+</div>
 
 <button onclick="go(4)">Next ➜</button>
 </div>
@@ -224,15 +239,23 @@ x.classList.remove("active");
 document.getElementById("p"+p).classList.add("active");
 }
 
-/* BOX CLICK → PAPER + MESSAGE */
+/* PAGE 2 BOX ANIMATION */
 function openBox(){
 
-document.getElementById("paper").classList.add("fly");
+let paper=document.getElementById("paper");
+
+paper.innerHTML=`
+Hey beautiful ❤️<br><br>
+Happy Birthday! Wishing you a peaceful and prosperous life ahead.<br><br>
+You know what you are to me… I love you the most 💖
+`;
+
+paper.classList.add("fly");
 
 setTimeout(()=>{
 document.getElementById("msg").style.display="block";
 document.getElementById("msg").innerHTML=
-"💌 Hey beautiful ❤️ Happy Birthday! Wishing you peace, prosperity and happiness. I love you 💖";
+"💌 I just wanted to say... you mean everything to me ❤️";
 },1200);
 
 }
@@ -251,8 +274,13 @@ let data=[
 "Everything about you 💖"
 ];
 
-function show(n){
-document.getElementById("text").innerHTML=data[n-1];
+function flip(el,n){
+
+el.classList.add("flipped");
+
+setTimeout(()=>{
+el.innerHTML=data[n-1];
+},200);
 }
 
 </script>
