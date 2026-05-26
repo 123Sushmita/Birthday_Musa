@@ -30,16 +30,7 @@ background:radial-gradient(circle,#1a1a1a,#000);
 z-index:-10;
 }
 
-/* ✨ STAR EFFECT */
-.star{
-position:absolute;
-width:2px;
-height:2px;
-background:white;
-opacity:0.6;
-}
-
-/* 🎬 SCENES */
+/* 🎬 PAGE */
 .page{
 position:absolute;
 width:100%;
@@ -64,7 +55,7 @@ pointer-events:auto;
 .title{
 font-size:38px;
 margin-bottom:15px;
-text-shadow:0 0 25px #ff4d6d;
+text-shadow:0 0 20px #ff4d6d;
 }
 
 /* 🔘 BUTTON */
@@ -78,7 +69,7 @@ margin-top:15px;
 cursor:pointer;
 }
 
-/* 💬 CHAT */
+/* 💬 CHAT BOX */
 #chatBox{
 width:90%;
 max-width:500px;
@@ -106,6 +97,7 @@ border:none;
 border-radius:10px;
 background:#222;
 color:white;
+margin-top:10px;
 }
 
 /* 💌 BOX */
@@ -121,34 +113,7 @@ align-items:center;
 cursor:pointer;
 }
 
-/* 💥 FLOAT MSG */
-.floatMsg{
-position:absolute;
-padding:12px;
-background:rgba(255,255,255,0.08);
-border-radius:15px;
-animation:pop 1s forwards;
-}
-
-@keyframes pop{
-from{opacity:0;transform:scale(0.3);}
-to{opacity:1;transform:scale(1);}
-}
-
-/* 🎮 GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
-}
-
-.grid button{
-width:60px;
-height:60px;
-border-radius:15px;
-}
-
-/* 📸 GALLERY (FIXED CINEMATIC LOOK) */
+/* 📸 GALLERY */
 .gallery{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -163,40 +128,12 @@ height:180px;
 object-fit:cover;
 border-radius:15px;
 box-shadow:0 10px 25px rgba(0,0,0,0.6);
-transition:0.3s;
-}
-
-.gallery img:hover{
-transform:scale(1.05);
-}
-
-/* 🎥 VIDEO */
-video{
-width:320px;
-border-radius:15px;
-}
-
-/* 💖 HEART */
-.heart{
-position:fixed;
-font-size:18px;
-animation:floatUp 5s linear forwards;
-}
-
-@keyframes floatUp{
-to{transform:translateY(-120vh);opacity:0;}
 }
 
 /* 🎆 FINAL */
 .finalGlow{
 font-size:42px;
-text-shadow:0 0 10px #fff,0 0 20px #ff4d6d,0 0 40px #ff4d6d;
-}
-
-.output{
-margin-top:15px;
-font-size:18px;
-max-width:700px;
+text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 }
 
 </style>
@@ -206,7 +143,7 @@ max-width:700px;
 
 <div class="bg"></div>
 
-<!-- 🔊 AUDIO (IMPORTANT FIX) -->
+<!-- 🔊 AUDIO (FIXED SYSTEM) -->
 <audio id="a1" src="audio_1.mp3"></audio>
 <audio id="a2" src="audio_2.mp3"></audio>
 <audio id="a3" src="audio_3.mp3"></audio>
@@ -220,53 +157,58 @@ max-width:700px;
 <h1 class="title">💬 Chat With Musa</h1>
 
 <div id="chatBox">
+
 <div class="msg me">Hi mero musa ❤️</div>
 
-<input id="r1" placeholder="Type reply..." onkeydown="next1(event)">
+<div id="chatArea"></div>
+
+<input id="r1" placeholder="Type reply..." onkeydown="chatFlow(event)">
+
 </div>
 
-<button id="startBtn" onclick="go(2)" style="display:none;">Start 🎬</button>
+<button id="startBtn" onclick="go(2)" style="display:none;">
+🎬 Start Surprise
+</button>
+
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
+
 <h1 class="title">💌 Special Message</h1>
 
 <div class="specialBox" onclick="openSpecial()">
-<h2>HBD GIRL ❤️</h2>
+<h3>HBD GIRL ❤️</h3>
 <p>Click to open</p>
 </div>
 
 <button onclick="go(3)">Next</button>
+
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
 
-<h2 class="title">🎮 What I Love</h2>
+<h1 class="title">🎮 What I Love</h1>
 
-<div class="grid">
+<div>
 <button onclick="love(1)">1</button>
 <button onclick="love(2)">2</button>
 <button onclick="love(3)">3</button>
 <button onclick="love(4)">4</button>
 <button onclick="love(5)">5</button>
-<button onclick="love(6)">6</button>
-<button onclick="love(7)">7</button>
-<button onclick="love(8)">8</button>
-<button onclick="love(9)">9</button>
-<button onclick="love(10)">10</button>
 </div>
 
-<div class="output" id="loveOut"></div>
+<p id="loveOut"></p>
 
 <button onclick="go(4)">Next</button>
+
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
 
-<h2 class="title">📸 Memories</h2>
+<h1 class="title">📸 Memories</h1>
 
 <div class="gallery">
 <img src="us.jpeg">
@@ -278,108 +220,140 @@ max-width:700px;
 </div>
 
 <button onclick="go(5)">Next</button>
+
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-<h2 class="title">💌 Thank You</h2>
 
-<button onclick="nextThank()">Reveal</button>
-<div class="output" id="thankOut"></div>
+<h1 class="title">💌 Thank You</h1>
+
+<button onclick="thank()">Reveal</button>
+
+<p id="thankOut"></p>
 
 <button onclick="go(6)">Next</button>
+
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-<h2 class="title">🎥 Video</h2>
 
-<video controls>
+<h1 class="title">🎥 Video</h1>
+
+<video controls width="300">
 <source src="Video.MOV">
 </video>
 
 <button onclick="go(7)">Final</button>
+
 </div>
 
 <!-- PAGE 7 -->
 <div class="page" id="p7">
-<div class="finalGlow">🎉 HAPPY BIRTHDAY SARITA ❤️</div>
-<p class="output">Forever My Best Friend 🫶</p>
+
+<div class="finalGlow">
+🎉 HAPPY BIRTHDAY SARITA ❤️
+</div>
+
+<p>Forever My Best Friend 🫶</p>
+
 </div>
 
 <script>
 
-/* AUDIO FIX */
-let currentAudio=null;
+let step = 0;
+let currentAudio = null;
 
+/* 🔊 AUDIO FIX */
 function stopAll(){
 if(currentAudio){
 currentAudio.pause();
-currentAudio.currentTime=0;
+currentAudio.currentTime = 0;
 }
 }
 
 function playAudio(n){
 stopAll();
-let a=document.getElementById("a"+n);
+let a = document.getElementById("a"+n);
 if(a){
-currentAudio=a;
+currentAudio = a;
 a.play().catch(()=>{});
 }
 }
 
-/* PAGE SWITCH */
+/* 🎬 PAGE SWITCH */
 function go(p){
 
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-if(p>=2 && p<=6){
+/* AUDIO RULE */
+if(p >= 2 && p <= 6){
 playAudio(p-1);
 }
+
 }
 
-/* CHAT */
-function next1(e){
-if(e.key==="Enter"){
+/* 💬 CHAT FLOW */
+function chatFlow(e){
+
+if(e.key !== "Enter") return;
+
+let val = document.getElementById("r1").value.trim();
+if(val === "") return;
+
+let chat = document.getElementById("chatArea");
+
+chat.innerHTML += `<div class="msg her">${val}</div>`;
+
+/* STORY */
+if(step === 0){
+chat.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`;
+}
+
+else if(step === 1){
+chat.innerHTML += `<div class="msg me">Thank you 🫶</div>`;
+}
+
+else if(step === 2){
+chat.innerHTML += `<div class="msg me">I tried something small for your birthday 🎬❤️</div>`;
+}
+
+else if(step === 3){
+chat.innerHTML += `<div class="msg me">Are you ready? 🫶</div>`;
 document.getElementById("startBtn").style.display="block";
 }
+
+step++;
+document.getElementById("r1").value="";
+chat.scrollTop = chat.scrollHeight;
 }
 
-/* SPECIAL */
+/* 💌 SPECIAL */
 function openSpecial(){
-let msgs=["Safe ❤️","Family 🫶","Happiness 🌈","Everything 💖"];
-
-msgs.forEach((m,i)=>{
-setTimeout(()=>{
-let d=document.createElement("div");
-d.className="floatMsg";
-d.innerText=m;
-document.body.appendChild(d);
-setTimeout(()=>d.remove(),2000);
-},i*700);
-});
+alert("You are my safe place ❤️");
 }
 
-/* LOVE */
+/* 🎮 LOVE */
 function love(n){
-let arr=["Beautiful","Kind","Funny","Strong","Loyal","Best","Rare","Caring","Pure","Forever"];
-document.getElementById("loveOut").innerText=arr[n-1];
+let arr=["Beautiful","Kind","Funny","Strong","Loyal"];
+document.getElementById("loveOut").innerText = arr[n-1];
 }
 
-/* THANK YOU */
+/* 💌 THANKS */
 let t=0;
 let thanks=[
-"Thank you for trusting me ❤️",
-"Thank you for colors 🌈",
-"Thank you for support 🫶",
-"Thank you for calm 🌸",
-"Thank you sister-in-law 😂💖"
+"Thank you ❤️",
+"Thank you 🌈",
+"Thank you 🫶",
+"Thank you 🌸",
+"Thank you 💖"
 ];
 
-function nextThank(){
-document.getElementById("thankOut").innerText=thanks[t];
-t=(t+1)%thanks.length;
+function thank(){
+document.getElementById("thankOut").innerText = thanks[t];
+t = (t+1)%thanks.length;
 }
 
 </script>
