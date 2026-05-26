@@ -13,6 +13,7 @@ color:white;
 overflow:hidden;
 }
 
+/* PAGE SYSTEM */
 .page{
 position:absolute;
 width:100%;
@@ -24,8 +25,7 @@ align-items:center;
 text-align:center;
 opacity:0;
 pointer-events:none;
-transition:0.6s;
-padding:20px;
+transition:0.6s ease;
 }
 
 .active{
@@ -45,48 +45,71 @@ margin-top:15px;
 cursor:pointer;
 }
 
-/* PAGE 1 BALLOONS */
+/* BALLOONS */
 .balloons{
 font-size:40px;
-animation:float 2s infinite ease-in-out;
+animation:float 2s infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(20px); opacity:0;}
+0%{transform:translateY(20px);opacity:0;}
 50%{opacity:1;}
-100%{transform:translateY(-30px); opacity:0;}
+100%{transform:translateY(-30px);opacity:0;}
 }
 
-/* LETTER BOX */
+/* BOX */
 .box{
 width:220px;
 height:140px;
 background:#ff4d6d;
-border-radius:12px;
 display:flex;
 align-items:center;
 justify-content:center;
+border-radius:12px;
 cursor:pointer;
 font-weight:bold;
 }
 
-.paper{
-display:none;
+/* FLYING PAPER */
+#paper{
+position:fixed;
+top:60%;
+left:50%;
+transform:translate(-50%,0);
 background:white;
 color:black;
 padding:20px;
+border-radius:12px;
+max-width:300px;
+opacity:0;
+transition:1s;
+}
+
+/* PAPER ANIMATION */
+.fly{
+top:10% !important;
+opacity:1 !important;
+}
+
+/* TOP MESSAGE */
+#msg{
+position:fixed;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(255,255,255,0.1);
+padding:15px;
 border-radius:10px;
-max-width:400px;
-margin-top:20px;
+max-width:80%;
+display:none;
 }
 
 /* GAME */
 .btn{
-padding:10px;
-margin:5px;
-border-radius:50%;
 width:45px;
 height:45px;
+margin:5px;
+border-radius:50%;
 border:none;
 background:white;
 cursor:pointer;
@@ -97,7 +120,7 @@ cursor:pointer;
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:8px;
-padding:15px;
+padding:10px;
 }
 
 .gallery img{
@@ -106,6 +129,7 @@ height:120px;
 object-fit:cover;
 border-radius:10px;
 }
+
 </style>
 </head>
 
@@ -123,29 +147,30 @@ border-radius:10px;
 <!-- PAGE 2 LETTER BOX -->
 <div class="page" id="p2">
 
-<h1>💌 Open Your Letter</h1>
+<h1>💌 Open Your Surprise</h1>
 
-<div class="box" onclick="openLetter()">
-📩 Click to Open
+<div class="box" onclick="openBox()">
+🎁 Happy Birthday Girl 💖<br>Click to Open
 </div>
 
-<div class="paper" id="paper">
+</div>
+
+<!-- FLOATING PAPER -->
+<div id="paper">
 Hey beautiful ❤️<br><br>
 
 Happy Birthday! Wishing you a peaceful and prosperous life ahead.<br><br>
 
-You know what you are to me… I love you the most.<br><br>
-
-Enjoy your special day with us hehe 💖
+You mean the world to me… I love you 💖
 </div>
 
-<button onclick="go(3)">Next ➜</button>
-</div>
+<!-- TOP MESSAGE -->
+<div id="msg"></div>
 
 <!-- PAGE 3 GAME -->
 <div class="page" id="p3">
 
-<h1>💖 What I Love The Most</h1>
+<h1>💖 What I Love Most</h1>
 
 <div>
 <button class="btn" onclick="show(1)">1</button>
@@ -199,22 +224,30 @@ x.classList.remove("active");
 document.getElementById("p"+p).classList.add("active");
 }
 
-/* LETTER OPEN */
-function openLetter(){
-document.getElementById("paper").style.display="block";
+/* BOX CLICK → PAPER + MESSAGE */
+function openBox(){
+
+document.getElementById("paper").classList.add("fly");
+
+setTimeout(()=>{
+document.getElementById("msg").style.display="block";
+document.getElementById("msg").innerHTML=
+"💌 Hey beautiful ❤️ Happy Birthday! Wishing you peace, prosperity and happiness. I love you 💖";
+},1200);
+
 }
 
 /* GAME */
 let data=[
-"Your beautiful eyes 👁️",
-"Your pure heart 💖",
+"Your eyes 👁️",
 "Your smile 😊",
-"Your innocence 🌸",
+"Your heart 💖",
 "Your kindness 🫶",
-"Your loyalty 💛",
 "Your support ❤️",
+"Your loyalty 💛",
 "Your strength 💪",
 "Your honesty ✨",
+"Your vibe 🌸",
 "Everything about you 💖"
 ];
 
