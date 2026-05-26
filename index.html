@@ -12,36 +12,52 @@ overflow:hidden;
 color:white;
 }
 
-/* BACKGROUND CELEBRATION */
+/* BACKGROUND */
 .bg{
 position:fixed;
 width:100%;
 height:100%;
-background:linear-gradient(-45deg,#ff4d6d,#1a001f,#3b0a45,#000);
+background:linear-gradient(-45deg,#0b0015,#1a0025,#2b0033,#000);
 background-size:400% 400%;
-animation:move 8s ease infinite;
-z-index:-1;
+animation:bg 10s ease infinite;
+z-index:-3;
 }
 
-@keyframes move{
+@keyframes bg{
 0%{background-position:0% 50%;}
 50%{background-position:100% 50%;}
 100%{background-position:0% 50%;}
 }
 
-/* FLOATING HEARTS */
-.heart{
+/* NETFLIX INTRO */
+#intro{
 position:fixed;
-bottom:-50px;
-font-size:20px;
-animation:up 6s linear infinite;
-opacity:0.7;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+animation:fadeOut 3.5s forwards;
+animation-delay:2s;
 }
 
-@keyframes up{
-0%{transform:translateY(0);opacity:0;}
-30%{opacity:1;}
-100%{transform:translateY(-110vh);opacity:0;}
+#intro h1{
+font-size:40px;
+letter-spacing:5px;
+color:#e50914;
+text-shadow:0 0 20px #e50914;
+animation:zoom 2s ease;
+}
+
+@keyframes zoom{
+from{transform:scale(0.5);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
 }
 
 /* PAGE SYSTEM */
@@ -72,82 +88,64 @@ border:none;
 border-radius:25px;
 background:#ff4d6d;
 color:white;
-font-size:16px;
 font-weight:bold;
 cursor:pointer;
 margin-top:15px;
 }
 
-/* PAGE 1 */
+/* TITLE */
 .title{
-font-size:38px;
+font-size:40px;
 text-shadow:0 0 25px #ff4d6d;
-animation:glow 2s infinite alternate;
 }
 
-@keyframes glow{
-from{transform:scale(1);}
-to{transform:scale(1.05);}
+/* CONFETTI */
+.confetti{
+position:fixed;
+width:8px;
+height:8px;
+background:red;
+top:-10px;
+animation:fall linear forwards;
 }
 
-/* PAGE 2 MULTI MESSAGES */
-.msg{
-position:absolute;
-font-size:18px;
-background:rgba(255,255,255,0.15);
-padding:12px 18px;
-border-radius:12px;
-animation:fade 2s ease;
-max-width:200px;
+@keyframes fall{
+to{transform:translateY(110vh) rotate(360deg);}
 }
 
-@keyframes fade{
-from{opacity:0;transform:scale(0.5);}
-to{opacity:1;transform:scale(1);}
-}
-
-/* GAME BIG CARDS */
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-padding:20px;
-}
-
+/* GAME */
 .card{
-height:120px;
+width:80%;
+padding:18px;
+margin:10px;
 background:#ff4d6d;
 border-radius:15px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:20px;
+font-size:18px;
 font-weight:bold;
-cursor:pointer;
-transition:0.4s;
-padding:10px;
-text-align:center;
 }
 
-.card.flipped{
-background:white;
-color:black;
-transform:scale(1.05);
+/* NAME GLOW */
+.glow{
+font-size:40px;
+color:white;
+text-shadow:0 0 20px #ff4d6d,0 0 40px #ff4d6d;
+animation:pulse 1.5s infinite;
 }
 
-/* PHOTOS */
-.gallery{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
-padding:10px;
+@keyframes pulse{
+50%{transform:scale(1.1);}
 }
 
-.gallery img{
-width:100%;
-height:130px;
-object-fit:cover;
-border-radius:10px;
+/* HUG ANIMATION */
+.hug{
+font-size:60px;
+position:relative;
+animation:hugMove 2s infinite alternate;
+}
+
+@keyframes hugMove{
+from{transform:translateX(-30px);}
+to{transform:translateX(30px);}
 }
 </style>
 </head>
@@ -156,126 +154,93 @@ border-radius:10px;
 
 <div class="bg"></div>
 
+<!-- NETFLIX INTRO -->
+<div id="intro">
+<h1>NETFLIX PRESENTS</h1>
+</div>
+
+<!-- AUDIO (6 SCENES) -->
+<audio id="a1" src="audio_1.m4a"></audio>
+<audio id="a2" src="audio_2.m4a"></audio>
+<audio id="a3" src="audio_3.m4a"></audio>
+<audio id="a4" src="audio_4.m4a"></audio>
+<audio id="a5" src="audio_5.m4a"></audio>
+<audio id="a6" src="audio_6.m4a"></audio>
+
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-
 <div class="title">🎉 HAPPY BIRTHDAY MY LOVE ❤️</div>
-<p>Today is your special day ✨</p>
-
-<button onclick="go(2)">Start Celebration 🎈</button>
+<button onclick="go(2)">Start Movie 🎬</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-
-<h1>💌 Messages For You</h1>
-
-<button onclick="showMessages()">Open Love Messages 💖</button>
-
-<div id="container"></div>
-
+<h1>💌 Open Surprise</h1>
 <button onclick="go(3)">Next ➜</button>
 </div>
 
-<!-- PAGE 3 GAME -->
+<!-- PAGE 3 -->
 <div class="page" id="p3">
-
-<h1>💖 What I Love About You</h1>
-
-<div class="grid">
-
-<div class="card" onclick="flip(this,1)">Your eyes 👁️</div>
-<div class="card" onclick="flip(this,2)">Your smile 😊</div>
-<div class="card" onclick="flip(this,3)">Your heart 💖</div>
-<div class="card" onclick="flip(this,4)">Your kindness 🫶</div>
-<div class="card" onclick="flip(this,5)">Your loyalty 💛</div>
-<div class="card" onclick="flip(this,6)">Your support ❤️</div>
-<div class="card" onclick="flip(this,7)">Your strength 💪</div>
-<div class="card" onclick="flip(this,8)">Everything 💖</div>
-
-</div>
-
+<h1>💖 Message</h1>
+<p>You are my peace, my home, my everything ❤️</p>
 <button onclick="go(4)">Next ➜</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-
-<h1>📸 Memories</h1>
-
-<div class="gallery">
-<img src="seeee.jpeg">
-<img src="Bum.JPG">
-<img src="weeeee.JPG">
-<img src="us.jpeg">
-<img src="Dai.jpg">
-<img src="surab.JPEG">
+<h1>🎮 Why You Matter</h1>
+<div class="card">Your smile 😊</div>
+<div class="card">Your heart 💖</div>
+<div class="card">Your soul 🫶</div>
+<button onclick="go(5)">Next ➜</button>
 </div>
 
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+<h1>📸 Memories</h1>
+<button onclick="go(6)">Next ➜</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+<div class="glow">HAPPY BIRTHDAY SARITA ❤️</div>
+<div class="hug">🧑‍🤝‍🧑💞</div>
+<p>Forever together 🫶</p>
 </div>
 
 <script>
 
-/* PAGE NAV */
+let audios=["a1","a2","a3","a4","a5","a6"];
+
+/* PAGE CHANGE + AUDIO SYNC */
 function go(p){
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
+
+let audio=document.getElementById(audios[p-1]);
+if(audio){
+audio.currentTime=0;
+audio.play().catch(()=>{});
 }
 
-/* PAGE 2 MULTI MESSAGE ANIMATION */
-function showMessages(){
-
-let container=document.getElementById("container");
-container.innerHTML="";
-
-let messages=[
-{t:"top:10%;left:50%",text:"You are my peace ❤️"},
-{t:"top:40%;left:10%",text:"I love your smile 😊"},
-{t:"top:50%;right:10%",text:"You are my happiness 💖"},
-{t:"bottom:20%;left:40%",text:"Stay always with me 🫶"},
-{t:"top:70%;left:50%",text:"Happy Birthday My Love 🎉"}
-];
-
-messages.forEach((m,i)=>{
-setTimeout(()=>{
-let d=document.createElement("div");
-d.className="msg";
-d.style.cssText=m.t;
-d.innerHTML=m.text;
-container.appendChild(d);
-},i*400);
-});
-
+if(p===6){
+startConfetti();
+}
 }
 
-/* GAME */
-let data=[
-"Your eyes are beautiful 👁️",
-"Your smile brightens everything 😊",
-"Your heart is pure 💖",
-"Your kindness is rare 🫶",
-"Your loyalty means everything 💛",
-"Your support keeps me strong ❤️",
-"Your strength inspires me 💪",
-"Everything about you is perfect 💖"
-];
+/* CONFETTI */
+function startConfetti(){
+for(let i=0;i<80;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"vw";
+c.style.background=["#ff4d6d","#fff","#ffd700","#ff69b4"][Math.floor(Math.random()*4)];
+c.style.animationDuration=(2+Math.random()*3)+"s";
+document.body.appendChild(c);
 
-function flip(el,n){
-el.classList.add("flipped");
-setTimeout(()=>{
-el.innerHTML=data[n-1];
-},200);
+setTimeout(()=>c.remove(),5000);
 }
-
-/* FLOATING HEARTS */
-setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},500);
+}
 
 </script>
 
