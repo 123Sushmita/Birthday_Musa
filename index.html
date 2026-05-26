@@ -2,382 +2,906 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday My Best Friend ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Sarita ❤️</title>
 
 <style>
-body{
+
+*{
 margin:0;
-font-family:Arial;
-background:black;
-color:white;
-overflow:hidden;
+padding:0;
+box-sizing:border-box;
 }
 
-/* 🌌 CINEMATIC DEPTH BACKGROUND */
+body{
+font-family:Arial,sans-serif;
+background:black;
+overflow:hidden;
+color:white;
+height:100vh;
+}
+
+/* 🌌 BACKGROUND */
+
 .bg{
 position:fixed;
-width:100%;
-height:100%;
-background:radial-gradient(circle at center,#1a1a1a,#000);
-z-index:-5;
-animation:zoomBg 10s infinite alternate;
+width:120%;
+height:120%;
+background:
+radial-gradient(circle at center,#1a1a1a,#000 70%);
+z-index:-10;
+transition:.2s linear;
 }
 
-@keyframes zoomBg{
-from{transform:scale(1);}
-to{transform:scale(1.1);}
-}
+/* ✨ STARS */
 
-/* 🎬 SCENES */
-.page{
+.star{
 position:absolute;
-width:100%;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-opacity:0;
-transform:scale(1.15);
-filter:blur(10px);
-transition:1s ease;
-pointer-events:none;
+background:white;
+border-radius:50%;
+opacity:.8;
+animation:twinkle 3s infinite alternate;
 }
 
-.page.active{
-opacity:1;
-transform:scale(1);
-filter:blur(0px);
-pointer-events:auto;
+@keyframes twinkle{
+from{opacity:.3;}
+to{opacity:1;}
 }
 
-/* 🔥 TRAILER TITLE */
-.title{
-font-size:34px;
-text-shadow:0 0 25px #ff4d6d;
-animation:fadeUp 1s ease;
-}
+/* 🎬 NETFLIX INTRO */
 
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
-}
-
-/* 🔘 BUTTON */
-button{
-padding:12px 18px;
-border:none;
-border-radius:25px;
-background:#ff4d6d;
-color:white;
-margin-top:10px;
-cursor:pointer;
-}
-
-/* 💌 MESSAGE BOXES */
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:20px;
-}
-
-.box{
-background:#222;
-padding:12px;
-border-radius:10px;
-border:1px solid #ff4d6d;
-cursor:pointer;
-transition:0.3s;
-}
-
-.box:hover{
-transform:scale(1.1);
-}
-
-/* 📸 MEMORY CARDS */
-.mem{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-margin-top:20px;
-}
-
-.card{
-background:#111;
-padding:12px;
-border-radius:10px;
-border:1px solid #444;
-cursor:pointer;
-}
-
-/* 🎥 VIDEO */
-video{
-width:320px;
-border-radius:10px;
-}
-
-/* 💖 HEARTS */
-.heart{
-position:fixed;
-font-size:18px;
-animation:floatUp 5s linear forwards;
-}
-
-@keyframes floatUp{
-to{transform:translateY(-120vh);opacity:0;}
-}
-
-/* 🎬 INTRO */
 #intro{
 position:fixed;
 width:100%;
 height:100%;
 background:black;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
+flex-direction:column;
 z-index:9999;
-animation:fadeOut 3s forwards;
-animation-delay:2.5s;
+animation:introFade 4s forwards;
+animation-delay:3s;
 }
 
 #intro h1{
+font-size:70px;
 color:#e50914;
-font-size:60px;
-letter-spacing:4px;
-animation:zoom 1s ease;
+letter-spacing:6px;
+animation:zoomIntro 1s ease;
 }
 
-@keyframes zoom{
-from{transform:scale(0.5);opacity:0;}
-to{transform:scale(1);opacity:1;}
-}
-
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
-}
-
-/* 🎞 SUBTITLE TYPING */
-.subtitle{
+#intro p{
 margin-top:10px;
+opacity:.8;
+font-size:18px;
+}
+
+@keyframes zoomIntro{
+from{
+transform:scale(.5);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+@keyframes introFade{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+
+/* 🎥 PAGE */
+
+.page{
+position:absolute;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:20px;
+text-align:center;
+opacity:0;
+pointer-events:none;
+transform:scale(1.1);
+filter:blur(10px);
+transition:1s ease;
+}
+
+.page.active{
+opacity:1;
+pointer-events:auto;
+transform:scale(1);
+filter:blur(0);
+}
+
+/* 🎬 TITLE */
+
+.title{
+font-size:38px;
+text-shadow:0 0 25px #ff4d6d;
+margin-bottom:20px;
+}
+
+/* 🔘 BUTTON */
+
+button{
+padding:13px 22px;
+border:none;
+border-radius:30px;
+background:#ff4d6d;
+color:white;
 font-size:16px;
-overflow:hidden;
-white-space:nowrap;
-border-right:2px solid white;
-width:0;
-animation:type 3s steps(40,end);
+margin-top:20px;
+cursor:pointer;
+transition:.3s;
 }
 
-@keyframes type{
-to{width:100%;}
+button:hover{
+transform:scale(1.08);
 }
 
-/* 🎆 FINAL GLOW */
-.finalGlow{
+/* 💬 CHAT */
+
+#chatBox{
+width:90%;
+max-width:500px;
+height:400px;
+overflow-y:auto;
+background:rgba(255,255,255,.05);
+padding:20px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+}
+
+.msg{
+margin:12px 0;
+padding:12px 16px;
+border-radius:18px;
+max-width:75%;
+line-height:1.5;
+animation:fadeUp .5s ease;
+}
+
+.me{
+background:#ff4d6d;
+margin-left:auto;
+text-align:right;
+}
+
+.her{
+background:#222;
+margin-right:auto;
+text-align:left;
+}
+
+.reply input{
+width:100%;
+padding:12px;
+border:none;
+border-radius:15px;
+outline:none;
+background:#222;
+color:white;
+}
+
+.reply input::placeholder{
+color:#aaa;
+}
+
+/* 💌 SPECIAL BOX */
+
+.specialBox{
+width:320px;
+height:220px;
+background:
+linear-gradient(145deg,#ff4d6d,#ff758f);
+border-radius:25px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+box-shadow:0 0 40px rgba(255,77,109,.4);
+transition:.4s;
+padding:20px;
+}
+
+.specialBox:hover{
+transform:scale(1.05);
+}
+
+.specialBox h2{
 font-size:32px;
-text-shadow:0 0 30px #ff4d6d;
+margin-bottom:10px;
 }
+
+/* 💌 FLOATING MESSAGE */
+
+.floatMsg{
+position:absolute;
+padding:14px 20px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+border-radius:18px;
+font-size:18px;
+border:1px solid rgba(255,255,255,.2);
+animation:popIn 1s forwards;
+opacity:0;
+}
+
+@keyframes popIn{
+0%{
+opacity:0;
+transform:scale(.3);
+}
+100%{
+opacity:1;
+transform:scale(1);
+}
+}
+
+/* 🎮 GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+margin-top:20px;
+}
+
+.grid button{
+width:60px;
+height:60px;
+border-radius:18px;
+}
+
+/* 📸 GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+width:90%;
+max-width:900px;
+}
+
+.gallery img{
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:14px;
+transition:.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+/* 🎥 VIDEO */
+
+video{
+width:320px;
+border-radius:15px;
+}
+
+/* 💖 HEARTS */
+
+.heart{
+position:fixed;
+font-size:20px;
+animation:floatUp 5s linear forwards;
+pointer-events:none;
+}
+
+@keyframes floatUp{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+/* 🎆 FINAL */
+
+.finalGlow{
+font-size:42px;
+text-shadow:
+0 0 10px #fff,
+0 0 20px #ff4d6d,
+0 0 40px #ff4d6d;
+}
+
+.output{
+margin-top:18px;
+font-size:18px;
+max-width:700px;
+line-height:1.6;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<!-- 🌌 BACKGROUND -->
+
+<div class="bg" id="bg"></div>
+
+<!-- ✨ STARS -->
+
+<script>
+for(let i=0;i<120;i++){
+
+let s=document.createElement("div");
+
+s.className="star";
+
+s.style.width=Math.random()*3+"px";
+s.style.height=s.style.width;
+
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(s);
+
+}
+</script>
 
 <!-- 🎬 INTRO -->
+
 <div id="intro">
+
 <h1>NETFLIX</h1>
-<div class="subtitle">A Viral Story of Pure Friendship ❤️</div>
+
+<p>
+A Pure Story Of Friendship ❤️
+</p>
+
 </div>
 
 <!-- 🔊 AUDIO -->
+
 <audio id="a1" src="audio_1.m4a"></audio>
 <audio id="a2" src="audio_2.m4a"></audio>
 <audio id="a3" src="audio_3.m4a"></audio>
 <audio id="a4" src="audio_4.m4a"></audio>
 <audio id="a5" src="audio_5.m4a"></audio>
+<audio id="a6" src="audio_6.m4a"></audio>
 
-<!-- 🎬 SCENE 1 -->
+<!-- 💬 PAGE 1 -->
+
 <div class="page active" id="p1">
-<div class="title">🎉 Happy Birthday My Best Friend ❤️</div>
-<button onclick="go(2)">Start Trailer 🎬</button>
+
+<h1 class="title">
+💬 Chat With Musa
+</h1>
+
+<div id="chatBox">
+
+<div class="msg me">
+Hi mero musa ❤️
 </div>
 
-<!-- 💌 SCENE 2 -->
+<div class="msg reply">
+<input
+type="text"
+id="r1"
+placeholder="Type your reply..."
+onkeydown="next1(event)">
+</div>
+
+</div>
+
+<button
+id="startBtn"
+onclick="go(2)"
+style="display:none;">
+🎬 Start The Surprise
+</button>
+
+</div>
+
+<!-- 💌 PAGE 2 -->
+
 <div class="page" id="p2">
-<h2>💌 Messages From My Heart</h2>
 
-<div class="grid">
-<div class="box" onclick="msg('You are my safe place ❤️')">Open</div>
-<div class="box" onclick="msg('You bring peace to my life 🌸')">Open</div>
-<div class="box" onclick="msg('You are irreplaceable 💖')">Open</div>
-<div class="box" onclick="msg('I trust you blindly 🫶')">Open</div>
-<div class="box" onclick="msg('You are my happiness 😊')">Open</div>
+<h1 class="title">
+💌 Special Message
+</h1>
+
+<div class="specialBox" onclick="openSpecial()">
+
+<h2>
+🎁 HBD GIRL ❤️
+</h2>
+
+<p>
+Click to open your special message 💌
+</p>
+
 </div>
 
-<p id="out"></p>
+<div id="floatingMessages"></div>
 
-<button onclick="go(3)">Next Scene 🎬</button>
+<button
+id="nextAfterSpecial"
+onclick="go(3)"
+style="display:none;">
+Next Scene 🎬
+</button>
+
 </div>
 
-<!-- 🎮 SCENE 3 -->
+<!-- 🎮 PAGE 3 -->
+
 <div class="page" id="p3">
-<h2>🎮 What I Love About You</h2>
+
+<h2 class="title">
+🎮 What I Love About You
+</h2>
 
 <div class="grid">
+
 <button onclick="love(1)">1</button>
 <button onclick="love(2)">2</button>
 <button onclick="love(3)">3</button>
 <button onclick="love(4)">4</button>
 <button onclick="love(5)">5</button>
+
 <button onclick="love(6)">6</button>
 <button onclick="love(7)">7</button>
 <button onclick="love(8)">8</button>
 <button onclick="love(9)">9</button>
 <button onclick="love(10)">10</button>
+
 </div>
 
-<p id="loveText"></p>
+<div class="output" id="loveOut"></div>
 
-<button onclick="go(4)">Next Scene</button>
+<button onclick="go(4)">
+Next Scene 🎬
+</button>
+
 </div>
 
-<!-- 📸 SCENE 4 -->
+<!-- 📸 PAGE 4 -->
+
 <div class="page" id="p4">
-<h2>📸 Memories That Made Us</h2>
 
-<div class="mem">
-<div class="card" onclick="mem('We laughed like crazy 😂❤️')">Memory 1</div>
-<div class="card" onclick="mem('We supported each other 🫶')">Memory 2</div>
-<div class="card" onclick="mem('We never gave up on each other 🌸')">Memory 3</div>
-<div class="card" onclick="mem('You are my strongest bond ❤️')">Memory 4</div>
+<h2 class="title">
+📸 Memories Together
+</h2>
+
+<div class="gallery">
+
+<img src="us.jpeg">
+<img src="Bum.JPG">
+<img src="weeeee.JPG">
+<img src="seeee.jpeg">
+<img src="Dai.jpg">
+<img src="Girls.jpeg">
+<img src="family.JPG">
+<img src="happy.jpeg">
+<img src="musa_1.jpg">
+<img src="me.JPG">
+<img src="surab.JPEG">
+<img src="bacchatoli.jpeg">
+
 </div>
 
-<p id="memText"></p>
+<button onclick="go(5)">
+Next Scene 🎞
+</button>
 
-<button onclick="go(5)">Next Scene</button>
 </div>
 
-<!-- 💌 SCENE 5 -->
+<!-- 💌 PAGE 5 -->
+
 <div class="page" id="p5">
-<h2>💌 Thank You</h2>
 
-<button onclick="thanks()">Reveal Message 💖</button>
-<p id="thankText"></p>
+<h2 class="title">
+💌 Thank You
+</h2>
 
-<button onclick="go(6)">Final Scene 🎬</button>
+<button onclick="nextThank()">
+Reveal Message ❤️
+</button>
+
+<div class="output" id="thankOut"></div>
+
+<button onclick="go(6)">
+Next Scene 🎬
+</button>
+
 </div>
 
-<!-- 🎥 VIDEO -->
+<!-- 🎥 PAGE 6 -->
+
 <div class="page" id="p6">
-<h2>🎥 Final Memory</h2>
+
+<h2 class="title">
+🎥 One Last Memory
+</h2>
 
 <video controls>
 <source src="Video.MOV">
 </video>
 
-<button onclick="go(7)">Finish</button>
+<p class="output">
+Some memories deserve forever ❤️
+</p>
+
+<button onclick="go(7)">
+Final Scene 🎆
+</button>
+
 </div>
 
-<!-- 🎆 FINAL -->
-<div class="page" id="p7">
-<div class="finalGlow">🎉 HAPPY BIRTHDAY SARITA ❤️</div>
-<p>Forever my best friend 🫶</p>
+<!-- 🎆 PAGE 7 -->
 
-<button onclick="final()">End Trailer 🎬</button>
+<div class="page" id="p7">
+
+<div class="finalGlow">
+🎉 HAPPY BIRTHDAY SARITA ❤️
+</div>
+
+<p class="output">
+Forever My Best Friend 🫶
+</p>
+
+<button onclick="finalBoom()">
+End Movie 🎬
+</button>
+
 </div>
 
 <script>
 
-/* 🔇 AUDIO CONTROL */
+/* 🌌 PARALLAX */
+
+document.addEventListener("mousemove",(e)=>{
+
+let x=(e.clientX/window.innerWidth-.5)*20;
+let y=(e.clientY/window.innerHeight-.5)*20;
+
+document.getElementById("bg").style.transform=
+`translate(${x}px,${y}px)`;
+
+});
+
+/* 🔇 STOP AUDIO */
+
 function stopAll(){
+
 document.querySelectorAll("audio").forEach(a=>{
+
 a.pause();
 a.currentTime=0;
+
 });
+
 }
 
-/* 🎬 SCENE SWITCH */
+/* 🎬 PAGE SWITCH */
+
 function go(p){
 
-document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+document.querySelectorAll(".page").forEach(x=>{
+x.classList.remove("active");
+});
 
 setTimeout(()=>{
 document.getElementById("p"+p).classList.add("active");
-},200);
+},250);
 
-/* audio only 1–5 */
-if(p<=5){
+/* 🎵 AUDIO */
+
+if(p>=2 && p<=6){
+
+if(p!==6){
+
 stopAll();
-let a=document.getElementById("a"+p);
-if(a) a.play().catch(()=>{});
+
+let a=document.getElementById("a"+(p-1));
+
+if(a){
+a.play().catch(()=>{});
 }
 
-heart();
 }
 
-/* 💌 MESSAGE */
-function msg(t){
-document.getElementById("out").innerText=t;
 }
 
-/* 🎮 LOVE */
-let love=[
-"Beautiful ❤️","Kind 🌸","Funny 😂","Strong 💪","Loyal 💛",
-"Peace 🫶","Best 🌈","Support ❤️","Unique ✨","Forever 💖"
+heartRain();
+
+}
+
+/* 💬 CHAT FLOW */
+
+function next1(e){
+
+if(e.key==="Enter"){
+
+let val=document.getElementById("r1").value;
+
+if(val.trim()!==""){
+
+let chat=document.getElementById("chatBox");
+
+chat.innerHTML += `
+
+<div class="msg her">
+${val}
+</div>
+
+<div class="msg me">
+Happy Birthday my love 🎂❤️
+</div>
+
+<div class="msg reply">
+<input
+type="text"
+id="r2"
+placeholder="Type your reply..."
+onkeydown="next2(event)">
+</div>
+
+`;
+
+chat.scrollTop=chat.scrollHeight;
+
+}
+
+}
+
+}
+
+function next2(e){
+
+if(e.key==="Enter"){
+
+let val=document.getElementById("r2").value;
+
+if(val.trim()!==""){
+
+let chat=document.getElementById("chatBox");
+
+chat.innerHTML += `
+
+<div class="msg her">
+${val}
+</div>
+
+<div class="msg me">
+I tried small things for your birthday 🥹❤️<br>
+Are you ready?
+</div>
+
+<div class="msg reply">
+<input
+type="text"
+id="r3"
+placeholder="Type your reply..."
+onkeydown="next3(event)">
+</div>
+
+`;
+
+chat.scrollTop=chat.scrollHeight;
+
+}
+
+}
+
+}
+
+function next3(e){
+
+if(e.key==="Enter"){
+
+let val=document.getElementById("r3").value;
+
+if(val.trim()!==""){
+
+let chat=document.getElementById("chatBox");
+
+chat.innerHTML += `
+
+<div class="msg her">
+${val}
+</div>
+
+<div class="msg me">
+Okay musa 🫶<br>
+Please click the button below 🎬
+</div>
+
+`;
+
+chat.scrollTop=chat.scrollHeight;
+
+document.getElementById("startBtn").style.display="block";
+
+}
+
+}
+
+}
+
+/* 💌 SPECIAL MESSAGE */
+
+function openSpecial(){
+
+document.querySelector(".specialBox").style.display="none";
+
+let texts=[
+"❤️ You are my safe place",
+"🫶 You are my family",
+"🌈 You add colors to my life",
+"😊 You are my happiness",
+"💖 You mean everything to me"
+];
+
+let positions=[
+{top:"12%",left:"8%"},
+{top:"22%",right:"8%"},
+{bottom:"20%",left:"10%"},
+{bottom:"12%",right:"10%"},
+{top:"42%",left:"35%"}
+];
+
+for(let i=0;i<texts.length;i++){
+
+setTimeout(()=>{
+
+let d=document.createElement("div");
+
+d.className="floatMsg";
+
+d.innerHTML=texts[i];
+
+Object.assign(d.style,positions[i]);
+
+document.getElementById("floatingMessages").appendChild(d);
+
+},i*900);
+
+}
+
+setTimeout(()=>{
+
+document.getElementById("nextAfterSpecial").style.display="block";
+
+},5200);
+
+}
+
+/* 🎮 LOVE GAME */
+
+let loves=[
+
+"Beautiful ❤️",
+"Kind 🌸",
+"Funny 😂",
+"Strong 💪",
+"Loyal 💛",
+"Peace 🫶",
+"Best 🌈",
+"Support ❤️",
+"Unique ✨",
+"Forever 💖"
+
 ];
 
 function love(n){
-document.getElementById("loveText").innerText=love[n-1];
-}
 
-/* 📸 MEMORY */
-function mem(t){
-document.getElementById("memText").innerText=t;
+document.getElementById("loveOut").innerHTML=
+loves[n-1];
+
 }
 
 /* 💌 THANK YOU */
-let t=[
+
+let thanks=[
+
 "Thank you for trusting me blindly ❤️",
+
 "Thank you for adding colors in my life 🌈",
+
 "Thank you for always being there 🫶",
+
 "Thank you for staying calm with me 🌸",
+
 "Thank you for making me your sister-in-law 😂💖"
+
 ];
 
-let i=0;
-function thanks(){
-document.getElementById("thankText").innerText=t[i];
-i++;
-if(i>=t.length) i=0;
+let t=0;
+
+function nextThank(){
+
+document.getElementById("thankOut").innerHTML=
+thanks[t];
+
+t++;
+
+if(t>=thanks.length){
+t=0;
+}
+
 }
 
 /* 💖 HEARTS */
-function heart(){
-for(let i=0;i<5;i++){
+
+function heartRain(){
+
+for(let i=0;i<8;i++){
+
 let h=document.createElement("div");
+
 h.className="heart";
-h.innerHTML="💖";
+
+h.innerHTML=
+["💖","✨","🫶"]
+[Math.floor(Math.random()*3)];
+
 h.style.left=Math.random()*100+"vw";
+
+h.style.top="100vh";
+
 document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
+
+setTimeout(()=>{
+h.remove();
+},5000);
+
 }
+
 }
 
 /* 🎆 FINAL */
-function final(){
-for(let i=0;i<120;i++){
+
+function finalBoom(){
+
+stopAll();
+
+let a=document.getElementById("a6");
+
+a.play().catch(()=>{});
+
+for(let i=0;i<180;i++){
+
 let c=document.createElement("div");
+
 c.className="heart";
-c.innerHTML=["💖","✨","🎉"][Math.floor(Math.random()*3)];
+
+c.innerHTML=
+["💖","✨","🎉","🫶"]
+[Math.floor(Math.random()*4)];
+
 c.style.left=Math.random()*100+"vw";
+
 c.style.top="-10px";
+
 document.body.appendChild(c);
-setTimeout(()=>c.remove(),4000);
+
+setTimeout(()=>{
+c.remove();
+},6000);
+
 }
+
 }
 
 </script>
