@@ -1,1 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Musa ❤️</title>
 
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(to bottom,#ffb6c1,#ff69b4);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+.page{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:30px;
+}
+
+.hidden{display:none;}
+
+button{
+padding:15px 25px;
+font-size:18px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+margin-top:15px;
+background:white;
+color:#ff1493;
+}
+
+img{
+width:250px;
+margin:10px;
+border-radius:20px;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+.number-btn{
+width:60px;
+height:60px;
+border-radius:50%;
+margin:5px;
+font-size:18px;
+}
+
+#reasonText{
+margin-top:20px;
+font-size:22px;
+padding:10px;
+}
+
+.floating{
+position:fixed;
+font-size:25px;
+animation:float 5s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-100vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page" id="p1">
+<h1>🎂 HAPPY BIRTHDAY MERO MUSA ❤️</h1>
+<h2>Sarita ✨</h2>
+
+<p>My best friend 🫶 My sister ❤️ My heart 🌸</p>
+
+<button onclick="go(2)">Tap to Start 🎁</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page hidden" id="p2">
+<h1>💌 Birthday Wish</h1>
+
+<p style="max-width:700px;font-size:20px;line-height:1.7;">
+Happy Birthday Musa ❤️<br><br>
+You are my best friend, my comfort, my family by heart.<br>
+Thank you for every memory, every laugh, every support 🌸✨<br><br>
+You will always be special to me 🫶
+</p>
+
+<button onclick="go(3)">Next 📸</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page hidden" id="p3">
+<h1>📸 Our Memories</h1>
+
+<div>
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\seeee.jpeg"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\Bum.JPG"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\weeeee.JPG"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\us.jpeg"">
+<img src="" C:\Users\sushm\OneDrive\Desktop\Musa_birthday\Dai.jpg"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\surab.JPEG"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\Girls.jpeg"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\bacchatoli.jpeg"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\family.JPG"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\happy.jpeg"">
+<img src=""C:\Users\sushm\OneDrive\Desktop\Musa_birthday\weird.JPG"">
+  
+</div>
+
+<p>Every moment with you is priceless ❤️</p>
+
+<button onclick="go(4)">Next 🎥</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page hidden" id="p4">
+<h1>🎥 Ghibli Memory</h1>
+
+<video width="300" controls>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<p>If friendship had a face, it would look like us 🥹❤️</p>
+
+<button onclick="go(5)">Play Game 🎮</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page hidden" id="p5">
+<h1>🎮 10 Reasons You Are Special</h1>
+
+<div>
+<button class="number-btn" onclick="reason(1)">1</button>
+<button class="number-btn" onclick="reason(2)">2</button>
+<button class="number-btn" onclick="reason(3)">3</button>
+<button class="number-btn" onclick="reason(4)">4</button>
+<button class="number-btn" onclick="reason(5)">5</button><br>
+
+<button class="number-btn" onclick="reason(6)">6</button>
+<button class="number-btn" onclick="reason(7)">7</button>
+<button class="number-btn" onclick="reason(8)">8</button>
+<button class="number-btn" onclick="reason(9)">9</button>
+<button class="number-btn" onclick="reason(10)">10</button>
+</div>
+
+<div id="reasonText"></div>
+
+<button onclick="go(6)">Secret Letter 💌</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page hidden" id="p6">
+<h1>💖 Secret Letter</h1>
+
+<p style="max-width:700px;font-size:20px;line-height:1.7;">
+Dear Sarita ❤️<br><br>
+Thank you for being my Musa, my strength, my happiness.<br>
+No matter where life takes us, you will always be my heart 🫶<br><br>
+I love you forever 🌸✨
+</p>
+
+<button onclick="go(7)">Final Surprise 🎁</button>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page hidden" id="p7">
+<h1>💖 I LOVE YOU MERO MUSA ❤️</h1>
+<h2>🎂 Happy Birthday Sarita 🎂</h2>
+
+<p>Forever Best Friends 🫂💖</p>
+
+<button onclick="end()">End 🌟</button>
+</div>
+
+<script>
+
+function go(p){
+for(let i=1;i<=7;i++){
+document.getElementById("p"+i).classList.add("hidden");
+}
+document.getElementById("p"+p).classList.remove("hidden");
+}
+
+function reason(n){
+let text="";
+
+if(n==1) text="❤️ You are my comfort person";
+if(n==2) text="🌸 You always understand me";
+if(n==3) text="🫶 You are my safe place";
+if(n==4) text="✨ You make life better";
+if(n==5) text="💖 You are family by heart";
+if(n==6) text="🥹 You support me always";
+if(n==7) text="🌸 Every memory with you is special";
+if(n==8) text="🫂 You never leave me alone";
+if(n==9) text="💖 You are beautiful inside out";
+if(n==10) text="✨ You are my forever Musa";
+
+document.getElementById("reasonText").innerHTML=text;
+}
+
+function end(){
+document.body.innerHTML=`
+<h1>🌸 THANK YOU MUSA ❤️</h1>
+<h2>Happy Birthday Sarita 🎂</h2>
+<h1>🫂💖✨🌸🎉</h1>
+<p>— Your BUM 🫶</p>
+`;
+}
+
+// floating emojis
+setInterval(()=>{
+let e=document.createElement("div");
+e.classList.add("floating");
+e.innerHTML=["💖","🌸","✨","🫶"][Math.floor(Math.random()*4)];
+e.style.left=Math.random()*100+"vw";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),5000);
+},400);
+
+</script>
+
+</body>
+</html>
