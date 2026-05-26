@@ -58,15 +58,22 @@ margin-bottom:15px;
 text-shadow:0 0 20px #ff4d6d;
 }
 
-/* 🔘 BUTTON */
+/* 🔘 BUTTON (NOW MORE VISIBLE) */
 button{
-padding:12px 20px;
+padding:14px 24px;
 border:none;
-border-radius:25px;
+border-radius:30px;
 background:#ff4d6d;
 color:white;
-margin-top:15px;
+margin-top:18px;
 cursor:pointer;
+font-size:16px;
+box-shadow:0 0 15px rgba(255,77,109,0.5);
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.08);
 }
 
 /* 💬 CHAT */
@@ -136,6 +143,18 @@ font-size:42px;
 text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 }
 
+/* 👉 CLICK INDICATOR */
+.hint{
+margin-top:15px;
+opacity:0.8;
+font-size:14px;
+animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+50%{opacity:0.3;}
+}
+
 </style>
 </head>
 
@@ -170,18 +189,20 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 🎬 Start Surprise
 </button>
 
+<div class="hint">👇 Type and press Enter to continue</div>
+
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
 <h1 class="title">💌 Special Message</h1>
 
-<div class="specialBox" onclick="openSpecial()">
+<div class="specialBox" onclick="go(3)">
 <h3>HBD GIRL ❤️</h3>
-<p>Click to open</p>
+<p>CLICK TO OPEN</p>
 </div>
 
-<button onclick="go(3)">Next</button>
+<div class="hint">👇 Click box to continue</div>
 </div>
 
 <!-- PAGE 3 -->
@@ -194,7 +215,8 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 
 <p id="loveOut"></p>
 
-<button onclick="go(4)">Next</button>
+<button onclick="go(4)">NEXT ▶</button>
+
 </div>
 
 <!-- PAGE 4 -->
@@ -208,7 +230,8 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 <img src="weeeee.JPG">
 </div>
 
-<button onclick="go(5)">Next</button>
+<button onclick="go(5)">NEXT ▶</button>
+
 </div>
 
 <!-- PAGE 5 -->
@@ -216,11 +239,12 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 
 <h1 class="title">💌 Thank You</h1>
 
-<button onclick="thank()">Reveal</button>
+<button onclick="thank()">REVEAL 💖</button>
 
 <p id="thankOut"></p>
 
-<button onclick="go(6)">Next</button>
+<button onclick="go(6)">NEXT ▶</button>
+
 </div>
 
 <!-- PAGE 6 -->
@@ -232,7 +256,10 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 <source src="Video.MOV">
 </video>
 
-<button onclick="go(7)">Final</button>
+<div class="hint">👇 Watch then click next</div>
+
+<button onclick="go(7)">FINAL ▶</button>
+
 </div>
 
 <!-- PAGE 7 -->
@@ -251,7 +278,7 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 let step = 0;
 let currentAudio = null;
 
-/* 🔊 AUDIO */
+/* 🔊 AUDIO FIX */
 function stopAll(){
 if(currentAudio){
 currentAudio.pause();
@@ -274,13 +301,14 @@ function go(p){
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-if(p >= 2 && p <= 6){
+/* audio only pages 2-6 */
+if(p>=2 && p<=6){
 playAudio(p-1);
 }
 
 }
 
-/* 💬 CHAT FLOW (FIXED EXACT STORY) */
+/* 💬 CHAT FLOW FIXED */
 function chatFlow(e){
 
 if(e.key !== "Enter") return;
@@ -290,15 +318,18 @@ if(val === "") return;
 
 let chat = document.getElementById("chatArea");
 
-/* user message */
 chat.innerHTML += `<div class="msg her">${val}</div>`;
 
-/* BOT STORY */
+/* FLOW */
 if(step === 0){
 chat.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`;
 }
 
 else if(step === 1){
+chat.innerHTML += `<div class="msg me">Thank you 🫶</div>`;
+}
+
+else if(step === 2){
 chat.innerHTML += `<div class="msg me">I tried this to celebrate your birthday 🎬❤️</div>`;
 }
 
@@ -310,15 +341,10 @@ document.getElementById("startBtn").style.display="block";
 step++;
 
 document.getElementById("r1").value="";
-chat.scrollTop = chatBox.scrollHeight;
+chat.scrollTop = chat.scrollHeight;
 }
 
-/* 💌 SPECIAL */
-function openSpecial(){
-alert("You are my safe place ❤️");
-}
-
-/* 🎮 LOVE */
+/* 💌 LOVE */
 function love(n){
 let arr=["Beautiful","Kind","Funny"];
 document.getElementById("loveOut").innerText = arr[n-1];
