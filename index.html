@@ -8,9 +8,40 @@
 body{
 margin:0;
 font-family:Arial;
-background:#0b0b0b;
-color:white;
 overflow:hidden;
+color:white;
+}
+
+/* CINEMATIC BACKGROUND */
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(-45deg,#0b0b0b,#1a001f,#2b0033,#000000);
+background-size:400% 400%;
+animation:gradient 10s ease infinite;
+z-index:-1;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* FLOATING HEARTS */
+.heart{
+position:fixed;
+bottom:-50px;
+font-size:20px;
+animation:floatUp 6s linear infinite;
+opacity:0.7;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:0;}
+30%{opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
 }
 
 /* PAGE SYSTEM */
@@ -23,11 +54,10 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:20px;
-
 opacity:0;
 pointer-events:none;
-transition:0.6s ease;
+transition:0.8s ease;
+padding:20px;
 }
 
 .active{
@@ -37,39 +67,33 @@ pointer-events:auto;
 
 /* BUTTON */
 button{
-padding:12px 20px;
+padding:12px 22px;
 border:none;
 border-radius:25px;
 background:#ff4d6d;
 color:white;
 font-weight:bold;
-margin-top:15px;
 cursor:pointer;
+margin-top:15px;
 }
 
 /* PAGE 1 */
-.balloons{
-font-size:40px;
-animation:float 2s infinite ease-in-out;
-}
-
-@keyframes float{
-0%{transform:translateY(20px);opacity:0;}
-50%{opacity:1;}
-100%{transform:translateY(-30px);opacity:0;}
+.title{
+font-size:32px;
+text-shadow:0 0 20px #ff4d6d;
 }
 
 /* BOX */
 .box{
-width:240px;
+width:260px;
 height:140px;
-background:#ff4d6d;
-border-radius:12px;
+background:rgba(255,77,109,0.8);
+border-radius:15px;
 display:flex;
 align-items:center;
 justify-content:center;
-cursor:pointer;
 font-weight:bold;
+cursor:pointer;
 }
 
 /* PAPER */
@@ -82,10 +106,9 @@ background:white;
 color:black;
 padding:20px;
 border-radius:12px;
-max-width:320px;
+max-width:340px;
 opacity:0;
 transition:1s ease;
-z-index:5;
 }
 
 .fly{
@@ -102,27 +125,27 @@ transform:translateX(-50%);
 background:rgba(255,255,255,0.1);
 padding:12px;
 border-radius:10px;
-max-width:85%;
 display:none;
 font-size:14px;
+max-width:90%;
 }
 
-/* GAME */
+/* GAME BIG CARDS */
 .grid{
 display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
 padding:15px;
 }
 
 .card{
-width:55px;
-height:55px;
+height:90px;
 background:#ff4d6d;
+border-radius:12px;
 display:flex;
 align-items:center;
 justify-content:center;
-border-radius:10px;
+font-size:18px;
 font-weight:bold;
 cursor:pointer;
 transition:0.4s;
@@ -131,29 +154,32 @@ transition:0.4s;
 .card.flipped{
 background:white;
 color:black;
-transform:scale(1.1);
+transform:scale(1.05);
 }
 
 /* PHOTOS */
 .gallery{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
+grid-template-columns:repeat(3,1fr);
+gap:6px;
 padding:10px;
 }
 
 .gallery img{
 width:100%;
-height:120px;
+height:90px;
 object-fit:cover;
 border-radius:10px;
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 AUDIO -->
+<div class="bg"></div>
+
+<!-- AUDIO (6) -->
 <audio id="a1" src="audio_1.m4a"></audio>
 <audio id="a2" src="audio_2.m4a"></audio>
 <audio id="a3" src="audio_3.m4a"></audio>
@@ -164,8 +190,8 @@ border-radius:10px;
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
 
-<div class="balloons">🎈🎈🎈🎈🎈</div>
-<h1>HAPPY BIRTHDAY MY LOVE ❤️</h1>
+<div class="title">🎉 HAPPY BIRTHDAY MY LOVE ❤️</div>
+<p>Tap to begin your cinematic journey</p>
 
 <button onclick="go(2)">Start</button>
 </div>
@@ -176,23 +202,19 @@ border-radius:10px;
 <h1>💌 Open Your Surprise</h1>
 
 <div class="box" onclick="openBox()">
-🎁 Happy Birthday Girl 💖<br>Click Me
+🎁 Click Me
 </div>
 
 <div id="paper"></div>
-
 <div id="msg"></div>
 
-<button id="nextBtn" onclick="go(3)" style="display:none;">
-👉 Continue Journey
-</button>
-
+<button onclick="go(3)">Continue ➜</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
 
-<h1>💖 What I Love Most</h1>
+<h1>💖 What I Love About You</h1>
 
 <div class="grid">
 
@@ -204,8 +226,6 @@ border-radius:10px;
 <div class="card" onclick="flip(this,6)">6</div>
 <div class="card" onclick="flip(this,7)">7</div>
 <div class="card" onclick="flip(this,8)">8</div>
-<div class="card" onclick="flip(this,9)">9</div>
-<div class="card" onclick="flip(this,10)">10</div>
 
 </div>
 
@@ -214,11 +234,25 @@ border-radius:10px;
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
+<h1>🎥 Emotional Moment</h1>
+<p>Our memories in motion ❤️</p>
+<button onclick="go(5)">Next ➜</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+
+<h1>💌 Secret Message</h1>
+<p>You are my peace, my home, my everything ❤️</p>
+<button onclick="go(6)">Next ➜</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
 
 <h1>📸 Memories</h1>
 
 <div class="gallery">
-
 <img src="seeee.jpeg">
 <img src="Bum.JPG">
 <img src="weeeee.JPG">
@@ -228,42 +262,37 @@ border-radius:10px;
 <img src="Girls.jpeg">
 <img src="bacchatoli.jpeg">
 <img src="family.JPG">
-<img src="happy.jpeg">
-<img src="weird.JPG">
-<img src="musa_1.jpg">
-<img src="me.JPG">
-
 </div>
+
+<button onclick="go(7)">Final ➜</button>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="p7">
+
+<h1>❤️ I LOVE YOU MERO MUSA</h1>
+<h2>Happy Birthday ❤️</h2>
 
 </div>
 
 <script>
 
-/* NAVIGATION */
+/* PAGE CONTROL */
 function go(p){
 
-document.querySelectorAll(".page").forEach(x=>{
-x.classList.remove("active");
-});
-
+document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* AUDIO START AFTER FIRST CLICK */
-if(p>=2 && p<=6){
+/* AUDIO CHANGE (PAGE 2–7 = 6 AUDIOS) */
+if(p>=2 && p<=7){
 playAudio(p-2);
 }
 }
 
-/* AUDIO FIX */
-let audios=[
-"a1","a2","a3","a4","a5","a6"
-];
-
-let started=false;
+/* AUDIO */
+let audios=["a1","a2","a3","a4","a5","a6"];
 
 function playAudio(i){
-
-if(!started) started=true;
 
 audios.forEach(id=>{
 let a=document.getElementById(id);
@@ -279,26 +308,21 @@ current.play().catch(()=>{});
 }
 }
 
-/* PAGE 2 BOX */
+/* BOX */
 function openBox(){
 
 document.getElementById("paper").innerHTML=`
 Hey beautiful ❤️<br><br>
-Happy Birthday! Wishing you a peaceful and prosperous life ahead.<br><br>
-You mean everything to me… I love you 💖
+Happy Birthday! Wishing you happiness, peace and success.<br><br>
+I love you more than words 💖
 `;
 
 document.getElementById("paper").classList.add("fly");
 
 setTimeout(()=>{
 document.getElementById("msg").style.display="block";
-document.getElementById("msg").innerHTML=
-"💌 Read the message above ❤️";
+document.getElementById("msg").innerHTML="💌 Read slowly… this is for you ❤️";
 },1200);
-
-setTimeout(()=>{
-document.getElementById("nextBtn").style.display="block";
-},1800);
 
 }
 
@@ -311,9 +335,7 @@ let data=[
 "Your support ❤️",
 "Your loyalty 💛",
 "Your strength 💪",
-"Your honesty ✨",
-"Your vibe 🌸",
-"Everything about you 💖"
+"Your everything 💖"
 ];
 
 function flip(el,n){
@@ -322,6 +344,16 @@ setTimeout(()=>{
 el.innerHTML=data[n-1];
 },200);
 }
+
+/* FLOATING HEARTS */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},400);
 
 </script>
 
