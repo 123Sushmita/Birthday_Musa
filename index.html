@@ -17,6 +17,7 @@ overflow:hidden;
 height:100vh;
 }
 
+/* BACKGROUND */
 .bg{
 position:fixed;
 width:100%;
@@ -25,6 +26,7 @@ background:radial-gradient(circle,#1a1a1a,#000);
 z-index:-10;
 }
 
+/* PAGE */
 .page{
 position:absolute;
 width:100%;
@@ -36,7 +38,7 @@ align-items:center;
 text-align:center;
 opacity:0;
 pointer-events:none;
-transition:1s ease;
+transition:1s;
 padding:20px;
 }
 
@@ -51,8 +53,9 @@ margin-bottom:15px;
 text-shadow:0 0 20px #ff4d6d;
 }
 
+/* BUTTON */
 button{
-padding:14px 24px;
+padding:14px 22px;
 border:none;
 border-radius:30px;
 background:#ff4d6d;
@@ -62,14 +65,15 @@ cursor:pointer;
 font-size:16px;
 }
 
-#chatBox{
+/* CHAT */
+.chat{
 width:90%;
 max-width:500px;
 height:380px;
-overflow-y:auto;
 background:rgba(255,255,255,0.05);
-padding:15px;
 border-radius:20px;
+padding:15px;
+overflow-y:auto;
 }
 
 .msg{
@@ -92,6 +96,7 @@ color:white;
 margin-top:10px;
 }
 
+/* SPECIAL BOX */
 .specialBox{
 width:300px;
 height:200px;
@@ -104,12 +109,13 @@ align-items:center;
 cursor:pointer;
 }
 
+/* GALLERY */
 .gallery{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:12px;
+gap:10px;
 width:90%;
-max-width:900px;
+max-width:800px;
 }
 
 .gallery img{
@@ -119,15 +125,16 @@ object-fit:cover;
 border-radius:15px;
 }
 
-.finalGlow{
+/* FINAL */
+.final{
 font-size:42px;
-text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
+text-shadow:0 0 20px #ff4d6d;
 }
 
 .hint{
-margin-top:12px;
-font-size:14px;
+margin-top:10px;
 opacity:0.7;
+font-size:14px;
 }
 
 </style>
@@ -137,7 +144,7 @@ opacity:0.7;
 
 <div class="bg"></div>
 
-<!-- 🔊 AUDIO -->
+<!-- 🎧 AUDIO (1 per page) -->
 <audio id="a1" src="audio_1.mp3"></audio>
 <audio id="a2" src="audio_2.mp3"></audio>
 <audio id="a3" src="audio_3.mp3"></audio>
@@ -150,18 +157,15 @@ opacity:0.7;
 
 <h1 class="title">💬 Chat With Musa</h1>
 
-<div id="chatBox">
-<div class="msg me">Hi mero musa ❤️</div>
-<div id="chatArea"></div>
+<div class="chat" id="chat">
 
-<input id="r1" placeholder="Type reply..." onkeydown="chatFlow(event)">
+<div class="msg me">Hi mero musa ❤️</div>
+
 </div>
 
-<button id="startBtn" onclick="go(2)" style="display:none;">
-🎬 Start Surprise
-</button>
+<input id="inp" placeholder="Type "hi"" onkeydown="chat(event)">
 
-<div class="hint">Type & press Enter</div>
+<div class="hint">Press Enter to continue</div>
 
 </div>
 
@@ -174,20 +178,13 @@ opacity:0.7;
 <p>CLICK TO OPEN</p>
 </div>
 
-<div class="hint">Click to continue</div>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
 <h1 class="title">🎮 What I Love</h1>
 
-<button onclick="love(1)">1</button>
-<button onclick="love(2)">2</button>
-<button onclick="love(3)">3</button>
-
-<p id="loveOut"></p>
-
-<button onclick="go(4)">NEXT ▶</button>
+<button onclick="go(4)">Reveal Memories ▶</button>
 </div>
 
 <!-- PAGE 4 -->
@@ -201,7 +198,7 @@ opacity:0.7;
 <img src="weeeee.JPG">
 </div>
 
-<button onclick="go(5)">NEXT ▶</button>
+<button onclick="go(5)">Next ▶</button>
 </div>
 
 <!-- PAGE 5 -->
@@ -209,35 +206,16 @@ opacity:0.7;
 
 <h1 class="title">💌 Thank You</h1>
 
-<button onclick="thank()">REVEAL 💖</button>
+<p id="thanks"></p>
 
-<p id="thankOut"></p>
-
-<button onclick="go(6)">NEXT ▶</button>
+<button onclick="go(6)">Final ▶</button>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
 
-<h1 class="title">🎥 Video</h1>
-
-<video controls width="300">
-<source src="Video.MOV">
-</video>
-
-<div class="hint">Watch carefully 👀</div>
-
-<button onclick="go(7)">FINAL ▶</button>
-</div>
-
-<!-- PAGE 7 -->
-<div class="page" id="p7">
-
-<div class="finalGlow">
-🎉 HAPPY BIRTHDAY SARITA ❤️
-</div>
-
-<p>Forever My Best Friend 🫶</p>
+<div class="final">🎉 HAPPY BIRTHDAY SARITA ❤️</div>
+<p>Forever my best friend 🫶</p>
 
 </div>
 
@@ -246,7 +224,7 @@ opacity:0.7;
 let step = 0;
 let currentAudio = null;
 
-/* 🔊 STOP ALL AUDIO */
+/* 🔊 STOP AUDIO */
 function stopAll(){
 document.querySelectorAll("audio").forEach(a=>{
 a.pause();
@@ -254,7 +232,7 @@ a.currentTime = 0;
 });
 }
 
-/* 🔊 PLAY AUDIO PER PAGE */
+/* 🔊 PLAY AUDIO */
 function playAudio(n){
 stopAll();
 let a = document.getElementById("a"+n);
@@ -264,72 +242,79 @@ a.play().catch(()=>{});
 }
 }
 
-/* 🎬 PAGE SWITCH */
+/* 🎬 PAGE CHANGE */
 function go(p){
 
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* AUDIO ONLY FOR 2–6 (NOT VIDEO ISSUE FIXED) */
-if(p>=2 && p<=6){
-playAudio(p-1);
-}
+/* AUDIO FLOW */
+if(p >= 1 && p <= 6){
+playAudio(p);
 }
 
-/* 💬 CHAT FLOW FIXED */
-function chatFlow(e){
+}
+
+/* 💬 CHAT FLOW */
+function chat(e){
 
 if(e.key !== "Enter") return;
 
-let val = document.getElementById("r1").value.trim();
-if(val === "") return;
+let v = inp.value.trim();
+if(!v) return;
 
-let chat = document.getElementById("chatArea");
+let chatBox = document.getElementById("chat");
 
-chat.innerHTML += `<div class="msg her">${val}</div>`;
+chatBox.innerHTML += `<div class="msg her">${v}</div>`;
 
-/* FLOW */
 if(step === 0){
-chat.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`;
+chatBox.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`;
 }
 
 else if(step === 1){
-chat.innerHTML += `<div class="msg me">Thank you 🫶</div>`;
+chatBox.innerHTML += `<div class="msg me">I made something small for you 🫶</div>`;
 }
 
 else if(step === 2){
-chat.innerHTML += `<div class="msg me">I tried this to celebrate your birthday 🎬❤️</div>`;
-}
-
-else if(step === 3){
-chat.innerHTML += `<div class="msg me">Are you ready? 🫶</div>`;
-document.getElementById("startBtn").style.display="block";
+chatBox.innerHTML += `<div class="msg me">Are you ready? ❤️</div>`;
+setTimeout(()=>go(2),800);
 }
 
 step++;
 
-document.getElementById("r1").value="";
-chat.scrollTop = chat.scrollHeight;
+inp.value="";
+chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-/* 💖 LOVE */
-function love(n){
-let arr=["Beautiful","Kind","Funny"];
-document.getElementById("loveOut").innerText = arr[n-1];
-}
-
-/* 💌 THANK YOU */
+/* 💌 THANK YOU AUTO */
 let t=0;
-let thanks=[
-"Thank you ❤️",
-"Thank you 🌈",
-"Thank you 🫶"
+let msgs=[
+"Thank you for trusting me ❤️",
+"Thank you for being my happiness 🌈",
+"Thank you for always being there 🫶",
+"Thank you for staying with me 🌸",
+"Thank you for everything 💖"
 ];
 
-function thank(){
-document.getElementById("thankOut").innerText = thanks[t];
-t=(t+1)%thanks.length;
+function showThanks(){
+let box=document.getElementById("thanks");
+
+let interval=setInterval(()=>{
+if(t>=msgs.length){
+clearInterval(interval);
+return;
 }
+box.innerHTML+=msgs[t]+"<br>";
+t++;
+},1200);
+}
+
+/* AUTO TRIGGER THANKS */
+setTimeout(()=>{
+if(document.getElementById("p5").classList.contains("active")){
+showThanks();
+}
+},2000);
 
 </script>
 
