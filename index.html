@@ -17,7 +17,6 @@ overflow:hidden;
 height:100vh;
 }
 
-/* BACKGROUND */
 .bg{
 position:fixed;
 width:100%;
@@ -26,7 +25,6 @@ background:radial-gradient(circle,#1a1a1a,#000);
 z-index:-10;
 }
 
-/* PAGE */
 .page{
 position:absolute;
 width:100%;
@@ -38,7 +36,7 @@ align-items:center;
 text-align:center;
 opacity:0;
 pointer-events:none;
-transition:1s;
+transition:1s ease;
 padding:20px;
 }
 
@@ -55,12 +53,12 @@ text-shadow:0 0 20px #ff4d6d;
 
 /* BUTTON */
 button{
-padding:14px 22px;
+padding:14px 24px;
 border:none;
 border-radius:30px;
 background:#ff4d6d;
 color:white;
-margin-top:18px;
+margin-top:15px;
 cursor:pointer;
 font-size:16px;
 }
@@ -69,7 +67,7 @@ font-size:16px;
 .chat{
 width:90%;
 max-width:500px;
-height:380px;
+height:360px;
 background:rgba(255,255,255,0.05);
 border-radius:20px;
 padding:15px;
@@ -88,7 +86,7 @@ max-width:75%;
 
 input{
 width:100%;
-padding:10px;
+padding:12px;
 border:none;
 border-radius:10px;
 background:#222;
@@ -96,10 +94,10 @@ color:white;
 margin-top:10px;
 }
 
-/* SPECIAL BOX */
-.specialBox{
+/* BOX */
+.box{
 width:300px;
-height:200px;
+height:180px;
 background:linear-gradient(145deg,#ff4d6d,#ff758f);
 border-radius:20px;
 display:flex;
@@ -107,35 +105,52 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 cursor:pointer;
+transition:0.3s;
 }
 
-/* GALLERY */
-.gallery{
+.box:hover{transform:scale(1.05);}
+
+/* REVEAL GRID */
+.grid{
 display:grid;
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(2,1fr);
 gap:10px;
 width:90%;
-max-width:800px;
+max-width:500px;
+margin-top:10px;
 }
 
-.gallery img{
-width:100%;
-height:180px;
-object-fit:cover;
+.item{
+background:#222;
+padding:12px;
 border-radius:15px;
+cursor:pointer;
+transition:0.3s;
 }
 
-/* FINAL */
+.item:hover{background:#ff4d6d;}
+
+.output{
+margin-top:15px;
+font-size:18px;
+min-height:30px;
+}
+
+/* THANK YOU */
+.thankBox{
+background:#111;
+padding:15px;
+border-radius:15px;
+margin-top:10px;
+width:80%;
+}
+
 .final{
-font-size:42px;
+font-size:40px;
 text-shadow:0 0 20px #ff4d6d;
 }
 
-.hint{
-margin-top:10px;
-opacity:0.7;
-font-size:14px;
-}
+.hint{opacity:0.6;margin-top:10px;font-size:13px;}
 
 </style>
 </head>
@@ -144,7 +159,7 @@ font-size:14px;
 
 <div class="bg"></div>
 
-<!-- 🎧 AUDIO (1 per page) -->
+<!-- 🎧 AUDIO -->
 <audio id="a1" src="audio_1.mp3"></audio>
 <audio id="a2" src="audio_2.mp3"></audio>
 <audio id="a3" src="audio_3.mp3"></audio>
@@ -152,66 +167,82 @@ font-size:14px;
 <audio id="a5" src="audio_5.mp3"></audio>
 <audio id="a6" src="audio_6.mp3"></audio>
 
-<!-- PAGE 1 -->
+<!-- PAGE 1 CHAT -->
 <div class="page active" id="p1">
 
 <h1 class="title">💬 Chat With Musa</h1>
 
 <div class="chat" id="chat">
-
 <div class="msg me">Hi mero musa ❤️</div>
+</div>
+
+<input id="inp" placeholder="type hi..." onkeydown="chat(event)">
 
 </div>
 
-<input id="inp" placeholder="Type "hi"" onkeydown="chat(event)">
-
-<div class="hint">Press Enter to continue</div>
-
-</div>
-
-<!-- PAGE 2 -->
+<!-- PAGE 2 SPECIAL -->
 <div class="page" id="p2">
+
 <h1 class="title">💌 Special Message</h1>
 
-<div class="specialBox" onclick="go(3)">
-<h3>HBD GIRL ❤️</h3>
-<p>CLICK TO OPEN</p>
+<div class="box" onclick="showSpecial()">
+<h3>Open Me 💖</h3>
+<p>Click the box</p>
 </div>
+
+<p class="output" id="specialText"></p>
+
+<button onclick="go(3)">Next ▶</button>
 
 </div>
 
-<!-- PAGE 3 -->
+<!-- PAGE 3 LOVE -->
 <div class="page" id="p3">
-<h1 class="title">🎮 What I Love</h1>
 
-<button onclick="go(4)">Reveal Memories ▶</button>
+<h1 class="title">🎮 What I Love Most</h1>
+
+<div class="grid">
+<div class="item" onclick="love(0)">Kind</div>
+<div class="item" onclick="love(1)">Beautiful</div>
+<div class="item" onclick="love(2)">Funny</div>
+<div class="item" onclick="love(3)">Caring</div>
+<div class="item" onclick="love(4)">Strong</div>
+<div class="item" onclick="love(5)">Loyal</div>
+<div class="item" onclick="love(6)">Supportive</div>
+<div class="item" onclick="love(7)">Pure heart</div>
+<div class="item" onclick="love(8)">Best soul</div>
+<div class="item" onclick="love(9)">My person</div>
 </div>
 
-<!-- PAGE 4 -->
+<p class="output" id="loveOut"></p>
+
+<button onclick="go(4)">Next ▶</button>
+
+</div>
+
+<!-- PAGE 4 MEMORIES -->
 <div class="page" id="p4">
 
 <h1 class="title">📸 Memories</h1>
 
-<div class="gallery">
-<img src="us.jpeg">
-<img src="Bum.JPG">
-<img src="weeeee.JPG">
+<img id="img" width="280" style="border-radius:15px;">
+
+<button onclick="nextImg()">Next Memory ▶</button>
+
 </div>
 
-<button onclick="go(5)">Next ▶</button>
-</div>
-
-<!-- PAGE 5 -->
+<!-- PAGE 5 THANK YOU -->
 <div class="page" id="p5">
 
 <h1 class="title">💌 Thank You</h1>
 
-<p id="thanks"></p>
+<div class="thankBox" id="thankBox"></div>
 
 <button onclick="go(6)">Final ▶</button>
+
 </div>
 
-<!-- PAGE 6 -->
+<!-- PAGE 6 FINAL -->
 <div class="page" id="p6">
 
 <div class="final">🎉 HAPPY BIRTHDAY SARITA ❤️</div>
@@ -221,98 +252,107 @@ font-size:14px;
 
 <script>
 
-let step = 0;
-let currentAudio = null;
-
-/* 🔊 STOP AUDIO */
+/* AUDIO CONTROL */
 function stopAll(){
 document.querySelectorAll("audio").forEach(a=>{
 a.pause();
-a.currentTime = 0;
+a.currentTime=0;
 });
 }
 
-/* 🔊 PLAY AUDIO */
 function playAudio(n){
 stopAll();
-let a = document.getElementById("a"+n);
+let a=document.getElementById("a"+n);
 if(a){
-currentAudio = a;
 a.play().catch(()=>{});
 }
 }
 
-/* 🎬 PAGE CHANGE */
+/* PAGE NAV */
 function go(p){
-
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* AUDIO FLOW */
-if(p >= 1 && p <= 6){
-playAudio(p);
+if(p>=1 && p<=6) playAudio(p);
 }
 
-}
-
-/* 💬 CHAT FLOW */
+/* CHAT FLOW */
 function chat(e){
+if(e.key!=="Enter") return;
 
-if(e.key !== "Enter") return;
-
-let v = inp.value.trim();
+let v=inp.value.trim();
 if(!v) return;
 
-let chatBox = document.getElementById("chat");
+chat.innerHTML += `<div class="msg her">${v}</div>`;
 
-chatBox.innerHTML += `<div class="msg her">${v}</div>`;
+setTimeout(()=>{
+chat.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`;
+},400);
 
-if(step === 0){
-chatBox.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`;
-}
+setTimeout(()=>{
+chat.innerHTML += `<div class="msg me">I made something special for you 🫶</div>`;
+},1000);
 
-else if(step === 1){
-chatBox.innerHTML += `<div class="msg me">I made something small for you 🫶</div>`;
-}
-
-else if(step === 2){
-chatBox.innerHTML += `<div class="msg me">Are you ready? ❤️</div>`;
+setTimeout(()=>{
+chat.innerHTML += `<div class="msg me">Are you ready? ❤️</div>`;
 setTimeout(()=>go(2),800);
-}
-
-step++;
+},1800);
 
 inp.value="";
-chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-/* 💌 THANK YOU AUTO */
-let t=0;
-let msgs=[
+/* SPECIAL MESSAGE */
+function showSpecial(){
+document.getElementById("specialText").innerText =
+"You are my safe place ❤️\nYou are my happiness 🫶\nYou are my everything 💖";
+}
+
+/* LOVE */
+let loveList=[
+"Kind","Beautiful","Funny","Caring","Strong",
+"Loyal","Supportive","Pure heart","Best soul","My person"
+];
+
+function love(i){
+document.getElementById("loveOut").innerText=loveList[i];
+}
+
+/* MEMORIES */
+let imgs=["us.jpeg","Bum.JPG","weeeee.JPG"];
+let i=0;
+
+function nextImg(){
+document.getElementById("img").src=imgs[i];
+i=(i+1)%imgs.length;
+}
+
+/* THANK YOU */
+let thanks=[
 "Thank you for trusting me ❤️",
-"Thank you for being my happiness 🌈",
-"Thank you for always being there 🫶",
-"Thank you for staying with me 🌸",
+"Thank you for loving me 🌈",
+"Thank you for being there 🫶",
+"Thank you for your patience 🌸",
 "Thank you for everything 💖"
 ];
 
-function showThanks(){
-let box=document.getElementById("thanks");
+let t=0;
+
+function startThanks(){
+let box=document.getElementById("thankBox");
 
 let interval=setInterval(()=>{
-if(t>=msgs.length){
+if(t>=thanks.length){
 clearInterval(interval);
 return;
 }
-box.innerHTML+=msgs[t]+"<br>";
+box.innerHTML += "💖 "+thanks[t]+"<br>";
 t++;
 },1200);
 }
 
-/* AUTO TRIGGER THANKS */
 setTimeout(()=>{
 if(document.getElementById("p5").classList.contains("active")){
-showThanks();
+startThanks();
 }
 },2000);
 
