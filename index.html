@@ -2,12 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Sarita ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Sarita ❤️</title>
 
 <style>
 
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
 background:black;
@@ -17,7 +21,6 @@ overflow:hidden;
 height:100vh;
 }
 
-/* BACKGROUND */
 .bg{
 position:fixed;
 width:100%;
@@ -26,7 +29,6 @@ background:radial-gradient(circle,#1a1a1a,#000);
 z-index:-1;
 }
 
-/* PAGE SYSTEM */
 .page{
 position:absolute;
 width:100%;
@@ -35,11 +37,11 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+text-align:center;
 opacity:0;
 pointer-events:none;
-transition:1s ease;
+transition:0.8s ease;
 padding:20px;
-text-align:center;
 }
 
 .page.active{
@@ -49,13 +51,13 @@ pointer-events:auto;
 
 .title{
 font-size:38px;
-text-shadow:0 0 20px #ff4d6d;
 margin-bottom:20px;
+text-shadow:0 0 20px #ff4d6d;
 }
 
 /* BUTTON */
 button{
-padding:14px 24px;
+padding:14px 22px;
 border:none;
 border-radius:30px;
 background:#ff4d6d;
@@ -126,7 +128,6 @@ border-radius:12px;
 cursor:pointer;
 }
 
-/* OUTPUT */
 .output{
 margin-top:15px;
 font-size:18px;
@@ -135,7 +136,7 @@ min-height:30px;
 
 /* FINAL */
 .final{
-font-size:40px;
+font-size:42px;
 text-shadow:0 0 25px #ff4d6d;
 }
 
@@ -146,7 +147,7 @@ text-shadow:0 0 25px #ff4d6d;
 
 <div class="bg"></div>
 
-<!-- AUDIO -->
+<!-- 🎧 AUDIO -->
 <audio id="a1" src="audio_1.mp3"></audio>
 <audio id="a2" src="audio_2.mp3"></audio>
 <audio id="a3" src="audio_3.mp3"></audio>
@@ -210,7 +211,7 @@ text-shadow:0 0 25px #ff4d6d;
 
 <h1 class="title">📸 Memories</h1>
 
-<img id="img" width="250" style="border-radius:15px;">
+<img id="img" width="260" style="border-radius:15px;">
 
 <button onclick="nextImg()">Next Memory ▶</button>
 
@@ -237,40 +238,54 @@ text-shadow:0 0 25px #ff4d6d;
 
 <script>
 
-let step=0;
-let t=0;
+/* 🔊 AUDIO FIX (MAIN PART) */
+let currentAudio = null;
 
-/* AUDIO SAFE */
-function stopAll(){
+function stopAllAudio(){
 document.querySelectorAll("audio").forEach(a=>{
-a.pause(); a.currentTime=0;
+a.pause();
+a.currentTime = 0;
 });
+currentAudio = null;
 }
 
 function playAudio(n){
-stopAll();
-let a=document.getElementById("a"+n);
-if(a) a.play().catch(()=>{});
+stopAllAudio();
+
+let audio = document.getElementById("a"+n);
+if(audio){
+currentAudio = audio;
+audio.play().catch(()=>{});
+}
 }
 
-/* PAGE */
+/* 📄 PAGE SWITCH */
 function go(p){
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
-if(p<=6) playAudio(p);
+
+/* play audio only for pages 1–5 */
+if(p >= 1 && p <= 5){
+playAudio(p);
 }
 
-/* CHAT FIXED STORY */
-function chat(e){
-if(e.key!=="Enter") return;
+/* no audio on final page */
+if(p === 6){
+stopAllAudio();
+}
+}
 
-let v=inp.value.trim();
+/* 💬 CHAT FLOW */
+function chat(e){
+if(e.key !== "Enter") return;
+
+let v = inp.value.trim();
 if(!v) return;
 
 chat.innerHTML += `<div class="msg her">${v}</div>`;
 
 setTimeout(()=>chat.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`,400);
-setTimeout(()=>chat.innerHTML += `<div class="msg me">I made something small for you 🫶</div>`,1000);
+setTimeout(()=>chat.innerHTML += `<div class="msg me">I made something special for you 🫶</div>`,1000);
 setTimeout(()=>chat.innerHTML += `<div class="msg me">Are you ready? ❤️</div>`,1800);
 
 setTimeout(()=>go(2),2400);
@@ -278,23 +293,30 @@ setTimeout(()=>go(2),2400);
 inp.value="";
 }
 
-/* SPECIAL */
+/* 💌 SPECIAL */
 document.getElementById("special").innerText =
 "You are my safe place ❤️\nYou are my happiness 🫶\nYou are my everything 💖";
 
-/* LOVE */
-let loveList=["Kind","Beautiful","Funny","Caring","Strong","Loyal","Support","Pure","Best","My Person"];
-function love(i){ loveOut.innerText=loveList[i]; }
+/* 🎮 LOVE */
+let loveList=[
+"Kind","Beautiful","Funny","Caring","Strong",
+"Loyal","Support","Pure","Best","My Person"
+];
 
-/* MEMORIES */
-let imgs=["us.jpeg","Bum.JPG","weeeee.JPG"];
-let i=0;
-function nextImg(){
-img.src=imgs[i];
-i=(i+1)%imgs.length;
+function love(i){
+loveOut.innerText = loveList[i];
 }
 
-/* THANK YOU */
+/* 📸 MEMORIES */
+let imgs=["us.jpeg","Bum.JPG","weeeee.JPG"];
+let i=0;
+
+function nextImg(){
+img.src = imgs[i];
+i = (i+1) % imgs.length;
+}
+
+/* 💖 THANK YOU */
 let th=[
 "Thank you for trusting me ❤️",
 "Thank you for loving me 🌈",
@@ -303,10 +325,12 @@ let th=[
 "Thank you for everything 💖"
 ];
 
+let t=0;
+
 setInterval(()=>{
 if(document.getElementById("p5").classList.contains("active")){
 thanks.innerHTML += th[t]+"<br>";
-t=(t+1)%th.length;
+t = (t+1)%th.length;
 }
 },1200);
 
