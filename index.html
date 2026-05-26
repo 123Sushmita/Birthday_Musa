@@ -59,7 +59,7 @@ animation:float 2s infinite ease-in-out;
 100%{transform:translateY(-30px);opacity:0;}
 }
 
-/* PAGE 2 BOX */
+/* BOX */
 .box{
 width:240px;
 height:140px;
@@ -88,7 +88,6 @@ transition:1s ease;
 z-index:5;
 }
 
-/* PAPER ANIMATION */
 .fly{
 top:10% !important;
 opacity:1 !important;
@@ -108,7 +107,7 @@ display:none;
 font-size:14px;
 }
 
-/* GAME GRID */
+/* GAME */
 .grid{
 display:grid;
 grid-template-columns:repeat(5,1fr);
@@ -149,17 +148,23 @@ height:120px;
 object-fit:cover;
 border-radius:10px;
 }
-
 </style>
 </head>
 
 <body>
 
+<!-- 🎵 AUDIO -->
+<audio id="a1" src="audio_1.m4a"></audio>
+<audio id="a2" src="audio_2.m4a"></audio>
+<audio id="a3" src="audio_3.m4a"></audio>
+<audio id="a4" src="audio_4.m4a"></audio>
+<audio id="a5" src="audio_5.m4a"></audio>
+<audio id="a6" src="audio_6.m4a"></audio>
+
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
 
 <div class="balloons">🎈🎈🎈🎈🎈</div>
-
 <h1>HAPPY BIRTHDAY MY LOVE ❤️</h1>
 
 <button onclick="go(2)">Start</button>
@@ -174,15 +179,17 @@ border-radius:10px;
 🎁 Happy Birthday Girl 💖<br>Click Me
 </div>
 
-</div>
-
-<!-- PAPER -->
 <div id="paper"></div>
 
-<!-- TOP MESSAGE -->
 <div id="msg"></div>
 
-<!-- PAGE 3 GAME -->
+<button id="nextBtn" onclick="go(3)" style="display:none;">
+👉 Continue Journey
+</button>
+
+</div>
+
+<!-- PAGE 3 -->
 <div class="page" id="p3">
 
 <h1>💖 What I Love Most</h1>
@@ -205,7 +212,7 @@ border-radius:10px;
 <button onclick="go(4)">Next ➜</button>
 </div>
 
-<!-- PAGE 4 PHOTOS -->
+<!-- PAGE 4 -->
 <div class="page" id="p4">
 
 <h1>📸 Memories</h1>
@@ -232,31 +239,66 @@ border-radius:10px;
 
 <script>
 
+/* NAVIGATION */
 function go(p){
+
 document.querySelectorAll(".page").forEach(x=>{
 x.classList.remove("active");
 });
+
 document.getElementById("p"+p).classList.add("active");
+
+/* AUDIO START AFTER FIRST CLICK */
+if(p>=2 && p<=6){
+playAudio(p-2);
+}
 }
 
-/* PAGE 2 BOX ANIMATION */
+/* AUDIO FIX */
+let audios=[
+"a1","a2","a3","a4","a5","a6"
+];
+
+let started=false;
+
+function playAudio(i){
+
+if(!started) started=true;
+
+audios.forEach(id=>{
+let a=document.getElementById(id);
+if(a){
+a.pause();
+a.currentTime=0;
+}
+});
+
+let current=document.getElementById(audios[i]);
+if(current){
+current.play().catch(()=>{});
+}
+}
+
+/* PAGE 2 BOX */
 function openBox(){
 
-let paper=document.getElementById("paper");
-
-paper.innerHTML=`
+document.getElementById("paper").innerHTML=`
 Hey beautiful ❤️<br><br>
 Happy Birthday! Wishing you a peaceful and prosperous life ahead.<br><br>
-You know what you are to me… I love you the most 💖
+You mean everything to me… I love you 💖
 `;
 
-paper.classList.add("fly");
+document.getElementById("paper").classList.add("fly");
 
 setTimeout(()=>{
 document.getElementById("msg").style.display="block";
 document.getElementById("msg").innerHTML=
-"💌 I just wanted to say... you mean everything to me ❤️";
+"💌 Read the message above ❤️";
 },1200);
+
+setTimeout(()=>{
+document.getElementById("nextBtn").style.display="block";
+},1800);
 
 }
 
@@ -275,9 +317,7 @@ let data=[
 ];
 
 function flip(el,n){
-
 el.classList.add("flipped");
-
 setTimeout(()=>{
 el.innerHTML=data[n-1];
 },200);
