@@ -7,11 +7,7 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:Arial;
@@ -21,7 +17,6 @@ overflow:hidden;
 height:100vh;
 }
 
-/* 🌌 BACKGROUND */
 .bg{
 position:fixed;
 width:100%;
@@ -30,7 +25,6 @@ background:radial-gradient(circle,#1a1a1a,#000);
 z-index:-10;
 }
 
-/* 🎬 PAGE */
 .page{
 position:absolute;
 width:100%;
@@ -51,14 +45,12 @@ opacity:1;
 pointer-events:auto;
 }
 
-/* 🎬 TITLE */
 .title{
 font-size:38px;
 margin-bottom:15px;
 text-shadow:0 0 20px #ff4d6d;
 }
 
-/* 🔘 BUTTON (NOW MORE VISIBLE) */
 button{
 padding:14px 24px;
 border:none;
@@ -68,15 +60,8 @@ color:white;
 margin-top:18px;
 cursor:pointer;
 font-size:16px;
-box-shadow:0 0 15px rgba(255,77,109,0.5);
-transition:0.3s;
 }
 
-button:hover{
-transform:scale(1.08);
-}
-
-/* 💬 CHAT */
 #chatBox{
 width:90%;
 max-width:500px;
@@ -107,7 +92,6 @@ color:white;
 margin-top:10px;
 }
 
-/* 💌 BOX */
 .specialBox{
 width:300px;
 height:200px;
@@ -120,7 +104,6 @@ align-items:center;
 cursor:pointer;
 }
 
-/* 📸 GALLERY */
 .gallery{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -134,25 +117,17 @@ width:100%;
 height:180px;
 object-fit:cover;
 border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.6);
 }
 
-/* 🎆 FINAL */
 .finalGlow{
 font-size:42px;
 text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 }
 
-/* 👉 CLICK INDICATOR */
 .hint{
-margin-top:15px;
-opacity:0.8;
+margin-top:12px;
 font-size:14px;
-animation:blink 1.2s infinite;
-}
-
-@keyframes blink{
-50%{opacity:0.3;}
+opacity:0.7;
 }
 
 </style>
@@ -176,20 +151,17 @@ animation:blink 1.2s infinite;
 <h1 class="title">💬 Chat With Musa</h1>
 
 <div id="chatBox">
-
 <div class="msg me">Hi mero musa ❤️</div>
-
 <div id="chatArea"></div>
 
 <input id="r1" placeholder="Type reply..." onkeydown="chatFlow(event)">
-
 </div>
 
 <button id="startBtn" onclick="go(2)" style="display:none;">
 🎬 Start Surprise
 </button>
 
-<div class="hint">👇 Type and press Enter to continue</div>
+<div class="hint">Type & press Enter</div>
 
 </div>
 
@@ -202,7 +174,7 @@ animation:blink 1.2s infinite;
 <p>CLICK TO OPEN</p>
 </div>
 
-<div class="hint">👇 Click box to continue</div>
+<div class="hint">Click to continue</div>
 </div>
 
 <!-- PAGE 3 -->
@@ -216,7 +188,6 @@ animation:blink 1.2s infinite;
 <p id="loveOut"></p>
 
 <button onclick="go(4)">NEXT ▶</button>
-
 </div>
 
 <!-- PAGE 4 -->
@@ -231,7 +202,6 @@ animation:blink 1.2s infinite;
 </div>
 
 <button onclick="go(5)">NEXT ▶</button>
-
 </div>
 
 <!-- PAGE 5 -->
@@ -244,7 +214,6 @@ animation:blink 1.2s infinite;
 <p id="thankOut"></p>
 
 <button onclick="go(6)">NEXT ▶</button>
-
 </div>
 
 <!-- PAGE 6 -->
@@ -256,10 +225,9 @@ animation:blink 1.2s infinite;
 <source src="Video.MOV">
 </video>
 
-<div class="hint">👇 Watch then click next</div>
+<div class="hint">Watch carefully 👀</div>
 
 <button onclick="go(7)">FINAL ▶</button>
-
 </div>
 
 <!-- PAGE 7 -->
@@ -278,14 +246,15 @@ animation:blink 1.2s infinite;
 let step = 0;
 let currentAudio = null;
 
-/* 🔊 AUDIO FIX */
+/* 🔊 STOP ALL AUDIO */
 function stopAll(){
-if(currentAudio){
-currentAudio.pause();
-currentAudio.currentTime = 0;
-}
+document.querySelectorAll("audio").forEach(a=>{
+a.pause();
+a.currentTime = 0;
+});
 }
 
+/* 🔊 PLAY AUDIO PER PAGE */
 function playAudio(n){
 stopAll();
 let a = document.getElementById("a"+n);
@@ -301,11 +270,10 @@ function go(p){
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* audio only pages 2-6 */
+/* AUDIO ONLY FOR 2–6 (NOT VIDEO ISSUE FIXED) */
 if(p>=2 && p<=6){
 playAudio(p-1);
 }
-
 }
 
 /* 💬 CHAT FLOW FIXED */
@@ -326,9 +294,14 @@ chat.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`;
 }
 
 else if(step === 1){
+chat.innerHTML += `<div class="msg me">Thank you 🫶</div>`;
+}
+
+else if(step === 2){
 chat.innerHTML += `<div class="msg me">I tried this to celebrate your birthday 🎬❤️</div>`;
 }
-else if(step === 2){
+
+else if(step === 3){
 chat.innerHTML += `<div class="msg me">Are you ready? 🫶</div>`;
 document.getElementById("startBtn").style.display="block";
 }
@@ -339,7 +312,7 @@ document.getElementById("r1").value="";
 chat.scrollTop = chat.scrollHeight;
 }
 
-/* 💌 LOVE */
+/* 💖 LOVE */
 function love(n){
 let arr=["Beautiful","Kind","Funny"];
 document.getElementById("loveOut").innerText = arr[n-1];
