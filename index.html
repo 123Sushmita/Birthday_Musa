@@ -3,49 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Musa ❤️</title>
+<title>Mero Musa ❤️ Cinematic Birthday</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:linear-gradient(to bottom,#ffb6c1,#ff69b4);
+background:black;
 color:white;
-text-align:center;
-overflow-x:hidden;
+overflow:hidden;
 }
 
 .page{
-min-height:100vh;
+position:absolute;
+width:100%;
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:25px;
+text-align:center;
+padding:20px;
+opacity:0;
+transform:scale(1.1);
+transition:1.2s ease;
 }
 
-.hidden{display:none;}
+.active{
+opacity:1;
+transform:scale(1);
+z-index:10;
+}
 
 button{
 padding:14px 22px;
-font-size:18px;
 border:none;
 border-radius:25px;
 cursor:pointer;
 background:white;
 color:#ff1493;
+font-size:18px;
 margin-top:15px;
 }
 
 img{
-width:230px;
-border-radius:20px;
+width:220px;
+border-radius:15px;
 margin:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
-transition:0.5s;
 }
 
-img:hover{transform:scale(1.05);}
+.gallery{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
 
 .number-btn{
 width:55px;
@@ -56,104 +67,85 @@ font-size:18px;
 }
 
 #reasonText{
-font-size:22px;
 margin-top:20px;
+font-size:22px;
 max-width:700px;
 }
 
-.balloon{
-position:fixed;
-font-size:30px;
-cursor:pointer;
-animation:float 6s linear infinite;
+/* cinematic glow */
+h1{
+text-shadow:0 0 20px #ff69b4;
 }
 
-@keyframes float{
-0%{transform:translateY(100vh);opacity:1;}
-100%{transform:translateY(-120vh);opacity:0;}
+/* fade effect */
+.fade{
+animation:fadeIn 1.5s ease;
 }
 
-/* confetti */
-.confetti{
-position:fixed;
-width:10px;
-height:10px;
-background:white;
-animation:fall 3s linear;
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
 }
 
-@keyframes fall{
-0%{transform:translateY(-10px) rotate(0);}
-100%{transform:translateY(100vh) rotate(360deg);opacity:0;}
-}
-
-/* typing text */
-.typing{
-border-right:2px solid white;
-white-space:nowrap;
-overflow:hidden;
-width:0;
-animation:typing 4s steps(40,end) forwards;
-}
-
-@keyframes typing{
-from{width:0}
-to{width:100%}
-}
 </style>
 </head>
 
 <body>
 
+<!-- 🎵 AUDIO -->
+<audio id="a1" src="audio_1.m4a"></audio>
+<audio id="a2" src="audio_2.m4a"></audio>
+<audio id="a3" src="audio_3.m4a"></audio>
+<audio id="a4" src="audio_4.m4a"></audio>
+<audio id="a5" src="audio_5.m4a"></audio>
+<audio id="a6" src="audio_6.m4a"></audio>
+
 <!-- PAGE 1 -->
-<div class="page" id="p1">
-<h1>🎂 HAPPY BIRTHDAY MERO MUSA ❤️</h1>
-<h2>Sarita ✨</h2>
-
-<p>My best friend 🫶 My heart 🌸</p>
-
-<button onclick="start()">Start Surprise 🎁</button>
+<div class="page active" id="p1">
+<h1>🎬 A CINEMATIC STORY FOR MERO MUSA ❤️</h1>
+<p>Sarita ✨</p>
+<button onclick="start()">Begin Journey 🎥</button>
 </div>
 
 <!-- PAGE 2 -->
-<div class="page hidden" id="p2">
-<h1>💌 Birthday Wish</h1>
-
-<p class="typing">
-Happy Birthday Musa ❤️ You are my best friend, my comfort, my family by heart. Thank you for everything 🫶
+<div class="page" id="p2">
+<h1>💌 A Message From My Heart</h1>
+<p class="fade">
+Happy Birthday Musa ❤️<br><br>
+You are not just my best friend...<br>
+You are my whole emotional world 🫶
 </p>
-
-<button onclick="go(3)">Next 📸</button>
+<button onclick="go(3)">Next Scene 🎬</button>
 </div>
 
 <!-- PAGE 3 -->
-<div class="page hidden" id="p3">
-<h1>📸 Memories</h1>
+<div class="page" id="p3">
+<h1>📸 Memory Lane</h1>
 
-<div>
+<div class="gallery">
 <img src="seeee.jpeg">
 <img src="Bum.JPG">
 <img src="weeeee.JPG">
 <img src="us.jpeg">
 </div>
 
-<button onclick="go(4)">Next 🎈</button>
+<button onclick="go(4)">Next 🎥</button>
 </div>
 
 <!-- PAGE 4 -->
-<div class="page hidden" id="p4">
-<h1>🎥 Video Memory</h1>
+<div class="page" id="p4">
+<h1>🎥 Our Real Moment</h1>
 
 <video width="300" controls>
-<source src="video.mp4" type="video/mp4">
+<source src="video.mp4">
 </video>
 
-<button onclick="go(5)">Play Game 🎮</button>
+<button onclick="go(5)">Unlock Game 🎮</button>
 </div>
 
 <!-- PAGE 5 -->
-<div class="page hidden" id="p5">
-<h1>🎮 Unlock 10 Reasons</h1>
+<div class="page" id="p5">
+<h1>🎮 10 REASONS YOU ARE SPECIAL</h1>
 
 <div>
 <button class="number-btn" onclick="reason(1)">1</button>
@@ -171,95 +163,109 @@ Happy Birthday Musa ❤️ You are my best friend, my comfort, my family by hear
 
 <div id="reasonText"></div>
 
-<button onclick="go(6)">Unlock Final 💖</button>
+<button onclick="go(6)">Final Letter 💌</button>
 </div>
 
 <!-- PAGE 6 -->
-<div class="page hidden" id="p6">
+<div class="page" id="p6">
 <h1>💖 FINAL LETTER</h1>
 
-<p style="max-width:700px;font-size:20px;line-height:1.7;">
+<p style="max-width:700px;font-size:20px;">
 Dear Sarita ❤️<br><br>
-You are not just my Musa, you are my life’s happiness.<br>
-No matter what happens, you will always be my heart 🫶✨
+You are my peace, my happiness, my Musa.<br>
+No matter what happens, you are always my home 🫶
 </p>
 
-<button onclick="final()">Final Surprise 🎁</button>
+<button onclick="final()">FINAL SCENE 🎬</button>
 </div>
 
-<!-- FINAL PAGE -->
-<div class="page hidden" id="final">
+<!-- FINAL -->
+<div class="page" id="final">
 <h1>🫂 I LOVE YOU MERO MUSA ❤️</h1>
 <h2>🎂 Happy Birthday Sarita 🎂</h2>
-
-<h1>💖✨🌸🫶🎉</h1>
-
-<p>Forever Best Friends</p>
+<p>Forever Us 💖</p>
 </div>
 
 <script>
 
+let audios = [
+document.getElementById("a1"),
+document.getElementById("a2"),
+document.getElementById("a3"),
+document.getElementById("a4"),
+document.getElementById("a5"),
+document.getElementById("a6")
+];
+
+let current = 0;
+
+function stopAll(){
+audios.forEach(a=>{
+a.pause();
+a.currentTime=0;
+});
+}
+
+function play(i){
+stopAll();
+if(audios[i]) audios[i].play();
+current=i;
+}
+
+function show(page){
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
+
+document.getElementById("p"+page).classList.add("active");
+
+/* audio mapping */
+if(page>=2 && page<=6){
+play(page-2);
+}
+}
+
 function start(){
-go(2);
-confetti();
+show(2);
 }
 
 function go(p){
-for(let i=1;i<=6;i++){
-let el=document.getElementById("p"+i);
-if(el) el.classList.add("hidden");
-}
-document.getElementById("final").classList.add("hidden");
-document.getElementById("p"+p).classList.remove("hidden");
-confetti();
+show(p);
 }
 
 function reason(n){
 
 let text=[
-"👁️ Most beautiful eyes",
-"💖 Pure soul",
-"😂 I love BUMMMMM",
-"🌸 Looks stunning in sari",
+"👁️ Most beautiful eyes ever",
+"💖 Purest soul",
+"😂 I love they way you say BUMMMM",
+"🌸 Stunning in sari",
 "🫶 Innocent heart",
-"✨ Bold personality",
+"✨ Strong personality",
 "❤️ My best friend",
-"🦋 Adds color to my life",
+"🦋 You color my life",
 "💛 Kind hearted",
-"🌟 Always stands for truth"
+"🌟 Truth always"
 ];
 
 document.getElementById("reasonText").innerHTML=text[n-1];
 }
 
 function final(){
-document.getElementById("p6").classList.add("hidden");
-document.getElementById("final").classList.remove("hidden");
-confetti();
+showFinal();
 }
 
-function confetti(){
-for(let i=0;i<30;i++){
-let c=document.createElement("div");
-c.classList.add("confetti");
-c.style.left=Math.random()*100+"vw";
-c.style.background=["#fff","#ff0","#f0f","#0ff"][Math.floor(Math.random()*4)];
-document.body.appendChild(c);
+function showFinal(){
+stopAll();
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
+document.getElementById("final").classList.add("active");
 
-setTimeout(()=>c.remove(),3000);
+/* play final audio */
+play(5);
 }
-}
-
-// floating balloons
-setInterval(()=>{
-let b=document.createElement("div");
-b.classList.add("balloon");
-b.innerHTML="🎈";
-b.style.left=Math.random()*100+"vw";
-document.body.appendChild(b);
-
-setTimeout(()=>b.remove(),6000);
-},500);
 
 </script>
 
