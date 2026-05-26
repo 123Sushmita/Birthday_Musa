@@ -21,59 +21,84 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:30px;
+padding:25px;
 }
 
 .hidden{display:none;}
 
 button{
-padding:15px 25px;
+padding:14px 22px;
 font-size:18px;
 border:none;
 border-radius:25px;
 cursor:pointer;
-margin-top:15px;
 background:white;
 color:#ff1493;
+margin-top:15px;
 }
 
 img{
-width:220px;
-margin:10px;
+width:230px;
 border-radius:20px;
+margin:10px;
 box-shadow:0 0 10px rgba(0,0,0,0.3);
+transition:0.5s;
 }
 
+img:hover{transform:scale(1.05);}
+
 .number-btn{
-width:60px;
-height:60px;
+width:55px;
+height:55px;
 border-radius:50%;
 margin:5px;
 font-size:18px;
 }
 
 #reasonText{
-margin-top:20px;
 font-size:22px;
-padding:10px;
+margin-top:20px;
 max-width:700px;
 }
 
-video{
-width:300px;
-border-radius:20px;
-margin-top:15px;
-}
-
-.floating{
+.balloon{
 position:fixed;
-font-size:25px;
-animation:float 5s linear infinite;
+font-size:30px;
+cursor:pointer;
+animation:float 6s linear infinite;
 }
 
 @keyframes float{
 0%{transform:translateY(100vh);opacity:1;}
-100%{transform:translateY(-100vh);opacity:0;}
+100%{transform:translateY(-120vh);opacity:0;}
+}
+
+/* confetti */
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+background:white;
+animation:fall 3s linear;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10px) rotate(0);}
+100%{transform:translateY(100vh) rotate(360deg);opacity:0;}
+}
+
+/* typing text */
+.typing{
+border-right:2px solid white;
+white-space:nowrap;
+overflow:hidden;
+width:0;
+animation:typing 4s steps(40,end) forwards;
+}
+
+@keyframes typing{
+from{width:0}
+to{width:100%}
 }
 </style>
 </head>
@@ -85,20 +110,17 @@ animation:float 5s linear infinite;
 <h1>🎂 HAPPY BIRTHDAY MERO MUSA ❤️</h1>
 <h2>Sarita ✨</h2>
 
-<p>My best friend 🫶 My sister ❤️ My heart 🌸</p>
+<p>My best friend 🫶 My heart 🌸</p>
 
-<button onclick="go(2)">Tap to Start 🎁</button>
+<button onclick="start()">Start Surprise 🎁</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page hidden" id="p2">
 <h1>💌 Birthday Wish</h1>
 
-<p style="max-width:700px;font-size:20px;line-height:1.7;">
-Happy Birthday Musa ❤️<br><br>
-You are my best friend, my comfort, my family by heart.<br>
-Thank you for every laugh, every memory, every support 🌸✨<br><br>
-You will always be special to me 🫶
+<p class="typing">
+Happy Birthday Musa ❤️ You are my best friend, my comfort, my family by heart. Thank you for everything 🫶
 </p>
 
 <button onclick="go(3)">Next 📸</button>
@@ -106,45 +128,32 @@ You will always be special to me 🫶
 
 <!-- PAGE 3 -->
 <div class="page hidden" id="p3">
-<h1>📸 Our Memories</h1>
+<h1>📸 Memories</h1>
 
 <div>
-<!-- UPLOAD YOUR IMAGES IN GITHUB AND USE ONLY FILE NAMES -->
 <img src="seeee.jpeg">
 <img src="Bum.JPG">
 <img src="weeeee.JPG">
 <img src="us.jpeg">
-<img src="Dai.jpg">
-<img src="surab.JPEG">
-<img src="Girls.jpeg">
-<img src="bacchatoli.jpeg">
-<img src="family.JPG">
-<img src="happy.jpeg">
-<img src="weird.JPG">
 </div>
 
-<p>Every moment with you is priceless ❤️</p>
-
-<button onclick="go(4)">Next 🎥</button>
+<button onclick="go(4)">Next 🎈</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page hidden" id="p4">
-<h1>🎥 Special Video Memory</h1>
+<h1>🎥 Video Memory</h1>
 
-<!-- UPLOAD YOUR VIDEO TO GITHUB AND NAME IT video.mp4 -->
-<video controls>
+<video width="300" controls>
 <source src="video.mp4" type="video/mp4">
 </video>
-
-<p>If friendship had a face, it would look like us 🥹❤️</p>
 
 <button onclick="go(5)">Play Game 🎮</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page hidden" id="p5">
-<h1>🎮 10 Reasons You Are Special</h1>
+<h1>🎮 Unlock 10 Reasons</h1>
 
 <div>
 <button class="number-btn" onclick="reason(1)">1</button>
@@ -162,78 +171,95 @@ You will always be special to me 🫶
 
 <div id="reasonText"></div>
 
-<button onclick="go(6)">Secret Letter 💌</button>
+<button onclick="go(6)">Unlock Final 💖</button>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page hidden" id="p6">
-<h1>💖 Secret Letter</h1>
+<h1>💖 FINAL LETTER</h1>
 
 <p style="max-width:700px;font-size:20px;line-height:1.7;">
 Dear Sarita ❤️<br><br>
-Thank you for being my Musa, my strength, my happiness.<br>
-No matter where life takes us, you will always be my heart 🫶<br><br>
-I love you forever 🌸✨
+You are not just my Musa, you are my life’s happiness.<br>
+No matter what happens, you will always be my heart 🫶✨
 </p>
 
-<button onclick="go(7)">Final Surprise 🎁</button>
+<button onclick="final()">Final Surprise 🎁</button>
 </div>
 
-<!-- PAGE 7 -->
-<div class="page hidden" id="p7">
-<h1>💖 I LOVE YOU MERO MUSA ❤️</h1>
+<!-- FINAL PAGE -->
+<div class="page hidden" id="final">
+<h1>🫂 I LOVE YOU MERO MUSA ❤️</h1>
 <h2>🎂 Happy Birthday Sarita 🎂</h2>
 
-<p>Forever Best Friends 🫂💖</p>
+<h1>💖✨🌸🫶🎉</h1>
 
-<button onclick="end()">End 🌟</button>
+<p>Forever Best Friends</p>
 </div>
 
 <script>
 
-function go(p){
-for(let i=1;i<=7;i++){
-document.getElementById("p"+i).classList.add("hidden");
+function start(){
+go(2);
+confetti();
 }
+
+function go(p){
+for(let i=1;i<=6;i++){
+let el=document.getElementById("p"+i);
+if(el) el.classList.add("hidden");
+}
+document.getElementById("final").classList.add("hidden");
 document.getElementById("p"+p).classList.remove("hidden");
+confetti();
 }
 
 function reason(n){
 
-let text="";
+let text=[
+"👁️ Most beautiful eyes",
+"💖 Pure soul",
+"😂 I love BUMMMMM",
+"🌸 Looks stunning in sari",
+"🫶 Innocent heart",
+"✨ Bold personality",
+"❤️ My best friend",
+"🦋 Adds color to my life",
+"💛 Kind hearted",
+"🌟 Always stands for truth"
+];
 
-if(n==1) text="👁️ The most beautiful eyes I have ever seen";
-if(n==2) text="💖 The most beautiful thing is your soul";
-if(n==3) text="😂 I love when you say BUMMMMM";
-if(n==4) text="🌸 You look pretty in sari";
-if(n==5) text="🫶 You are so innocent that anyone can love you";
-if(n==6) text="✨ Your bold personality impresses me";
-if(n==7) text="❤️ Having you is the best thing in my life";
-if(n==8) text="🦋 You added color to my life";
-if(n==9) text="💛 You are kind-hearted";
-if(n==10) text="🌟 You always stand for truth and right";
-
-document.getElementById("reasonText").innerHTML=text;
+document.getElementById("reasonText").innerHTML=text[n-1];
 }
 
-function end(){
-document.body.innerHTML=`
-<h1>🌸 THANK YOU MERO MUSA ❤️</h1>
-<h2>Happy Birthday Sarita 🎂</h2>
-<h1>🫂💖✨🌸🎉</h1>
-<p>— Your Sushmita ❤️</p>
-`;
+function final(){
+document.getElementById("p6").classList.add("hidden");
+document.getElementById("final").classList.remove("hidden");
+confetti();
 }
 
-// floating emojis
+function confetti(){
+for(let i=0;i<30;i++){
+let c=document.createElement("div");
+c.classList.add("confetti");
+c.style.left=Math.random()*100+"vw";
+c.style.background=["#fff","#ff0","#f0f","#0ff"][Math.floor(Math.random()*4)];
+document.body.appendChild(c);
+
+setTimeout(()=>c.remove(),3000);
+}
+}
+
+// floating balloons
 setInterval(()=>{
-let e=document.createElement("div");
-e.classList.add("floating");
-e.innerHTML=["💖","🌸","✨","🫶"][Math.floor(Math.random()*4)];
-e.style.left=Math.random()*100+"vw";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),5000);
-},400);
+let b=document.createElement("div");
+b.classList.add("balloon");
+b.innerHTML="🎈";
+b.style.left=Math.random()*100+"vw";
+document.body.appendChild(b);
+
+setTimeout(()=>b.remove(),6000);
+},500);
 
 </script>
 
