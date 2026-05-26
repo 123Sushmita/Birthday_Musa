@@ -13,16 +13,22 @@ color:white;
 overflow:hidden;
 }
 
-/* 🌌 CINEMATIC BACKGROUND */
+/* 🌌 CINEMATIC DEPTH BACKGROUND */
 .bg{
 position:fixed;
 width:100%;
 height:100%;
-background:radial-gradient(circle,#1a1a1a,#000);
+background:radial-gradient(circle at center,#1a1a1a,#000);
 z-index:-5;
+animation:zoomBg 10s infinite alternate;
 }
 
-/* 🎬 PAGE SYSTEM */
+@keyframes zoomBg{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+/* 🎬 SCENES */
 .page{
 position:absolute;
 width:100%;
@@ -33,16 +39,29 @@ justify-content:center;
 align-items:center;
 text-align:center;
 opacity:0;
-transform:scale(1.1);
-transition:0.8s ease;
+transform:scale(1.15);
+filter:blur(10px);
+transition:1s ease;
 pointer-events:none;
-padding:20px;
 }
 
 .page.active{
 opacity:1;
 transform:scale(1);
+filter:blur(0px);
 pointer-events:auto;
+}
+
+/* 🔥 TRAILER TITLE */
+.title{
+font-size:34px;
+text-shadow:0 0 25px #ff4d6d;
+animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 /* 🔘 BUTTON */
@@ -56,14 +75,8 @@ margin-top:10px;
 cursor:pointer;
 }
 
-/* 💖 TITLE */
-.glow{
-font-size:32px;
-text-shadow:0 0 20px #ff4d6d;
-}
-
-/* 💌 FLOATING BOXES */
-.boxContainer{
+/* 💌 MESSAGE BOXES */
+.grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:10px;
@@ -72,7 +85,7 @@ margin-top:20px;
 
 .box{
 background:#222;
-padding:15px;
+padding:12px;
 border-radius:10px;
 border:1px solid #ff4d6d;
 cursor:pointer;
@@ -84,7 +97,7 @@ transform:scale(1.1);
 }
 
 /* 📸 MEMORY CARDS */
-.memGrid{
+.mem{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:10px;
@@ -93,23 +106,15 @@ margin-top:20px;
 
 .card{
 background:#111;
-padding:15px;
+padding:12px;
 border-radius:10px;
-cursor:pointer;
 border:1px solid #444;
-}
-
-/* 💌 TEXT OUTPUT */
-.output{
-margin-top:15px;
-font-size:16px;
-color:#fff;
-max-width:300px;
+cursor:pointer;
 }
 
 /* 🎥 VIDEO */
 video{
-width:300px;
+width:320px;
 border-radius:10px;
 }
 
@@ -141,8 +146,9 @@ animation-delay:2.5s;
 
 #intro h1{
 color:#e50914;
-font-size:50px;
-animation:zoom 1.2s ease;
+font-size:60px;
+letter-spacing:4px;
+animation:zoom 1s ease;
 }
 
 @keyframes zoom{
@@ -152,6 +158,27 @@ to{transform:scale(1);opacity:1;}
 
 @keyframes fadeOut{
 to{opacity:0;visibility:hidden;}
+}
+
+/* 🎞 SUBTITLE TYPING */
+.subtitle{
+margin-top:10px;
+font-size:16px;
+overflow:hidden;
+white-space:nowrap;
+border-right:2px solid white;
+width:0;
+animation:type 3s steps(40,end);
+}
+
+@keyframes type{
+to{width:100%;}
+}
+
+/* 🎆 FINAL GLOW */
+.finalGlow{
+font-size:32px;
+text-shadow:0 0 30px #ff4d6d;
 }
 </style>
 </head>
@@ -163,7 +190,7 @@ to{opacity:0;visibility:hidden;}
 <!-- 🎬 INTRO -->
 <div id="intro">
 <h1>NETFLIX</h1>
-<p>🎬 A Story of Best Friendship ❤️</p>
+<div class="subtitle">A Viral Story of Pure Friendship ❤️</div>
 </div>
 
 <!-- 🔊 AUDIO -->
@@ -173,104 +200,99 @@ to{opacity:0;visibility:hidden;}
 <audio id="a4" src="audio_4.m4a"></audio>
 <audio id="a5" src="audio_5.m4a"></audio>
 
-<!-- 🎬 PAGE 1 -->
+<!-- 🎬 SCENE 1 -->
 <div class="page active" id="p1">
-<div class="glow">🎉 Happy Birthday My Best Friend ❤️</div>
-<button onclick="go(2)">Start Movie 🎬</button>
+<div class="title">🎉 Happy Birthday My Best Friend ❤️</div>
+<button onclick="go(2)">Start Trailer 🎬</button>
 </div>
 
-<!-- 💌 PAGE 2 MESSAGE -->
+<!-- 💌 SCENE 2 -->
 <div class="page" id="p2">
-<h2>💌 Tap to open messages</h2>
+<h2>💌 Messages From My Heart</h2>
 
-<div class="boxContainer">
-
+<div class="grid">
 <div class="box" onclick="msg('You are my safe place ❤️')">Open</div>
-<div class="box" onclick="msg('You bring peace into my life 🫶')">Open</div>
+<div class="box" onclick="msg('You bring peace to my life 🌸')">Open</div>
 <div class="box" onclick="msg('You are irreplaceable 💖')">Open</div>
-<div class="box" onclick="msg('I trust you blindly 🌸')">Open</div>
+<div class="box" onclick="msg('I trust you blindly 🫶')">Open</div>
 <div class="box" onclick="msg('You are my happiness 😊')">Open</div>
-
 </div>
 
-<div class="output" id="out"></div>
+<p id="out"></p>
 
-<button onclick="go(3)">Next 🎬</button>
+<button onclick="go(3)">Next Scene 🎬</button>
 </div>
 
-<!-- 🎮 PAGE 3 GAME -->
+<!-- 🎮 SCENE 3 -->
 <div class="page" id="p3">
 <h2>🎮 What I Love About You</h2>
 
-<div class="boxContainer">
-<button onclick="show(1)">1</button>
-<button onclick="show(2)">2</button>
-<button onclick="show(3)">3</button>
-<button onclick="show(4)">4</button>
-<button onclick="show(5)">5</button>
-<button onclick="show(6)">6</button>
-<button onclick="show(7)">7</button>
-<button onclick="show(8)">8</button>
-<button onclick="show(9)">9</button>
-<button onclick="show(10)">10</button>
+<div class="grid">
+<button onclick="love(1)">1</button>
+<button onclick="love(2)">2</button>
+<button onclick="love(3)">3</button>
+<button onclick="love(4)">4</button>
+<button onclick="love(5)">5</button>
+<button onclick="love(6)">6</button>
+<button onclick="love(7)">7</button>
+<button onclick="love(8)">8</button>
+<button onclick="love(9)">9</button>
+<button onclick="love(10)">10</button>
 </div>
 
-<p id="msg"></p>
+<p id="loveText"></p>
 
-<button onclick="go(4)">Next</button>
+<button onclick="go(4)">Next Scene</button>
 </div>
 
-<!-- 📸 PAGE 4 MEMORIES -->
+<!-- 📸 SCENE 4 -->
 <div class="page" id="p4">
-<h2>📸 Memories</h2>
+<h2>📸 Memories That Made Us</h2>
 
-<div class="memGrid">
-
-<div class="card" onclick="mem('We laughed endlessly 😂❤️')">Memory 1</div>
-<div class="card" onclick="mem('We stayed together in hard times 🫶')">Memory 2</div>
-<div class="card" onclick="mem('Every moment mattered 🌸')">Memory 3</div>
-<div class="card" onclick="mem('You are my safe soul ❤️')">Memory 4</div>
-
+<div class="mem">
+<div class="card" onclick="mem('We laughed like crazy 😂❤️')">Memory 1</div>
+<div class="card" onclick="mem('We supported each other 🫶')">Memory 2</div>
+<div class="card" onclick="mem('We never gave up on each other 🌸')">Memory 3</div>
+<div class="card" onclick="mem('You are my strongest bond ❤️')">Memory 4</div>
 </div>
 
 <p id="memText"></p>
 
-<button onclick="go(5)">Next</button>
+<button onclick="go(5)">Next Scene</button>
 </div>
 
-<!-- 💌 PAGE 5 THANK YOU -->
+<!-- 💌 SCENE 5 -->
 <div class="page" id="p5">
 <h2>💌 Thank You</h2>
 
-<button onclick="thank()">Reveal 💖</button>
-
+<button onclick="thanks()">Reveal Message 💖</button>
 <p id="thankText"></p>
 
-<button onclick="go(6)">Next</button>
+<button onclick="go(6)">Final Scene 🎬</button>
 </div>
 
-<!-- 🎥 PAGE 6 VIDEO -->
+<!-- 🎥 VIDEO -->
 <div class="page" id="p6">
-<h2>🎥 One Last Memory</h2>
+<h2>🎥 Final Memory</h2>
 
 <video controls>
 <source src="Video.MOV">
 </video>
 
-<button onclick="go(7)">Final 🎬</button>
+<button onclick="go(7)">Finish</button>
 </div>
 
-<!-- 🎉 FINAL -->
+<!-- 🎆 FINAL -->
 <div class="page" id="p7">
-<div class="glow">🎉 HAPPY BIRTHDAY SARITA ❤️</div>
+<div class="finalGlow">🎉 HAPPY BIRTHDAY SARITA ❤️</div>
 <p>Forever my best friend 🫶</p>
 
-<button onclick="final()">End Movie 🎆</button>
+<button onclick="final()">End Trailer 🎬</button>
 </div>
 
 <script>
 
-/* 🔇 AUDIO */
+/* 🔇 AUDIO CONTROL */
 function stopAll(){
 document.querySelectorAll("audio").forEach(a=>{
 a.pause();
@@ -278,12 +300,16 @@ a.currentTime=0;
 });
 }
 
-/* 🎬 PAGE SWITCH */
+/* 🎬 SCENE SWITCH */
 function go(p){
 
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-document.getElementById("p"+p).classList.add("active");
 
+setTimeout(()=>{
+document.getElementById("p"+p).classList.add("active");
+},200);
+
+/* audio only 1–5 */
 if(p<=5){
 stopAll();
 let a=document.getElementById("a"+p);
@@ -298,14 +324,14 @@ function msg(t){
 document.getElementById("out").innerText=t;
 }
 
-/* 🎮 GAME */
+/* 🎮 LOVE */
 let love=[
 "Beautiful ❤️","Kind 🌸","Funny 😂","Strong 💪","Loyal 💛",
 "Peace 🫶","Best 🌈","Support ❤️","Unique ✨","Forever 💖"
 ];
 
-function show(n){
-document.getElementById("msg").innerText=love[n-1];
+function love(n){
+document.getElementById("loveText").innerText=love[n-1];
 }
 
 /* 📸 MEMORY */
@@ -313,8 +339,8 @@ function mem(t){
 document.getElementById("memText").innerText=t;
 }
 
-/* 💌 THANK YOU (ONE BY ONE) */
-let thanks=[
+/* 💌 THANK YOU */
+let t=[
 "Thank you for trusting me blindly ❤️",
 "Thank you for adding colors in my life 🌈",
 "Thank you for always being there 🫶",
@@ -323,10 +349,10 @@ let thanks=[
 ];
 
 let i=0;
-function thank(){
-document.getElementById("thankText").innerText=thanks[i];
+function thanks(){
+document.getElementById("thankText").innerText=t[i];
 i++;
-if(i>=thanks.length) i=0;
+if(i>=t.length) i=0;
 }
 
 /* 💖 HEARTS */
@@ -343,7 +369,7 @@ setTimeout(()=>h.remove(),5000);
 
 /* 🎆 FINAL */
 function final(){
-for(let i=0;i<100;i++){
+for(let i=0;i<120;i++){
 let c=document.createElement("div");
 c.className="heart";
 c.innerHTML=["💖","✨","🎉"][Math.floor(Math.random()*3)];
