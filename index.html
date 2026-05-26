@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Happy Birthday Sarita ❤️</title>
 
 <style>
@@ -15,106 +14,67 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Arial,sans-serif;
+font-family:Arial;
 background:black;
-overflow:hidden;
 color:white;
+overflow:hidden;
 height:100vh;
 }
 
 /* 🌌 BACKGROUND */
 .bg{
 position:fixed;
-width:120%;
-height:120%;
-background:radial-gradient(circle at center,#1a1a1a,#000 70%);
+width:100%;
+height:100%;
+background:radial-gradient(circle,#1a1a1a,#000);
 z-index:-10;
 }
 
-/* ✨ STARS */
+/* ✨ STAR EFFECT */
 .star{
 position:absolute;
+width:2px;
+height:2px;
 background:white;
-border-radius:50%;
-opacity:.8;
-animation:twinkle 3s infinite alternate;
+opacity:0.6;
 }
 
-@keyframes twinkle{
-from{opacity:.3;}
-to{opacity:1;}
-}
-
-/* 🎬 INTRO */
-#intro{
-position:fixed;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:9999;
-animation:introFade 4s forwards;
-animation-delay:3s;
-}
-
-#intro h1{
-font-size:70px;
-color:#e50914;
-letter-spacing:6px;
-}
-
-#intro p{
-margin-top:10px;
-opacity:.8;
-font-size:18px;
-}
-
-@keyframes introFade{
-to{opacity:0;visibility:hidden;}
-}
-
-/* 🎥 PAGES */
+/* 🎬 SCENES */
 .page{
 position:absolute;
 width:100%;
 height:100vh;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-padding:20px;
 text-align:center;
 opacity:0;
 pointer-events:none;
-transform:scale(1.1);
 transition:1s ease;
+padding:20px;
 }
 
 .page.active{
 opacity:1;
 pointer-events:auto;
-transform:scale(1);
 }
 
 /* 🎬 TITLE */
 .title{
 font-size:38px;
+margin-bottom:15px;
 text-shadow:0 0 25px #ff4d6d;
-margin-bottom:20px;
 }
 
 /* 🔘 BUTTON */
 button{
-padding:13px 22px;
+padding:12px 20px;
 border:none;
-border-radius:30px;
+border-radius:25px;
 background:#ff4d6d;
 color:white;
-font-size:16px;
-margin-top:20px;
+margin-top:15px;
 cursor:pointer;
 }
 
@@ -122,50 +82,38 @@ cursor:pointer;
 #chatBox{
 width:90%;
 max-width:500px;
-height:400px;
+height:380px;
 overflow-y:auto;
-background:rgba(255,255,255,.05);
-padding:20px;
+background:rgba(255,255,255,0.05);
+padding:15px;
 border-radius:20px;
-backdrop-filter:blur(10px);
 }
 
 .msg{
-margin:12px 0;
-padding:12px 16px;
-border-radius:18px;
-max-width:75%;
-line-height:1.5;
-}
-
-.me{
-background:#ff4d6d;
-margin-left:auto;
-text-align:right;
-}
-
-.her{
-background:#222;
-margin-right:auto;
-text-align:left;
-}
-
-.reply input{
-width:100%;
-padding:12px;
-border:none;
+margin:10px 0;
+padding:10px 14px;
 border-radius:15px;
-outline:none;
+max-width:75%;
+}
+
+.me{background:#ff4d6d;margin-left:auto;}
+.her{background:#222;margin-right:auto;}
+
+input{
+width:100%;
+padding:10px;
+border:none;
+border-radius:10px;
 background:#222;
 color:white;
 }
 
-/* 💌 SPECIAL BOX */
+/* 💌 BOX */
 .specialBox{
-width:320px;
-height:220px;
+width:300px;
+height:200px;
 background:linear-gradient(145deg,#ff4d6d,#ff758f);
-border-radius:25px;
+border-radius:20px;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -173,19 +121,17 @@ align-items:center;
 cursor:pointer;
 }
 
-/* 💌 FLOATING */
+/* 💥 FLOAT MSG */
 .floatMsg{
 position:absolute;
-padding:14px 20px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
-border-radius:18px;
-font-size:18px;
-animation:popIn 1s forwards;
+padding:12px;
+background:rgba(255,255,255,0.08);
+border-radius:15px;
+animation:pop 1s forwards;
 }
 
-@keyframes popIn{
-from{opacity:0;transform:scale(.3);}
+@keyframes pop{
+from{opacity:0;transform:scale(0.3);}
 to{opacity:1;transform:scale(1);}
 }
 
@@ -194,16 +140,15 @@ to{opacity:1;transform:scale(1);}
 display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:10px;
-margin-top:20px;
 }
 
 .grid button{
 width:60px;
 height:60px;
-border-radius:18px;
+border-radius:15px;
 }
 
-/* 📸 FIXED IMAGE LOOK */
+/* 📸 GALLERY (FIXED CINEMATIC LOOK) */
 .gallery{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -214,11 +159,11 @@ max-width:900px;
 
 .gallery img{
 width:100%;
-height:170px;
+height:180px;
 object-fit:cover;
-border-radius:14px;
-transition:.3s;
-box-shadow:0 10px 20px rgba(0,0,0,0.5);
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.6);
+transition:0.3s;
 }
 
 .gallery img:hover{
@@ -231,17 +176,15 @@ width:320px;
 border-radius:15px;
 }
 
-/* 💖 HEARTS */
+/* 💖 HEART */
 .heart{
 position:fixed;
-font-size:20px;
+font-size:18px;
 animation:floatUp 5s linear forwards;
-pointer-events:none;
 }
 
 @keyframes floatUp{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-120vh);opacity:0;}
+to{transform:translateY(-120vh);opacity:0;}
 }
 
 /* 🎆 FINAL */
@@ -251,10 +194,9 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d,0 0 40px #ff4d6d;
 }
 
 .output{
-margin-top:18px;
+margin-top:15px;
 font-size:18px;
 max-width:700px;
-line-height:1.6;
 }
 
 </style>
@@ -264,13 +206,7 @@ line-height:1.6;
 
 <div class="bg"></div>
 
-<!-- 🎬 INTRO -->
-<div id="intro">
-<h1>NETFLIX</h1>
-<p>A Pure Story Of Friendship ❤️</p>
-</div>
-
-<!-- 🔊 AUDIO (IMPORTANT FIX: USE MP3 FILES) -->
+<!-- 🔊 AUDIO (IMPORTANT FIX) -->
 <audio id="a1" src="audio_1.mp3"></audio>
 <audio id="a2" src="audio_2.mp3"></audio>
 <audio id="a3" src="audio_3.mp3"></audio>
@@ -280,17 +216,16 @@ line-height:1.6;
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
+
 <h1 class="title">💬 Chat With Musa</h1>
 
 <div id="chatBox">
 <div class="msg me">Hi mero musa ❤️</div>
 
-<div class="msg reply">
 <input id="r1" placeholder="Type reply..." onkeydown="next1(event)">
 </div>
-</div>
 
-<button id="startBtn" onclick="go(2)" style="display:none;">🎬 Start</button>
+<button id="startBtn" onclick="go(2)" style="display:none;">Start 🎬</button>
 </div>
 
 <!-- PAGE 2 -->
@@ -298,17 +233,16 @@ line-height:1.6;
 <h1 class="title">💌 Special Message</h1>
 
 <div class="specialBox" onclick="openSpecial()">
-<h2>🎁 HBD GIRL ❤️</h2>
+<h2>HBD GIRL ❤️</h2>
 <p>Click to open</p>
 </div>
-
-<div id="floatingMessages"></div>
 
 <button onclick="go(3)">Next</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
+
 <h2 class="title">🎮 What I Love</h2>
 
 <div class="grid">
@@ -331,17 +265,16 @@ line-height:1.6;
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
+
 <h2 class="title">📸 Memories</h2>
 
 <div class="gallery">
 <img src="us.jpeg">
 <img src="Bum.JPG">
 <img src="weeeee.JPG">
-<img src="seeee.jpeg">
-<img src="Dai.jpg">
-<img src="Girls.jpeg">
 <img src="family.JPG">
 <img src="happy.jpeg">
+<img src="Girls.jpeg">
 </div>
 
 <button onclick="go(5)">Next</button>
@@ -376,26 +309,31 @@ line-height:1.6;
 
 <script>
 
-/* AUDIO FIX (NO OVERLAP) */
+/* AUDIO FIX */
+let currentAudio=null;
+
 function stopAll(){
-document.querySelectorAll("audio").forEach(a=>{
-a.pause();
-a.currentTime=0;
-});
+if(currentAudio){
+currentAudio.pause();
+currentAudio.currentTime=0;
+}
 }
 
 function playAudio(n){
 stopAll();
 let a=document.getElementById("a"+n);
-if(a) a.play().catch(()=>{});
+if(a){
+currentAudio=a;
+a.play().catch(()=>{});
+}
 }
 
 /* PAGE SWITCH */
 function go(p){
+
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* AUDIO ONLY 2–6 */
 if(p>=2 && p<=6){
 playAudio(p-1);
 }
@@ -419,7 +357,7 @@ d.className="floatMsg";
 d.innerText=m;
 document.body.appendChild(d);
 setTimeout(()=>d.remove(),2000);
-},i*800);
+},i*700);
 });
 }
 
