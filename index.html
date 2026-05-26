@@ -18,36 +18,17 @@ color:white;
 position:fixed;
 width:100%;
 height:100%;
-background:radial-gradient(circle,#1a0020,#000);
-z-index:-3;
+background:radial-gradient(circle,#200020,#000);
+z-index:-5;
+animation:move 10s infinite alternate;
 }
 
-/* 🎬 INTRO */
-#intro{
-position:fixed;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:999;
-animation:fadeOut 4s forwards;
-animation-delay:2.5s;
+@keyframes move{
+0%{filter:hue-rotate(0deg);}
+100%{filter:hue-rotate(30deg);}
 }
 
-#intro h1{
-color:#ff4d6d;
-font-size:38px;
-text-shadow:0 0 20px #ff4d6d;
-}
-
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
-}
-
-/* 📄 PAGE SYSTEM */
+/* 🎬 PAGE TRANSITION */
 .page{
 position:absolute;
 width:100%;
@@ -58,45 +39,52 @@ justify-content:center;
 align-items:center;
 text-align:center;
 opacity:0;
+transform:scale(1.05);
+transition:0.8s ease;
 pointer-events:none;
-transition:0.8s;
 padding:20px;
 }
 
 .active{
 opacity:1;
+transform:scale(1);
 pointer-events:auto;
 }
 
 /* 🔘 BUTTON */
 button{
-padding:14px 22px;
+padding:12px 20px;
 border:none;
 border-radius:25px;
 background:#ff4d6d;
 color:white;
 font-weight:bold;
-margin-top:15px;
+margin-top:12px;
 cursor:pointer;
 }
 
 /* 💖 TITLE */
 .glow{
 font-size:38px;
-text-shadow:0 0 25px #ff4d6d;
+text-shadow:0 0 20px #ff4d6d;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+50%{transform:scale(1.08);}
 }
 
 /* 📸 GALLERY */
 .gallery{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:6px;
+gap:5px;
 max-width:90%;
 }
 
 .gallery img{
 width:100%;
-height:90px;
+height:85px;
 object-fit:cover;
 border-radius:10px;
 }
@@ -105,8 +93,7 @@ border-radius:10px;
 .game{
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:8px;
-margin-top:10px;
+gap:6px;
 }
 
 .game button{
@@ -118,7 +105,6 @@ border-radius:8px;
 video{
 width:300px;
 border-radius:12px;
-margin-top:10px;
 }
 
 /* 🎆 CONFETTI */
@@ -134,7 +120,7 @@ animation:fall 3s linear forwards;
 to{transform:translateY(110vh) rotate(360deg);}
 }
 
-/* 🫶 FINAL */
+/* 🫶 HUG */
 .hug{
 font-size:60px;
 animation:beat 1.2s infinite;
@@ -151,12 +137,6 @@ animation:beat 1.2s infinite;
 
 <div class="bg"></div>
 
-<!-- 🎬 INTRO -->
-<div id="intro">
-<h1>NETFLIX PRESENTS</h1>
-<p>🎬 A Best Friend Birthday Story</p>
-</div>
-
 <!-- 🎵 AUDIO -->
 <audio id="a1" src="audio_1.m4a"></audio>
 <audio id="a2" src="audio_2.m4a"></audio>
@@ -168,13 +148,13 @@ animation:beat 1.2s infinite;
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
 <div class="glow">🎉 HAPPY BIRTHDAY MY BEST FRIEND ❤️</div>
-<button onclick="go(2)">Next ➜</button>
+<button onclick="go(2)">Start ➜</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
 <h2>💌 A Special Message</h2>
-<p>You are my safe place, my happiness, my family ❤️</p>
+<p>You are my peace, my chaos, my happiness ❤️</p>
 <button onclick="go(3)">Next ➜</button>
 </div>
 
@@ -219,30 +199,46 @@ animation:beat 1.2s infinite;
 <button onclick="go(5)">Next ➜</button>
 </div>
 
-<!-- PAGE 5 VIDEO -->
+<!-- PAGE 5 FUN -->
 <div class="page" id="p5">
-<h2>🎥 Our Video Memory</h2>
+<h2>🫶 Our Friendship Moments</h2>
+
+<p id="funText">Click to reveal memories 😂</p>
+
+<button onclick="fun(1)">1</button>
+<button onclick="fun(2)">2</button>
+<button onclick="fun(3)">3</button>
+<button onclick="fun(4)">4</button>
+<button onclick="fun(5)">5</button>
+
+<button onclick="go(6)">Next ➜</button>
+</div>
+
+<!-- PAGE 6 VIDEO -->
+<div class="page" id="p6">
+<h2>🎥 One Last Memory</h2>
 
 <video controls>
 <source src="Video.MOV" type="video/mp4">
 </video>
 
-<button onclick="go(6)">Next ➜</button>
+<button onclick="go(7)">Next ➜</button>
 </div>
 
-<!-- PAGE 6 FINAL -->
-<div class="page" id="p6">
-<div class="glow">❤️ HAPPY BIRTHDAY SARITA ❤️</div>
-<div class="hug">🫶💞🫶</div>
+<!-- PAGE 7 FINAL -->
+<div class="page" id="p7">
+<div class="glow">🎉 HAPPY BIRTHDAY SARITA 🎉</div>
+
+<div class="hug">🫶💖🫶</div>
+
+<p>Forever my best friend ❤️</p>
 
 <button onclick="final()">Finish 🎆</button>
 </div>
 
 <script>
 
-/* 🔊 AUDIO FIX (IMPORTANT) */
-let audios=["a1","a2","a3","a4","a5","a6"];
-
+/* 🔇 HARD AUDIO STOP SYSTEM */
 function stopAllAudio(){
 document.querySelectorAll("audio").forEach(a=>{
 a.pause();
@@ -251,17 +247,19 @@ a.currentTime=0;
 }
 
 /* 🎬 PAGE CONTROL */
+let audios=["a1","a2","a3","a4","a5","a6"];
+
 function go(p){
 
-stopAllAudio(); // 🔥 ALWAYS STOP FIRST
+stopAllAudio();
 
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* play correct audio */
-let index=p-2;
-if(index>=0 && index<audios.length){
-let a=document.getElementById(audios[index]);
+/* audio sync */
+let i=p-2;
+if(i>=0 && i<audios.length){
+let a=document.getElementById(audios[i]);
 if(a){
 a.play().catch(()=>{});
 }
@@ -271,31 +269,45 @@ a.play().catch(()=>{});
 /* 🎮 GAME */
 let msgs=[
 "Your smile is everything 😊",
-"You are kind hearted 💖",
+"You are kind 💖",
 "You always support me 🫶",
 "You are strong 💪",
-"You are beautiful inside out 🌸",
+"You are beautiful 🌸",
 "You are my safe place ❤️",
 "You are loyal 💛",
 "You make life better 🌈",
 "You are unforgettable ✨",
-"You are my best friend forever ❤️"
+"You are my forever best friend ❤️"
 ];
 
 function show(n){
 document.getElementById("msg").innerText=msgs[n-1];
 }
 
-/* 🎆 FINAL */
+/* 🫶 FUN PAGE */
+let funMsgs=[
+"We laughed till stomach hurt 😂",
+"Your BUMMM moments forever iconic",
+"Late night talks 💖",
+"Random gossip + fun 🌸",
+"You are my safe chaos ❤️"
+];
+
+function fun(n){
+document.getElementById("funText").innerText=funMsgs[n-1];
+}
+
+/* 🎆 FINAL CONFETTI */
 function final(){
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
 let c=document.createElement("div");
 c.className="confetti";
 c.style.left=Math.random()*100+"vw";
-c.style.background=["#ff4d6d","#fff","#ffd700"][Math.floor(Math.random()*3)];
+c.style.background=["#ff4d6d","#fff","#ffd700","#ff69b4"][Math.floor(Math.random()*4)];
 c.style.animationDuration=(2+Math.random()*3)+"s";
 document.body.appendChild(c);
+
 setTimeout(()=>c.remove(),5000);
 }
 
