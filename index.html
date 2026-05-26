@@ -251,7 +251,7 @@ text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
 let step = 0;
 let currentAudio = null;
 
-/* 🔊 AUDIO FIX */
+/* 🔊 AUDIO */
 function stopAll(){
 if(currentAudio){
 currentAudio.pause();
@@ -290,10 +290,10 @@ if(val === "") return;
 
 let chat = document.getElementById("chatArea");
 
-/* user msg */
+/* user message */
 chat.innerHTML += `<div class="msg her">${val}</div>`;
 
-/* STORY */
+/* BOT STORY */
 if(step === 0){
 chat.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`;
 }
@@ -314,7 +314,7 @@ document.getElementById("startBtn").style.display="block";
 step++;
 
 document.getElementById("r1").value="";
-chat.scrollTop = chat.scrollHeight;
+chat.scrollTop = chatBox.scrollHeight;
 }
 
 /* 💌 SPECIAL */
