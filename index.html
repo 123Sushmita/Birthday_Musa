@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Love ❤️</title>
+<title>Happy Birthday Love  ❤️</title>
 
 <style>
 
@@ -21,7 +21,6 @@ overflow:hidden;
 height:100vh;
 }
 
-/* BACKGROUND */
 body::before{
 content:"";
 position:fixed;
@@ -104,7 +103,7 @@ margin-top:10px;
 outline:none;
 }
 
-/* BOX */
+/* SPECIAL BOX */
 .specialBox{
 width:320px;
 height:220px;
@@ -183,6 +182,7 @@ max-width:700px;
 border-radius:20px;
 }
 
+/* FINAL */
 .final{
 font-size:42px;
 text-shadow:0 0 20px #ff4d6d;
@@ -202,40 +202,32 @@ text-shadow:0 0 20px #ff4d6d;
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-
 <h1 class="title">💬 Chat With Musa</h1>
 
 <div class="chatBox" id="chatBox">
-<div class="msg me">Hi Musa ❤️ Happy Birthday 🎂</div>
+<div class="msg me">Hi Musa ❤️ Happy Birthday mero musa. please click to begin.   🎂</div>
 </div>
 
 <input id="chatInput" placeholder="Type reply..." onkeydown="chatFlow(event)">
 
-<button id="startBtn" onclick="go(2)" style="display:none;">
-Start ▶
-</button>
-
+<button id="startBtn" onclick="go(2)" style="display:none;">Start ▶</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-
 <h1 class="title">💌 Special Message</h1>
 
 <div class="specialBox" onclick="openSpecial()">
 <h2>Happy Birthday Love ❤️</h2>
-<p>Click to open message</p>
+<p>Click to open</p>
 </div>
 
 <div id="specialArea"></div>
-
 <button onclick="go(3)">Next ▶</button>
-
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-
 <h1 class="title">💖 Thank You</h1>
 
 <div class="grid">
@@ -247,15 +239,12 @@ Start ▶
 </div>
 
 <div class="output" id="thankOut"></div>
-
 <button onclick="go(4)">Next ▶</button>
-
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-
-<h1 class="title">🫶 What I Love About You</h1>
+<h1 class="title">🫶 What I Love</h1>
 
 <div class="grid">
 <button onclick="love(1)">1</button>
@@ -271,14 +260,11 @@ Start ▶
 </div>
 
 <div class="output" id="loveOut"></div>
-
 <button onclick="go(5)">Next ▶</button>
-
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-
 <h1 class="title">📸 Memories</h1>
 
 <div class="gallery">
@@ -291,12 +277,10 @@ Start ▶
 </div>
 
 <button onclick="go(6)">Next ▶</button>
-
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-
 <h1 class="title">💌 Envelope</h1>
 
 <div class="specialBox" onclick="openLetter()">
@@ -305,51 +289,41 @@ Start ▶
 
 <div class="output" id="letter" style="display:none;">
 You mean everything to me ❤️<br><br>
-My life became peaceful, happy and complete after you came into it 🫶<br><br>
-I am always proud of you and grateful for you every day 💖
+Life became peaceful after you came 🫶<br><br>
+— your bum ❤️
 </div>
 
 <button onclick="go(7)">Next ▶</button>
-
 </div>
 
 <!-- PAGE 7 -->
 <div class="page" id="p7">
-
 <div class="final">🎉 HAPPY BIRTHDAY ❤️</div>
-
 <p>Forever my Musa 🫶</p>
-
 <button onclick="go(8)">Next ▶</button>
-
 </div>
 
-<!-- PAGE 8 -->
+<!-- PAGE 8 (FIXED VIDEO) -->
 <div class="page" id="p8">
-
 <h1 class="title">🎥 Video</h1>
 
-<!-- FIXED VIDEO -->
-<video controls playsinline>
-<source src="video.mp4" type="video/mp4">
+<video controls playsinline preload="metadata" width="100%">
+    <source src="video.mp4" type="video/mp4">
+    Your browser does not support video playback.
 </video>
 
 <button onclick="go(9)">Next ▶</button>
-
 </div>
 
 <!-- PAGE 9 -->
 <div class="page" id="p9">
-
 <div class="final">🌸 END ❤️</div>
-
 <p>May Radha Rani bless you always 🫶</p>
-
 </div>
 
 <script>
 
-/* AUDIO FIX */
+/* AUDIO */
 function stopAllAudio(){
 document.querySelectorAll("audio").forEach(a=>{
 a.pause();
@@ -379,24 +353,20 @@ if(p===6) playAudio("a6");
 
 /* CHAT */
 let step=0;
-
 function chatFlow(e){
 if(e.key==="Enter"){
-
 let val=chatInput.value.trim();
 if(!val) return;
 
 chatBox.innerHTML += `<div class="msg her">${val}</div>`;
 
 if(step===0){
-chatBox.innerHTML += `<div class="msg me">I tried something special for you ❤️</div>`;
+chatBox.innerHTML += `<div class="msg me">I tried something special ❤️</div>`;
 }
-
 else if(step===1){
 chatBox.innerHTML += `<div class="msg me">Are you ready? 🫶</div>`;
 startBtn.style.display="block";
 }
-
 step++;
 chatInput.value="";
 chatBox.scrollTop=chatBox.scrollHeight;
@@ -405,13 +375,12 @@ chatBox.scrollTop=chatBox.scrollHeight;
 
 /* SPECIAL */
 function openSpecial(){
-
 let msgs=[
-"You are my family, my real home ❤️",
-"You are my safe place where I feel peace 🫶",
-"You are my happiness, my daily smile 🌸",
-"You are my everything in this life 💖",
-"I feel lucky every single day because of you ✨"
+"You are my family ❤️",
+"You are my safe place 🫶",
+"You are my happiness 🌸",
+"You are my everything 💖",
+"I am lucky to have you ✨"
 ];
 
 msgs.forEach((m,i)=>{
@@ -432,25 +401,25 @@ let t=[
 "Thank you for being there ❤️",
 "Thank you for loving me 🫶",
 "Thank you for everything 💖",
-"Thank you for your support 🌸",
-"Thank you my best friend ✨"
+"Thank you for support 🌸",
+"Thank you adding colors in my life ✨"
 ];
 thankOut.innerHTML=t[n-1];
 }
 
-/* LOVE FIXED WORDING */
+/* LOVE */
 function love(n){
 let l=[
-"Your eyes are the most beautiful thing I have ever seen 👀",
-"You look absolutely graceful when you wear a sari 🌸",
-"The way you call me ‘bummm’ always makes me smile 😂❤️",
-"You always call me in the morning to check if I am okay ☀️",
-"You are a strong, bold and fearless girl 💪",
-"You always stand for what is right ⚖️",
-"You have a genuinely good heart and pure soul 🌈",
-"You are confident, loyal and honest 💎",
-"You are one of the most real and truthful people I know 🤍",
-"Simply… you are everything to me 🫶"
+"Your eyes are beautiful 👀",
+"You look amazing in sari 🌸",
+"You calling me bummm 😂❤️",
+"Morning calls ☀️",
+"Strong girl 💪",
+"Right always ⚖️",
+"Good soul 🌈",
+"Loyal 💎",
+"Honest 🤍",
+"Everything 🫶"
 ];
 loveOut.innerHTML=l[n-1];
 }
