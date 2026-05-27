@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Love  ❤️</title>
+<title>Happy Birthday Musa ❤️</title>
 
 <style>
 
@@ -14,7 +14,7 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Arial;
+font-family:Arial,sans-serif;
 background:black;
 color:white;
 overflow:hidden;
@@ -44,6 +44,7 @@ text-align:center;
 opacity:0;
 pointer-events:none;
 transition:1s ease;
+overflow-y:auto;
 }
 
 .page.active{
@@ -68,6 +69,7 @@ color:white;
 font-size:16px;
 cursor:pointer;
 margin-top:20px;
+box-shadow:0 0 20px rgba(255,77,109,.5);
 }
 
 /* CHAT */
@@ -89,8 +91,15 @@ max-width:75%;
 line-height:1.5;
 }
 
-.me{background:#ff4d6d;margin-left:auto;}
-.her{background:#222;margin-right:auto;}
+.me{
+background:#ff4d6d;
+margin-left:auto;
+}
+
+.her{
+background:#222;
+margin-right:auto;
+}
 
 input{
 width:100%;
@@ -114,9 +123,11 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 cursor:pointer;
+padding:20px;
+box-shadow:0 0 40px rgba(255,77,109,.4);
 }
 
-/* FLOAT NOTES */
+/* FLOATING NOTES */
 .floatNote{
 position:absolute;
 padding:14px 18px;
@@ -126,46 +137,50 @@ font-size:18px;
 border:1px solid rgba(255,255,255,.2);
 animation:fadeUp 1s forwards;
 opacity:0;
+max-width:260px;
 }
 
 @keyframes fadeUp{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 /* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:10px;
+gap:12px;
 margin-top:20px;
 }
 
 .grid button{
 width:60px;
 height:60px;
-border:none;
 border-radius:18px;
-background:#ff4d6d;
-color:white;
-cursor:pointer;
 }
 
 /* OUTPUT */
 .output{
-margin-top:20px;
-font-size:18px;
-line-height:1.6;
+margin-top:25px;
+font-size:20px;
+line-height:1.7;
 max-width:700px;
+padding:15px;
 }
 
 /* GALLERY */
 .gallery{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:10px;
+gap:12px;
 width:90%;
-max-width:900px;
+max-width:1000px;
 }
 
 .gallery img{
@@ -173,6 +188,7 @@ width:100%;
 height:220px;
 object-fit:cover;
 border-radius:15px;
+box-shadow:0 0 20px rgba(255,255,255,.08);
 }
 
 /* VIDEO */
@@ -180,12 +196,15 @@ video{
 width:90%;
 max-width:700px;
 border-radius:20px;
+background:black;
+margin-top:20px;
 }
 
 /* FINAL */
 .final{
-font-size:42px;
+font-size:45px;
 text-shadow:0 0 20px #ff4d6d;
+margin-bottom:20px;
 }
 
 </style>
@@ -199,54 +218,82 @@ text-shadow:0 0 20px #ff4d6d;
 <audio id="a4" src="audio_4.m4a"></audio>
 <audio id="a5" src="audio_5.m4a"></audio>
 <audio id="a6" src="audio_6.m4a"></audio>
+<audio id="a7" src="audio_1.m4a"></audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
+
 <h1 class="title">💬 Chat With Musa</h1>
 
 <div class="chatBox" id="chatBox">
-<div class="msg me">Hi Musa ❤️ Happy Birthday mero musa. please click to begin.   🎂</div>
+
+<div class="msg me">
+Hi Musa ❤️ Happy Birthday 🎂
+</div>
+
 </div>
 
 <input id="chatInput" placeholder="Type reply..." onkeydown="chatFlow(event)">
 
-<button id="startBtn" onclick="go(2)" style="display:none;">Start ▶</button>
+<button id="startBtn" onclick="go(2)" style="display:none;">
+Start Surprise ▶
+</button>
+
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
+
 <h1 class="title">💌 Special Message</h1>
 
 <div class="specialBox" onclick="openSpecial()">
+
 <h2>Happy Birthday Love ❤️</h2>
-<p>Click to open</p>
+
+<p style="margin-top:10px;">
+Click to open your surprise
+</p>
+
 </div>
 
 <div id="specialArea"></div>
-<button onclick="go(3)">Next ▶</button>
+
+<button onclick="go(3)">
+Next ▶
+</button>
+
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
+
 <h1 class="title">💖 Thank You</h1>
 
 <div class="grid">
+
 <button onclick="thank(1)">1</button>
 <button onclick="thank(2)">2</button>
 <button onclick="thank(3)">3</button>
 <button onclick="thank(4)">4</button>
 <button onclick="thank(5)">5</button>
+
 </div>
 
 <div class="output" id="thankOut"></div>
-<button onclick="go(4)">Next ▶</button>
+
+<button onclick="go(4)">
+Next ▶
+</button>
+
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-<h1 class="title">🫶 What I Love</h1>
+
+<h1 class="title">🫶 What I Love About You</h1>
 
 <div class="grid">
+
 <button onclick="love(1)">1</button>
 <button onclick="love(2)">2</button>
 <button onclick="love(3)">3</button>
@@ -257,91 +304,171 @@ text-shadow:0 0 20px #ff4d6d;
 <button onclick="love(8)">8</button>
 <button onclick="love(9)">9</button>
 <button onclick="love(10)">10</button>
+
 </div>
 
 <div class="output" id="loveOut"></div>
-<button onclick="go(5)">Next ▶</button>
+
+<button onclick="go(5)">
+Next ▶
+</button>
+
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-<h1 class="title">📸 Memories</h1>
+
+<h1 class="title">📸 Memories Together</h1>
 
 <div class="gallery">
+
 <img src="us.jpeg">
 <img src="Bum.JPG">
 <img src="weeeee.JPG">
 <img src="family.JPG">
 <img src="happy.jpeg">
 <img src="Girls.jpeg">
+
 </div>
 
-<button onclick="go(6)">Next ▶</button>
+<button onclick="go(6)">
+Next ▶
+</button>
+
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
-<h1 class="title">💌 Envelope</h1>
+
+<h1 class="title">💌 A Note For You</h1>
 
 <div class="specialBox" onclick="openLetter()">
-<h3>Click Envelope</h3>
+
+<h2>Open Envelope 💌</h2>
+
+<p style="margin-top:10px;">
+Click to read
+</p>
+
 </div>
 
 <div class="output" id="letter" style="display:none;">
-You mean everything to me ❤️<br><br>
-Life became peaceful after you came 🫶<br><br>
-— your bum ❤️
+
+You truly changed my life for the better ❤️<br><br>
+
+My days became peaceful, happier and lighter after you came into my life 🫶<br><br>
+
+You always support me, understand me and make me feel safe 🌸<br><br>
+
+Thank you for being such a beautiful soul and the best friend anyone could ever ask for 💖<br><br>
+
+— Your Bummm ❤️
+
 </div>
 
-<button onclick="go(7)">Next ▶</button>
+<button onclick="go(7)">
+Next ▶
+</button>
+
 </div>
 
 <!-- PAGE 7 -->
 <div class="page" id="p7">
-<div class="final">🎉 HAPPY BIRTHDAY ❤️</div>
-<p>Forever my Musa 🫶</p>
-<button onclick="go(8)">Next ▶</button>
+
+<div class="final">
+🌸 I Am Proud Of You ❤️
 </div>
 
-<!-- PAGE 8 (FIXED VIDEO) -->
-<div class="page" id="p8">
-<h1 class="title">🎥 Video</h1>
+<div class="output">
 
-<video controls playsinline preload="metadata" width="100%">
-    <source src="video.mp4" type="video/mp4">
-    Your browser does not support video playback.
+You achieved so much through your own hard work, patience and dedication 💖<br><br>
+
+Every day you inspire me to become a better person 🫶<br><br>
+
+You are strong, intelligent and one of the purest souls I know 🌸<br><br>
+
+I am truly lucky to have you in my life ❤️<br><br>
+
+Let’s celebrate your birthday together this year 🎉
+
+</div>
+
+<button onclick="go(8)">
+Next ▶
+</button>
+
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" id="p8">
+
+<h1 class="title">
+🎥 Birthday Video
+</h1>
+
+<video controls playsinline autoplay muted width="100%">
+    <source src="Video.MOV" type="video/quicktime">
+    <source src="Video.MOV">
 </video>
 
-<button onclick="go(9)">Next ▶</button>
+<button onclick="go(9)">
+Next ▶
+</button>
+
 </div>
 
 <!-- PAGE 9 -->
 <div class="page" id="p9">
-<div class="final">🌸 END ❤️</div>
-<p>May Radha Rani bless you always 🫶</p>
+
+<div class="final">
+🎉 HAPPY BIRTHDAY ❤️
+</div>
+
+<div class="output">
+
+May Radha Rani bless you always 🌸<br><br>
+
+Lots of love forever, my Musa 🫶❤️
+
+</div>
+
 </div>
 
 <script>
 
 /* AUDIO */
+
 function stopAllAudio(){
+
 document.querySelectorAll("audio").forEach(a=>{
+
 a.pause();
 a.currentTime=0;
+
 });
+
 }
 
 function playAudio(id){
+
 stopAllAudio();
+
 let a=document.getElementById(id);
+
 if(!a) return;
+
 a.load();
+
 a.play().catch(()=>{});
+
 }
 
 /* PAGE */
+
 function go(p){
+
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+
 document.getElementById("p"+p).classList.add("active");
 
 if(p===2) playAudio("a2");
@@ -349,91 +476,155 @@ if(p===3) playAudio("a3");
 if(p===4) playAudio("a4");
 if(p===5) playAudio("a5");
 if(p===6) playAudio("a6");
+if(p===7) playAudio("a7");
+
 }
 
-/* CHAT */
+/* CHAT FLOW */
+
 let step=0;
+
 function chatFlow(e){
+
 if(e.key==="Enter"){
+
 let val=chatInput.value.trim();
+
 if(!val) return;
 
 chatBox.innerHTML += `<div class="msg her">${val}</div>`;
 
 if(step===0){
-chatBox.innerHTML += `<div class="msg me">I tried something special ❤️</div>`;
-}
-else if(step===1){
-chatBox.innerHTML += `<div class="msg me">Are you ready? 🫶</div>`;
-startBtn.style.display="block";
-}
-step++;
-chatInput.value="";
-chatBox.scrollTop=chatBox.scrollHeight;
-}
+
+chatBox.innerHTML += `
+<div class="msg me">
+I tried to do something special for your birthday ❤️
+</div>
+`;
+
 }
 
-/* SPECIAL */
+else if(step===1){
+
+chatBox.innerHTML += `
+<div class="msg me">
+Are you ready for your surprise? 🫶
+</div>
+`;
+
+startBtn.style.display="block";
+
+}
+
+step++;
+
+chatInput.value="";
+
+chatBox.scrollTop=chatBox.scrollHeight;
+
+}
+
+}
+
+/* SPECIAL NOTES */
+
 function openSpecial(){
+
 let msgs=[
-"You are my family ❤️",
-"You are my safe place 🫶",
-"You are my happiness 🌸",
-"You are my everything 💖",
-"I am lucky to have you ✨"
+
+"You are my family and my comfort place ❤️",
+
+"You are the person who always brings peace into my life 🫶",
+
+"You make my days happier and brighter 🌸",
+
+"You are truly one of the most important people in my life 💖",
+
+"I feel lucky every single day because I have you ✨"
+
 ];
 
 msgs.forEach((m,i)=>{
+
 setTimeout(()=>{
+
 let d=document.createElement("div");
+
 d.className="floatNote";
+
 d.innerText=m;
-d.style.top=(10+i*15)+"%";
-d.style.left=(10+i*10)+"%";
+
+d.style.top=(10+i*12)+"%";
+d.style.left=(8+i*10)+"%";
+
 specialArea.appendChild(d);
-},i*600);
+
+},i*700);
+
 });
+
 }
 
 /* THANK YOU */
+
 function thank(n){
+
 let t=[
-"Thank you for being there ❤️",
-"Thank you for loving me 🫶",
-"Thank you for everything 💖",
-"Thank you for support 🌸",
-"Thank you adding colors in my life ✨"
+
+"Thank you for always being there for me ❤️",
+
+"Thank you for understanding me even when I cannot explain myself 🫶",
+
+"Thank you for making me your sister-in-law 😂💖",
+
+"Thank you for always supporting me and caring for me 🌸",
+
+"Thank you for being my best friend forever ✨"
+
 ];
+
 thankOut.innerHTML=t[n-1];
+
 }
 
 /* LOVE */
+
 function love(n){
+
 let l=[
-Your eyes are the most beautiful thing I have ever seen 👀",
 
-"You look absolutely graceful when you wear a sari 🌸",
+"Your beautiful eyes 👀",
 
-"The way you call me ‘bummm’ always makes me smile 😂❤️",
+"The way you look in a sari 🌸",
 
-"You always call me in the morning to check if I am okay ☀️",
+"The way you call me ‘Bummm’ 😂❤️",
 
-"You are a strong, bold and fearless girl 💪",
+"The way you call me every morning to check on me ☀️",
 
-"You always stand for what is right ⚖️",
+"Your bold and fearless personality 💪",
 
-"You have a genuinely good heart and pure soul 🌈",
+"The way you always stand for what is right ⚖️",
 
-"You are confident, loyal and honest 💎",
+"Your pure and beautiful soul 🌈",
 
-"You are one of the most real and truthful people I know 🤍"
+"Your confidence, loyalty and honesty 💎",
+
+"The way you always stay true to yourself 🤍",
+
+"The way you love and care for me 🫶"
+
 ];
+
 loveOut.innerHTML=l[n-1];
+
 }
 
-/* ENVELOPE */
+/* LETTER */
+
 function openLetter(){
+
 letter.style.display="block";
+
 }
 
 </script>
