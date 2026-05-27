@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Musa ❤️</title>
+<title>Happy Birthday ❤️</title>
 
 <style>
 
@@ -14,20 +14,21 @@ box-sizing:border-box;
 }
 
 body{
+font-family:Arial;
 background:black;
 color:white;
-font-family:Arial;
 overflow:hidden;
 height:100vh;
 }
 
+/* BACKGROUND */
 body::before{
 content:"";
 position:fixed;
 width:100%;
 height:100%;
 background:radial-gradient(circle,#1a1a1a,#000 70%);
-z-index:-2;
+z-index:-1;
 }
 
 /* PAGE */
@@ -59,7 +60,7 @@ text-shadow:0 0 20px #ff4d6d;
 }
 
 /* BUTTON */
-.nextBtn{
+button{
 padding:14px 24px;
 border:none;
 border-radius:30px;
@@ -67,8 +68,7 @@ background:#ff4d6d;
 color:white;
 font-size:16px;
 cursor:pointer;
-margin-top:25px;
-box-shadow:0 0 20px rgba(255,77,109,.5);
+margin-top:20px;
 }
 
 /* CHAT */
@@ -98,9 +98,9 @@ width:100%;
 padding:12px;
 border:none;
 border-radius:15px;
-margin-top:10px;
 background:#222;
 color:white;
+margin-top:10px;
 outline:none;
 }
 
@@ -115,17 +115,9 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 cursor:pointer;
-padding:20px;
-box-shadow:0 0 40px rgba(255,77,109,.4);
 }
 
-/* NOTES */
-#specialArea{
-position:relative;
-width:100%;
-height:350px;
-}
-
+/* FLOAT NOTES */
 .floatNote{
 position:absolute;
 padding:14px 18px;
@@ -157,14 +149,13 @@ border:none;
 border-radius:18px;
 background:#ff4d6d;
 color:white;
-font-size:18px;
 cursor:pointer;
 }
 
 /* OUTPUT */
 .output{
 margin-top:20px;
-font-size:20px;
+font-size:18px;
 line-height:1.6;
 max-width:700px;
 }
@@ -175,48 +166,14 @@ display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:10px;
 width:90%;
-max-width:1000px;
+max-width:900px;
 }
 
 .gallery img{
 width:100%;
 height:220px;
-object-fit:contain;
-background:#111;
+object-fit:cover;
 border-radius:15px;
-}
-
-/* ENVELOPE */
-.envelope{
-width:180px;
-height:120px;
-background:#ff4d6d;
-position:relative;
-cursor:pointer;
-border-radius:10px;
-}
-
-.envelope:before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-border-left:90px solid transparent;
-border-right:90px solid transparent;
-border-top:60px solid #ff758f;
-}
-
-/* LETTER */
-.letter{
-display:none;
-width:90%;
-max-width:700px;
-background:white;
-color:black;
-padding:30px;
-border-radius:20px;
-line-height:1.8;
-margin-top:20px;
 }
 
 /* VIDEO */
@@ -226,10 +183,9 @@ max-width:700px;
 border-radius:20px;
 }
 
-/* FINAL */
 .final{
-font-size:45px;
-text-shadow:0 0 25px #ff4d6d;
+font-size:42px;
+text-shadow:0 0 20px #ff4d6d;
 }
 
 </style>
@@ -237,14 +193,12 @@ text-shadow:0 0 25px #ff4d6d;
 
 <body>
 
-<!-- 🔊 AUDIO (FIXED .m4a) -->
+<!-- AUDIO -->
 <audio id="a2" src="audio_2.m4a"></audio>
 <audio id="a3" src="audio_3.m4a"></audio>
 <audio id="a4" src="audio_4.m4a"></audio>
 <audio id="a5" src="audio_5.m4a"></audio>
 <audio id="a6" src="audio_6.m4a"></audio>
-<audio id="a7" src="audio_7.m4a"></audio>
-<audio id="a9" src="audio_9.m4a"></audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
@@ -257,7 +211,7 @@ text-shadow:0 0 25px #ff4d6d;
 
 <input id="chatInput" placeholder="Type reply..." onkeydown="chatFlow(event)">
 
-<button class="nextBtn" id="startBtn" onclick="go(2)" style="display:none;">
+<button id="startBtn" onclick="go(2)" style="display:none;">
 Start ▶
 </button>
 
@@ -270,12 +224,12 @@ Start ▶
 
 <div class="specialBox" onclick="openSpecial()">
 <h2>Happy Birthday Love ❤️</h2>
-<p>Click to see message</p>
+<p>Click to open message</p>
 </div>
 
 <div id="specialArea"></div>
 
-<button class="nextBtn" onclick="go(3)">Next ▶</button>
+<button onclick="go(3)">Next ▶</button>
 
 </div>
 
@@ -294,14 +248,14 @@ Start ▶
 
 <div class="output" id="thankOut"></div>
 
-<button class="nextBtn" onclick="go(4)">Next ▶</button>
+<button onclick="go(4)">Next ▶</button>
 
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
 
-<h1 class="title">🫶 What I Love</h1>
+<h1 class="title">🫶 What I Love About You</h1>
 
 <div class="grid">
 <button onclick="love(1)">1</button>
@@ -318,7 +272,7 @@ Start ▶
 
 <div class="output" id="loveOut"></div>
 
-<button class="nextBtn" onclick="go(5)">Next ▶</button>
+<button onclick="go(5)">Next ▶</button>
 
 </div>
 
@@ -336,7 +290,7 @@ Start ▶
 <img src="Girls.jpeg">
 </div>
 
-<button class="nextBtn" onclick="go(6)">Next ▶</button>
+<button onclick="go(6)">Next ▶</button>
 
 </div>
 
@@ -345,15 +299,17 @@ Start ▶
 
 <h1 class="title">💌 Envelope</h1>
 
-<div class="envelope" onclick="openLetter()"></div>
-
-<div class="letter" id="letter">
-You mean everything ❤️<br><br>
-Life became peaceful after you came 🫶<br><br>
-— your bum ❤️
+<div class="specialBox" onclick="openLetter()">
+<h3>Click Envelope</h3>
 </div>
 
-<button class="nextBtn" onclick="go(7)">Next ▶</button>
+<div class="output" id="letter" style="display:none;">
+You mean everything to me ❤️<br><br>
+My life became peaceful, happy and complete after you came into it 🫶<br><br>
+I am always proud of you and grateful for you every day 💖
+</div>
+
+<button onclick="go(7)">Next ▶</button>
 
 </div>
 
@@ -364,20 +320,21 @@ Life became peaceful after you came 🫶<br><br>
 
 <p>Forever my Musa 🫶</p>
 
-<button class="nextBtn" onclick="go(8)">Next ▶</button>
+<button onclick="go(8)">Next ▶</button>
 
 </div>
 
-<!-- PAGE 8 VIDEO -->
+<!-- PAGE 8 -->
 <div class="page" id="p8">
 
 <h1 class="title">🎥 Video</h1>
 
+<!-- FIXED VIDEO -->
 <video controls playsinline>
 <source src="video.mp4" type="video/mp4">
 </video>
 
-<button class="nextBtn" onclick="go(9)">Next ▶</button>
+<button onclick="go(9)">Next ▶</button>
 
 </div>
 
@@ -392,7 +349,7 @@ Life became peaceful after you came 🫶<br><br>
 
 <script>
 
-/* 🔊 FIX AUDIO */
+/* AUDIO FIX */
 function stopAllAudio(){
 document.querySelectorAll("audio").forEach(a=>{
 a.pause();
@@ -408,9 +365,8 @@ a.load();
 a.play().catch(()=>{});
 }
 
-/* PAGE CONTROL */
+/* PAGE */
 function go(p){
-
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
@@ -419,15 +375,12 @@ if(p===3) playAudio("a3");
 if(p===4) playAudio("a4");
 if(p===5) playAudio("a5");
 if(p===6) playAudio("a6");
-if(p===7) playAudio("a7");
-if(p===9) playAudio("a9");
 }
 
 /* CHAT */
 let step=0;
 
 function chatFlow(e){
-
 if(e.key==="Enter"){
 
 let val=chatInput.value.trim();
@@ -436,7 +389,7 @@ if(!val) return;
 chatBox.innerHTML += `<div class="msg her">${val}</div>`;
 
 if(step===0){
-chatBox.innerHTML += `<div class="msg me">I made something special for you ❤️</div>`;
+chatBox.innerHTML += `<div class="msg me">I tried something special for you ❤️</div>`;
 }
 
 else if(step===1){
@@ -454,11 +407,11 @@ chatBox.scrollTop=chatBox.scrollHeight;
 function openSpecial(){
 
 let msgs=[
-"You are my family ❤️",
-"My safe place 🫶",
-"My happiness 🌸",
-"My everything 💖",
-"Forever lucky to have you ✨"
+"You are my family, my real home ❤️",
+"You are my safe place where I feel peace 🫶",
+"You are my happiness, my daily smile 🌸",
+"You are my everything in this life 💖",
+"I feel lucky every single day because of you ✨"
 ];
 
 msgs.forEach((m,i)=>{
@@ -471,7 +424,6 @@ d.style.left=(10+i*10)+"%";
 specialArea.appendChild(d);
 },i*600);
 });
-
 }
 
 /* THANK YOU */
@@ -480,17 +432,25 @@ let t=[
 "Thank you for being there ❤️",
 "Thank you for loving me 🫶",
 "Thank you for everything 💖",
-"Thank you for support 🌸",
-"Thank you my bestie ✨"
+"Thank you for your support 🌸",
+"Thank you my best friend ✨"
 ];
-thankOut.innerHTML=`💖 ${t[n-1]} 💖`;
+thankOut.innerHTML=t[n-1];
 }
 
-/* LOVE */
+/* LOVE FIXED WORDING */
 function love(n){
 let l=[
-"Eyes 👀","Sari 🌸","Bummm 😂","Morning calls ☀️","Strong 💪",
-"Right stand ⚖️","Good soul 🌈","Loyal 💎","Honest 🤍","Everything 🫶"
+"Your eyes are the most beautiful thing I have ever seen 👀",
+"You look absolutely graceful when you wear a sari 🌸",
+"The way you call me ‘bummm’ always makes me smile 😂❤️",
+"You always call me in the morning to check if I am okay ☀️",
+"You are a strong, bold and fearless girl 💪",
+"You always stand for what is right ⚖️",
+"You have a genuinely good heart and pure soul 🌈",
+"You are confident, loyal and honest 💎",
+"You are one of the most real and truthful people I know 🤍",
+"Simply… you are everything to me 🫶"
 ];
 loveOut.innerHTML=l[n-1];
 }
