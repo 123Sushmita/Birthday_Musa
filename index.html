@@ -15,19 +15,15 @@ box-sizing:border-box;
 
 body{
 font-family:Arial,sans-serif;
-background:black;
+background:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.82)),
+url('musa_1.jpg');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 color:white;
 overflow:hidden;
 height:100vh;
-}
-
-body::before{
-content:"";
-position:fixed;
-width:100%;
-height:100%;
-background:radial-gradient(circle,#1a1a1a,#000 70%);
-z-index:-1;
 }
 
 /* PAGE */
@@ -70,6 +66,11 @@ font-size:16px;
 cursor:pointer;
 margin-top:20px;
 box-shadow:0 0 20px rgba(255,77,109,.5);
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.08);
 }
 
 /* CHAT */
@@ -79,6 +80,7 @@ max-width:520px;
 height:360px;
 overflow-y:auto;
 background:rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
 padding:15px;
 border-radius:20px;
 }
@@ -125,13 +127,19 @@ align-items:center;
 cursor:pointer;
 padding:20px;
 box-shadow:0 0 40px rgba(255,77,109,.4);
+transition:.3s;
 }
 
-/* FLOATING NOTES */
+.specialBox:hover{
+transform:scale(1.05);
+}
+
+/* FLOAT NOTES */
 .floatNote{
 position:absolute;
 padding:14px 18px;
 background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
 border-radius:18px;
 font-size:18px;
 border:1px solid rgba(255,255,255,.2);
@@ -143,11 +151,11 @@ max-width:260px;
 @keyframes fadeUp{
 from{
 opacity:0;
-transform:translateY(20px);
+transform:translateY(20px) scale(.7);
 }
 to{
 opacity:1;
-transform:translateY(0);
+transform:translateY(0) scale(1);
 }
 }
 
@@ -172,6 +180,9 @@ font-size:20px;
 line-height:1.7;
 max-width:700px;
 padding:15px;
+background:rgba(255,255,255,.05);
+border-radius:20px;
+backdrop-filter:blur(10px);
 }
 
 /* GALLERY */
@@ -189,6 +200,11 @@ height:220px;
 object-fit:cover;
 border-radius:15px;
 box-shadow:0 0 20px rgba(255,255,255,.08);
+transition:.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.04);
 }
 
 /* VIDEO */
@@ -406,7 +422,7 @@ Next ▶
 🎥 Birthday Video
 </h1>
 
-<video controls playsinline autoplay muted width="100%">
+<video controls playsinline preload="metadata" width="100%">
     <source src="Video.MOV" type="video/quicktime">
     <source src="Video.MOV">
 </video>
@@ -478,9 +494,17 @@ if(p===5) playAudio("a5");
 if(p===6) playAudio("a6");
 if(p===7) playAudio("a7");
 
+if(p===8){
+stopAllAudio();
 }
 
-/* CHAT FLOW */
+if(p===9){
+playAudio("a5");
+}
+
+}
+
+/* CHAT */
 
 let step=0;
 
@@ -526,9 +550,11 @@ chatBox.scrollTop=chatBox.scrollHeight;
 
 }
 
-/* SPECIAL NOTES */
+/* PAGE 2 NOTES */
 
 function openSpecial(){
+
+specialArea.innerHTML="";
 
 let msgs=[
 
@@ -544,6 +570,20 @@ let msgs=[
 
 ];
 
+let positions=[
+
+{top:"10%",left:"5%"},
+
+{top:"20%",right:"5%"},
+
+{bottom:"18%",left:"8%"},
+
+{bottom:"12%",right:"10%"},
+
+{top:"45%",left:"35%"}
+
+];
+
 msgs.forEach((m,i)=>{
 
 setTimeout(()=>{
@@ -554,12 +594,11 @@ d.className="floatNote";
 
 d.innerText=m;
 
-d.style.top=(10+i*12)+"%";
-d.style.left=(8+i*10)+"%";
+Object.assign(d.style,positions[i]);
 
 specialArea.appendChild(d);
 
-},i*700);
+},i*800);
 
 });
 
