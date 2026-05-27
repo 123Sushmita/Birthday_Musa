@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Birthday Sarita ❤️</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
+font-family:Arial;
 background:black;
 color:white;
-font-family:Arial;
 overflow:hidden;
 height:100vh;
 }
@@ -50,12 +44,11 @@ pointer-events:auto;
 }
 
 .title{
-font-size:38px;
-margin-bottom:20px;
+font-size:34px;
+margin-bottom:15px;
 text-shadow:0 0 20px #ff4d6d;
 }
 
-/* BUTTON */
 button{
 padding:14px 22px;
 border:none;
@@ -67,29 +60,9 @@ cursor:pointer;
 font-size:16px;
 }
 
-/* CHAT */
-.chat{
-width:90%;
-max-width:500px;
-height:360px;
-background:rgba(255,255,255,0.05);
-border-radius:20px;
-padding:15px;
-overflow-y:auto;
-}
-
-.msg{
-margin:10px 0;
-padding:10px 14px;
-border-radius:15px;
-max-width:75%;
-}
-
-.me{background:#ff4d6d;margin-left:auto;}
-.her{background:#222;margin-right:auto;}
-
 input{
-width:100%;
+width:90%;
+max-width:400px;
 padding:12px;
 border:none;
 border-radius:10px;
@@ -98,16 +71,37 @@ color:white;
 margin-top:10px;
 }
 
+/* CHAT */
+.chatBox{
+width:90%;
+max-width:500px;
+height:320px;
+overflow-y:auto;
+background:rgba(255,255,255,0.05);
+border-radius:15px;
+padding:10px;
+}
+
+.msg{
+margin:8px 0;
+padding:10px;
+border-radius:10px;
+max-width:75%;
+}
+
+.me{background:#ff4d6d;margin-left:auto;}
+.her{background:#222;margin-right:auto;}
+
 /* BOX */
 .box{
-width:300px;
-height:180px;
+width:280px;
+height:160px;
 background:linear-gradient(145deg,#ff4d6d,#ff758f);
-border-radius:20px;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+border-radius:15px;
 cursor:pointer;
 }
 
@@ -118,27 +112,37 @@ grid-template-columns:repeat(2,1fr);
 gap:10px;
 width:90%;
 max-width:500px;
-margin-top:10px;
 }
 
 .item{
 background:#222;
 padding:12px;
-border-radius:12px;
+border-radius:10px;
 cursor:pointer;
 }
 
-.output{
-margin-top:15px;
-font-size:18px;
-min-height:30px;
-}
+/* OUTPUT */
+.output{margin-top:15px;min-height:30px;}
 
 /* FINAL */
 .final{
-font-size:42px;
-text-shadow:0 0 25px #ff4d6d;
+font-size:40px;
+text-shadow:0 0 20px #ff4d6d;
 }
+
+/* NAV BUTTON */
+.nextBtn{
+position:absolute;
+bottom:30px;
+padding:12px 25px;
+border-radius:25px;
+background:#ff4d6d;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+.hidden{display:none;}
 
 </style>
 </head>
@@ -147,192 +151,175 @@ text-shadow:0 0 25px #ff4d6d;
 
 <div class="bg"></div>
 
-<!-- 🎧 AUDIO -->
+<!-- AUDIO -->
 <audio id="a1" src="audio_1.mp3"></audio>
 <audio id="a2" src="audio_2.mp3"></audio>
 <audio id="a3" src="audio_3.mp3"></audio>
 <audio id="a4" src="audio_4.mp3"></audio>
 <audio id="a5" src="audio_5.mp3"></audio>
 <audio id="a6" src="audio_6.mp3"></audio>
+<audio id="a7" src="audio_7.mp3"></audio>
+<audio id="a8" src="audio_8.mp3"></audio>
+<audio id="a9" src="audio_9.mp3"></audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
+<h1 class="title">💬 Hi Musa ❤️</h1>
 
-<h1 class="title">💬 Chat With Musa</h1>
-
-<div class="chat" id="chat">
-<div class="msg me">Hi mero musa ❤️</div>
+<div class="chatBox" id="chat">
+<div class="msg me">Hi Musa ❤️ Happy Birthday my girl 🎂</div>
 </div>
 
-<input id="inp" placeholder="Type hi..." onkeydown="chat(event)">
+<input id="inp" placeholder="Type reply..." onkeydown="chat(event)">
 
+<button class="nextBtn hidden" id="n1" onclick="go(2)">Next ▶</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-
 <h1 class="title">💌 Special Message</h1>
 
-<div class="box" onclick="go(3)">
-<h3>Open Me 💖</h3>
-<p>Click here</p>
+<div class="box" onclick="special()">
+<h3>Happy Birthday Love ❤️</h3>
+<p>Click to open</p>
 </div>
 
-<p id="special" class="output"></p>
-
+<p id="specialText" class="output"></p>
+<button class="nextBtn hidden" id="n2" onclick="go(3)">Next ▶</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-
-<h1 class="title">🎮 What I Love Most</h1>
+<h1 class="title">💖 Thank You Game</h1>
 
 <div class="grid">
-<div class="item" onclick="love(0)">Kind</div>
-<div class="item" onclick="love(1)">Beautiful</div>
-<div class="item" onclick="love(2)">Funny</div>
-<div class="item" onclick="love(3)">Caring</div>
-<div class="item" onclick="love(4)">Strong</div>
-<div class="item" onclick="love(5)">Loyal</div>
-<div class="item" onclick="love(6)">Support</div>
-<div class="item" onclick="love(7)">Pure</div>
-<div class="item" onclick="love(8)">Best</div>
-<div class="item" onclick="love(9)">My Person</div>
+<div class="item" onclick="thank(0)">1</div>
+<div class="item" onclick="thank(1)">2</div>
+<div class="item" onclick="thank(2)">3</div>
+<div class="item" onclick="thank(3)">4</div>
+<div class="item" onclick="thank(4)">5</div>
 </div>
 
-<p id="loveOut" class="output"></p>
-
-<button onclick="go(4)">Next ▶</button>
-
+<p id="thankOut" class="output"></p>
+<button class="nextBtn hidden" id="n3" onclick="go(4)">Next ▶</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
+<h1 class="title">🎮 What I Love Most</h1>
 
-<h1 class="title">📸 Memories</h1>
+<div class="grid">
+<div class="item" onclick="love(0)">1</div>
+<div class="item" onclick="love(1)">2</div>
+<div class="item" onclick="love(2)">3</div>
+<div class="item" onclick="love(3)">4</div>
+<div class="item" onclick="love(4)">5</div>
+<div class="item" onclick="love(5)">6</div>
+<div class="item" onclick="love(6)">7</div>
+<div class="item" onclick="love(7)">8</div>
+<div class="item" onclick="love(8)">9</div>
+<div class="item" onclick="love(9)">10</div>
+</div>
 
-<img id="img" width="260" style="border-radius:15px;">
-
-<button onclick="nextImg()">Next Memory ▶</button>
-
+<p id="loveOut" class="output"></p>
+<button class="nextBtn hidden" id="n4" onclick="go(5)">Next ▶</button>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-
-<h1 class="title">💖 Thank You</h1>
-
-<p id="thanks" class="output"></p>
-
-<button onclick="go(6)">Final ▶</button>
-
+<h1 class="title">📸 Memories</h1>
+<p>💖 Your photos go here</p>
+<button class="nextBtn" onclick="go(6)">Next ▶</button>
 </div>
 
 <!-- PAGE 6 -->
 <div class="page" id="p6">
+<h1 class="title">💌 Envelope</h1>
+<p>Click envelope (you can add animation later)</p>
+<button class="nextBtn" onclick="go(7)">Next ▶</button>
+</div>
 
+<!-- PAGE 7 -->
+<div class="page" id="p7">
 <div class="final">🎉 HAPPY BIRTHDAY SARITA ❤️</div>
-<p>Forever my best friend 🫶</p>
+<p>I'm proud of you 🫶</p>
+<button class="nextBtn" onclick="go(8)">Next ▶</button>
+</div>
 
+<!-- PAGE 8 -->
+<div class="page" id="p8">
+<h1 class="title">🎥 Birthday Video</h1>
+<video controls width="300">
+<source src="video.mp4">
+</video>
+<button class="nextBtn" onclick="go(9)">Next ▶</button>
+</div>
+
+<!-- PAGE 9 -->
+<div class="page" id="p9">
+<div class="final">🎉 HAPPY BIRTHDAY ❤️</div>
+<p>May Radha Rani bless you always 🌸</p>
+<p>Lots of love mero musa 🫶</p>
 </div>
 
 <script>
 
-/* 🔊 AUDIO FIX (MAIN PART) */
-let currentAudio = null;
+let currentAudio=null;
 
-function stopAllAudio(){
+function stopAudio(){
 document.querySelectorAll("audio").forEach(a=>{
-a.pause();
-a.currentTime = 0;
+a.pause(); a.currentTime=0;
 });
-currentAudio = null;
 }
 
 function playAudio(n){
-stopAllAudio();
-
-let audio = document.getElementById("a"+n);
-if(audio){
-currentAudio = audio;
-audio.play().catch(()=>{});
-}
+stopAudio();
+let a=document.getElementById("a"+n);
+if(a){a.play().catch(()=>{});}
 }
 
-/* 📄 PAGE SWITCH */
+/* PAGE SWITCH */
 function go(p){
 document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 document.getElementById("p"+p).classList.add("active");
 
-/* play audio only for pages 1–5 */
-if(p >= 1 && p <= 5){
-playAudio(p);
+if(p<=9) playAudio(p);
 }
 
-/* no audio on final page */
-if(p === 6){
-stopAllAudio();
-}
-}
-
-/* 💬 CHAT FLOW */
+/* CHAT */
 function chat(e){
-if(e.key !== "Enter") return;
-
-let v = inp.value.trim();
-if(!v) return;
-
-chat.innerHTML += `<div class="msg her">${v}</div>`;
-
-setTimeout(()=>chat.innerHTML += `<div class="msg me">Happy Birthday Musa 🎉❤️</div>`,400);
-setTimeout(()=>chat.innerHTML += `<div class="msg me">I made something special for you 🫶</div>`,1000);
-setTimeout(()=>chat.innerHTML += `<div class="msg me">Are you ready? ❤️</div>`,1800);
-
-setTimeout(()=>go(2),2400);
-
-inp.value="";
+if(e.key!=="Enter")return;
+n1.classList.remove("hidden");
 }
 
-/* 💌 SPECIAL */
-document.getElementById("special").innerText =
-"You are my safe place ❤️\nYou are my happiness 🫶\nYou are my everything 💖";
+/* SPECIAL */
+function special(){
+specialText.innerText="You are my safe place ❤️\nYou are my everything 🫶";
+n2.classList.remove("hidden");
+}
 
-/* 🎮 LOVE */
-let loveList=[
-"Kind","Beautiful","Funny","Caring","Strong",
-"Loyal","Support","Pure","Best","My Person"
+/* THANK YOU */
+let t=[
+"Thank you for being there ❤️",
+"Thank you for making me family 🫶",
+"Thank you for best friend 💖",
+"Thank you for support 🌸",
+"Thank you for everything ❤️"
 ];
+function thank(i){
+thankOut.innerText=t[i];
+n3.classList.remove("hidden");
+}
 
+/* LOVE */
+let l=[
+"Eyes","Sari","Bummm","Morning call","Brave",
+"Right stand","Soul","Loyal","Honest","Love"
+];
 function love(i){
-loveOut.innerText = loveList[i];
+loveOut.innerText=l[i];
+n4.classList.remove("hidden");
 }
-
-/* 📸 MEMORIES */
-let imgs=["us.jpeg","Bum.JPG","weeeee.JPG"];
-let i=0;
-
-function nextImg(){
-img.src = imgs[i];
-i = (i+1) % imgs.length;
-}
-
-/* 💖 THANK YOU */
-let th=[
-"Thank you for trusting me ❤️",
-"Thank you for loving me 🌈",
-"Thank you for always being there 🫶",
-"Thank you for staying calm 🌸",
-"Thank you for everything 💖"
-];
-
-let t=0;
-
-setInterval(()=>{
-if(document.getElementById("p5").classList.contains("active")){
-thanks.innerHTML += th[t]+"<br>";
-t = (t+1)%th.length;
-}
-},1200);
 
 </script>
 
